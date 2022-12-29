@@ -1,4 +1,4 @@
-import TestUtilities;
+import Utilities.Test.Assertions;
 import Toybox.Position;
 import Toybox.Lang;
 import Toybox.Test;
@@ -40,7 +40,7 @@ module TestDistanceCalculator
         expectedDistance as Numeric, 
         tolerance as Numeric) as Boolean
     {
-        return TestUtilities.areApproximatelyEquals(
+        return Assertions.areApproximatelyEquals(
             DistanceCalculator.distance(
             new Toybox.Position.Location({
                         :latitude => aY, 

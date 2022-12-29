@@ -1,4 +1,4 @@
-import TestUtilities;
+import Utilities.Test.Assertions;
 import Toybox.Position;
 import Toybox.Lang;
 import Toybox.Test;
@@ -24,7 +24,7 @@ module TestBearing
         expected as Numeric, 
         tolerance as Numeric) as Boolean
     {
-        return TestUtilities.areApproximatelyEquals(
+        return Assertions.areApproximatelyEquals(
             Bearing.bearing(
             new Position.Location({
                         :latitude => aY, 

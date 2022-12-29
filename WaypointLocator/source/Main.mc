@@ -59,6 +59,13 @@ class Main extends Application.AppBase
                 :longitude => 174.76830573854085, 
                 :format => :degrees
             }));
+        _waypointTracker.addWaypoint(
+            "Okahu Bay Wharf",
+            new Position.Location({
+                :latitude => -36.845450811519804, 
+                :longitude => 174.81746726099607, 
+                :format => :degrees
+            }));
     }
 
     // onStart() is called on application start up

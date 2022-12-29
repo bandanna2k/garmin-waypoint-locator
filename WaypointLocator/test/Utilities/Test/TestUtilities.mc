@@ -1,3 +1,4 @@
+import Utilities.Test.Assertions;
 import Toybox.Test;
 import Toybox.Lang;
 import Toybox.Position;
@@ -8,14 +9,14 @@ module TestUtilities
     (:test)
     function testLatitude(logger as Logger) as Boolean
     {
-        return TestUtilities.areEquals(
+        return Assertions.areEqual(
             Utilities.latitude(testPosition()), -36.901801);
     }
 
     (:test)
     function testLongitude(logger as Logger) as Boolean
     {
-        return TestUtilities.areEquals(
+        return Assertions.areEqual(
             Utilities.longitude(testPosition()), 174.786346d);
     }
 

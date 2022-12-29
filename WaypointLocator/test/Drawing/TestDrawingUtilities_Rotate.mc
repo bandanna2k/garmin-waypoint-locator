@@ -1,4 +1,4 @@
-import TestUtilities;
+import Utilities.Test.Assertions;
 import Toybox.Position;
 import Toybox.Lang;
 import Toybox.Test;
@@ -44,12 +44,12 @@ module TestRotate
             var expectedX = expected[i][0];
             var expectedY = expected[i][1];
 
-            if(!TestUtilities.areApproximatelyEquals(actualX, expectedX, CLOSE_TOLERANCE))
+            if(!Assertions.areApproximatelyEquals(actualX, expectedX, CLOSE_TOLERANCE))
             {
                 System.println("Actual X " + actualX + " does not equal expected X " + expectedX + " at " + i);
                 return false;
             }
-            else if(!TestUtilities.areApproximatelyEquals(actualY, expectedY, CLOSE_TOLERANCE))
+            else if(!Assertions.areApproximatelyEquals(actualY, expectedY, CLOSE_TOLERANCE))
             {
                 System.println("Actual Y " + actualY + " does not equal expected Y " + expectedY + " at " + i);
                 return false;
