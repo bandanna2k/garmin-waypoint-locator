@@ -1,6 +1,5 @@
 import Toybox.Lang;
 import Toybox.Graphics;
-import Toybox.System;
 
 module Drawing
 {
@@ -17,7 +16,6 @@ module Drawing
 
         function setDistance(value as Numeric)
         {
-            System.println("setDistance " + value);
             _dist = value;
         }    
     }
