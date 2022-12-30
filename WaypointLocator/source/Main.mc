@@ -13,16 +13,19 @@ class Main extends Application.AppBase
     var _counter = 0;
     var _bearing = 0;
 
+    var _cyclicString = new Utilities.Text.CyclicString("The quick brown fox jumps over the lazy dog.", 18);
+
     var _arrowHead = new Drawing.ArrowHead();
     var _bearingLabel = new Drawing.BearingLabel();
     var _distanceLabel = new Drawing.DistanceLabel();
     var _waypointLabel = new Drawing.WaypointLabel();
+    var _cyclicLabel = new Drawing.CyclicLabel(_cyclicString);
 
     var _waypointTracker = new Waypoints.WaypointTracker(
         new Method(self, :onCurrentWaypoint),
         new Method(self, :onWaypointValues));
 
-    var _view = new MainView(_arrowHead, _bearingLabel, _distanceLabel, _waypointLabel);
+    var _view = new MainView(_arrowHead, _bearingLabel, _distanceLabel, _waypointLabel, _cyclicLabel);
 
     var _currentPosition;
     var _currentWaypoint;
@@ -88,6 +91,9 @@ class Main extends Application.AppBase
             onAttention();
             _counter = 0;
         }
+
+        _cyclicString.cycle();
+        WatchUi.requestUpdate();
     }
 
     function onAttention() as Void
@@ -122,7 +128,6 @@ class Main extends Application.AppBase
         waypointCount as Number) as Void
     {
         _waypointLabel.setValues(displayIndex, waypointCount);
-        WatchUi.requestUpdate();        
     }
 
     function onPosition(info as Toybox.Position.Info) as Void

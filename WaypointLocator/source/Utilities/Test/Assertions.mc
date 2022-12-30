@@ -1,9 +1,28 @@
 import Toybox.Lang;
-import Utilities.Test.Assertions;
+import Utilities.Test;
 
 module Utilities { module Test { module Assertions
 {
-    function areEqual(actual as Object, expected as Object) as Boolean
+    // function doesThrow(inputMethod as Method) as Boolean
+    // {
+    //     var pass = false;
+    //     try
+    //     {
+    //         inputMethod.invoke();
+    //     }
+    //     catch(ex instanceof Exception)
+    //     {
+    //         pass = true;
+    //     }
+    //     if(pass)
+    //     {
+    //         return pass;
+    //     }
+    //     throw new AssertionException("Method does not throw expected exception.");
+    // }
+    function areEqual(
+        actual as Object or Null, 
+        expected as Object or Null) as Boolean
     {
         var result = actual.toString().equals(expected.toString());
         if(result)
@@ -17,7 +36,10 @@ module Utilities { module Test { module Assertions
         return result;
     }
 
-    function areApproximatelyEquals(actual as Numeric, expected as Numeric, tolerance as Numeric) as Boolean
+    function areApproximatelyEquals(
+        actual as Numeric, 
+        expected as Numeric, 
+        tolerance as Numeric) as Boolean
     {
         var lower = expected - tolerance;
         if(actual < lower)

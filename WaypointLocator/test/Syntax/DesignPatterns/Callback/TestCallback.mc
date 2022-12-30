@@ -1,4 +1,3 @@
-import TestUtilities;
 import Toybox.Lang;
 import Toybox.Test;
 import Toybox.System;

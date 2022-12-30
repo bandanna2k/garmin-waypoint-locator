@@ -27,7 +27,23 @@ module Utilities { module Text
 
         function cycle()
         {
-            _counter++;
+            if(_direction == 1)
+            {
+                if(_counter + _numberOfChars >= _fullText.length())
+                {
+                    _direction = -1;
+                }
+            }
+            else
+            {
+                if(_counter - _direction <= 0)
+                {
+                    _direction = 1;
+                }
+            }
+
+            _counter = _counter + _direction;
+            calculatePartText();
         }
 
         function setText(text as String) as Void
@@ -43,10 +59,11 @@ module Utilities { module Text
         {
             if(_numberOfChars >= _fullText.length())
             {
+                _partText = _fullText;
                 return;
             }
 
-            _partText = _fullText.substring(_counter, _numberOfChars);
+            _partText = _fullText.substring(_counter, _counter + _numberOfChars);
         }
     }
 }}

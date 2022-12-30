@@ -4,7 +4,7 @@ import Toybox.Lang;
 import Toybox.Position;
 import Toybox.System;
 
-module TestUtilities
+module Utilities
 {
     (:test)
     function testLatitude(logger as Logger) as Boolean

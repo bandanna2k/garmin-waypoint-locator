@@ -1,53 +1,29 @@
+import Utilities.Text;
 import Toybox.Lang;
 import Toybox.System;
 import Toybox.Graphics;
 
 module Drawing
 {
-    class CyclicTextLabel
+    class CyclicLabel
     {
-        private var _numberOfChars;
-        var _x;
-        var _y;
-        var _counter = 0;
-        var _direction = 1; // 1 forward, -1 backward 
-        var _fullText;
-        var _partialText;
+        var _cyclicString;
 
-        function initialize(
-            x as Number,
-            y as Number,
-            numberOfChars as Number)
+        function initialize(cyclicString as CyclicString)
         {
-            _x = x;
-            _y = y;
-            numberOfChars = numberOfChars;
+            _cyclicString = cyclicString;
         }
 
         function draw(dc as Dc) as Void
         {
-            
+            var w = dc.getWidth();
+            var h = dc.getHeight();
+            dc.drawText(w / 2, h - 65, Graphics.FONT_MEDIUM, _cyclicString.get(), Graphics.TEXT_JUSTIFY_CENTER);
         }
 
         function cycle() as Void
         {
-
-            setPartialText();
-        }
-
-        function setText(text as String) as Void
-        {
-            _counter = 0;
-            _fullText = text;
-            setPartialText();
-        }
-
-        function setPartialText()
-        {
-            if(_numberOfChars >= _fullText.length())
-            {
-                return;
-            }
+            _cyclicString.cycle();
         }
     }
 }
