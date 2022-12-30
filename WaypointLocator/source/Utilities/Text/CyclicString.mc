@@ -36,7 +36,7 @@ module Utilities { module Text
             }
             else
             {
-                if(_counter - _direction <= 0)
+                if(_counter + _direction <= 0)
                 {
                     _direction = 1;
                 }

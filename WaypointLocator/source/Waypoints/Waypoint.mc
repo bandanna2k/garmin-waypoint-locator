@@ -20,5 +20,10 @@ module Waypoints
         {
             return _position;
         }
+
+        public function title() as String
+        {
+            return _title;
+        }
     }
 }

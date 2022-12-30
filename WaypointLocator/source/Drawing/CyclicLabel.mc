@@ -2,6 +2,7 @@ import Utilities.Text;
 import Toybox.Lang;
 import Toybox.System;
 import Toybox.Graphics;
+import Waypoints;
 
 module Drawing
 {
@@ -30,6 +31,11 @@ module Drawing
         function onPulse() as Void
         {
             _cyclicString.cycle();
+        }
+
+        function onCurrentWaypoint(waypoint as Waypoint) as Void
+        {
+            _cyclicString.setText(waypoint.title());
         }
     }
 }

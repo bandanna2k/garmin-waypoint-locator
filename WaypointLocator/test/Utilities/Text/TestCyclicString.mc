@@ -15,6 +15,8 @@ module Utilities { module Text
         Assertions.areEqual(cyclicString.get(), "123456789");
         cyclicString.cycle();
         Assertions.areEqual(cyclicString.get(), "012345678");
+        cyclicString.cycle();
+        Assertions.areEqual(cyclicString.get(), "123456789");
         return true;
     } 
 
