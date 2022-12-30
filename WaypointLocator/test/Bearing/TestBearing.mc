@@ -25,17 +25,17 @@ module TestBearing
         tolerance as Numeric) as Boolean
     {
         return Assertions.areApproximatelyEquals(
-            Bearing.bearing(
-            new Position.Location({
-                        :latitude => aY, 
-                        :longitude => aX, 
-                        :format => :degrees
-                        }),
-            new Position.Location({
-                        :latitude => bY, 
-                        :longitude => bX, 
-                        :format => :degrees
-                        })                
+            Bearing.calculate(
+                new Position.Location({
+                            :latitude => aY, 
+                            :longitude => aX, 
+                            :format => :degrees
+                            }),
+                new Position.Location({
+                            :latitude => bY, 
+                            :longitude => bX, 
+                            :format => :degrees
+                            })                
             ), 
             expected, tolerance);
     }

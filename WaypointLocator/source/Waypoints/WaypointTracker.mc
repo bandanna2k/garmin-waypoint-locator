@@ -1,25 +1,21 @@
 import Toybox.Lang;
 import Toybox.Position;
-import Toybox.System;
 import Toybox.WatchUi;
 
 module Waypoints
 {
-    class WaypointTracker extends WatchUi.BehaviorDelegate
+    class WaypointTracker extends BehaviorDelegate
     {
         var _waypoints;
         var _currentWaypointIndex;
-        var _currentWaypointCallback;
-        var _waypointCounterCallback;
 
-        function initialize(
-            currentWaypointCallback as Method,
-            waypointCounterCallback as Method)
+        var _listener;
+
+        function initialize(listener as Events)
         {
             BehaviorDelegate.initialize();
 
-            _currentWaypointCallback = currentWaypointCallback;
-            _waypointCounterCallback = waypointCounterCallback;
+            _listener = listener;
 
             _waypoints = [];
             _currentWaypointIndex = null;
@@ -37,8 +33,8 @@ module Waypoints
                 _currentWaypointIndex = 0;
             }
 
-            _currentWaypointCallback.invoke(_waypoints[_currentWaypointIndex]);
-            _waypointCounterCallback.invoke(_currentWaypointIndex + 1, _waypoints.size());
+            _listener.onCurrentWaypoint(_waypoints[_currentWaypointIndex]);
+            _listener.onWaypointCounter(_currentWaypointIndex + 1, _waypoints.size());
         }
 
         function onNextPage() as Boolean
@@ -53,31 +49,29 @@ module Waypoints
 
         function onNextWaypoint() as Boolean
         {
-            System.println("Next waypoint");
             if(_currentWaypointIndex == null)
             {
-                _currentWaypointCallback.invoke(_currentWaypointIndex);
+                _listener.onCurrentWaypoint(null);
                 return false;
             }
 
             _currentWaypointIndex = Utilities.mod(_currentWaypointIndex + 1, _waypoints.size());
-            _currentWaypointCallback.invoke(_waypoints[_currentWaypointIndex]);
-            _waypointCounterCallback.invoke(_currentWaypointIndex + 1, _waypoints.size());
+            _listener.onCurrentWaypoint(_waypoints[_currentWaypointIndex]);
+            _listener.onWaypointCounter(_currentWaypointIndex + 1, _waypoints.size());
             return true;
         }
 
         function onPreviousWaypoint() as Boolean
         {
-            System.println("Prev waypoint");
             if(_currentWaypointIndex == null)
             {
-                _currentWaypointCallback.invoke(_currentWaypointIndex);
+                _listener.onCurrentWaypoint(null);
                 return false;
             }
 
             _currentWaypointIndex = Utilities.mod(_currentWaypointIndex - 1 + _waypoints.size(), _waypoints.size());
-            _currentWaypointCallback.invoke(_waypoints[_currentWaypointIndex]);
-            _waypointCounterCallback.invoke(_currentWaypointIndex + 1, _waypoints.size());
+            _listener.onCurrentWaypoint(_waypoints[_currentWaypointIndex]);
+            _listener.onWaypointCounter(_currentWaypointIndex + 1, _waypoints.size());
             return true;
         }
     }

@@ -4,9 +4,14 @@ import Toybox.System;
 
 module Drawing
 {
-    class BearingLabel
+    class BearingLabel extends Events
     {
-        var _bearing = 0;
+        var _bearing;
+
+        function initialize()
+        {
+            Events.initialize();
+        }
 
         function draw(dc as Dc) as Void
         {
@@ -21,7 +26,7 @@ module Drawing
             dc.drawText(w / 2, h - 35, Graphics.FONT_LARGE, string, Graphics.TEXT_JUSTIFY_CENTER);
         }
 
-        function bearing(bearing as Numeric) as Void
+        function onBearing(bearing as Numeric) as Void
         {
             _bearing = bearing;
         }

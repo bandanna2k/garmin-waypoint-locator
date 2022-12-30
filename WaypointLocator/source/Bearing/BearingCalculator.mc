@@ -1,6 +1,8 @@
 import Toybox.Lang;
 import Toybox.System;
 import Toybox.Math;
+import Toybox.Position;
+import Waypoints;
 
 module Bearing
 {
@@ -23,10 +25,46 @@ bearing = arctan2(X,Y)
 Note: this value is in radians!
 
 */
+    class BearingCalculator extends Events
+    {
+        var _eventRegistry;
+        var _currentWaypoint;
+        var _currentPosition;
 
-    function bearing(
-        positionA as Toybox.Position.Location, 
-        positionB as Toybox.Position.Location) as Numeric
+        function initialize(eventRegistry as EventRegistry)
+        {
+            Events.initialize();
+            _eventRegistry = eventRegistry;
+            _eventRegistry.register(self);
+        }
+
+        function onCurrentWaypoint(currentWaypoint as Waypoint or Null) as Void
+        {
+            _currentWaypoint = currentWaypoint;
+            calculateBearing();
+        }
+        function onCurrentPosition(currentPosition as Location or Null) as Void
+        {
+            _currentPosition = currentPosition;
+            calculateBearing();
+        }
+        function calculateBearing() as Void
+        {
+            if(_currentPosition == null || _currentWaypoint == null)
+            {
+                _eventRegistry.onBearing(null);
+            }
+            else
+            {
+                var bearing = calculate(_currentPosition, _currentWaypoint.position());
+                _eventRegistry.onBearing(bearing);
+            }
+        }
+    }
+
+    function calculate(
+        positionA as Location, 
+        positionB as Location) as Numeric
     {
         var deltaLong = Math.toRadians(Utilities.longitude(positionB) - Utilities.longitude(positionA));
         var latA = Math.toRadians(Utilities.latitude(positionA));

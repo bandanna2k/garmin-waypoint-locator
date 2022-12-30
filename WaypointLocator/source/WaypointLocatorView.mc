@@ -1,35 +1,26 @@
-import Toybox.Graphics;
 import Toybox.WatchUi;
-import Toybox.Lang;
+import Toybox.Graphics;
 
-class MainView extends WatchUi.View 
+class WaypointLocatorView extends WatchUi.View  
 {
-    // const _originX = 0;
-    // const _originY = 0;
-    // const _maxX = 176;
-    // const _maxY = 176;
+    var _arrowHead = new Drawing.ArrowHead();
+    var _bearingLabel = new Drawing.BearingLabel();
+    var _distanceLabel = new Drawing.DistanceLabel();
+    var _waypointLabel = new Drawing.WaypointLabel();
 
-    var _arrowHead;
-    var _bearingLabel;
-    var _distanceLabel;
-    var _waypointLabel;
-    var _cyclicLabel;
+    var _cyclicString = new Utilities.Text.CyclicString("Waypoint Locator by David North", 18);
+    var _cyclicLabel = new Drawing.CyclicLabel(_cyclicString);
 
-    function initialize(
-        arrowHead as Drawing.ArrowHead, 
-        bearingLabel as Drawing.BearingLabel,
-        distanceLabel as Drawing.DistanceLabel,
-        waypointLabel as Drawing.WaypointLabel,
-        cyclicLabel as Drawing.CyclicLabel)
+    function initialize(_eventRegistry as EventRegistry)
     {
-        _arrowHead = arrowHead;
-        _bearingLabel = bearingLabel;
-        _distanceLabel = distanceLabel;
-        _waypointLabel = waypointLabel;
-        _cyclicLabel = cyclicLabel;
-
         View.initialize();
-    }
+
+        _eventRegistry.register(_arrowHead);
+        _eventRegistry.register(_bearingLabel);
+        _eventRegistry.register(_distanceLabel);
+        _eventRegistry.register(_waypointLabel);
+        _eventRegistry.register(_cyclicLabel);
+   }
 
     // Load your resources here
     function onLayout(dc as Dc) as Void 

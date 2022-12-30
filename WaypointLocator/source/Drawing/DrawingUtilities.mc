@@ -1,6 +1,5 @@
 import Toybox.Math;
 import Toybox.Lang;
-import Toybox.System;
 
 module DrawingUtilities
 {

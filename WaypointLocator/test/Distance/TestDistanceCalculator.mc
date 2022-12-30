@@ -1,4 +1,5 @@
 import Utilities.Test.Assertions;
+import Distance;
 import Toybox.Position;
 import Toybox.Lang;
 import Toybox.Test;
@@ -41,17 +42,17 @@ module TestDistanceCalculator
         tolerance as Numeric) as Boolean
     {
         return Assertions.areApproximatelyEquals(
-            DistanceCalculator.distance(
-            new Toybox.Position.Location({
-                        :latitude => aY, 
-                        :longitude => aX, 
-                        :format => :degrees
-                        }),
-            new Toybox.Position.Location({
-                        :latitude => bY, 
-                        :longitude => bX, 
-                        :format => :degrees
-                        })                
+            DistanceCalculator.calculate(
+                new Toybox.Position.Location({
+                            :latitude => aY, 
+                            :longitude => aX, 
+                            :format => :degrees
+                            }),
+                new Toybox.Position.Location({
+                            :latitude => bY, 
+                            :longitude => bX, 
+                            :format => :degrees
+                            })                
             )
             .kilometres(), expectedDistance, tolerance);
     }

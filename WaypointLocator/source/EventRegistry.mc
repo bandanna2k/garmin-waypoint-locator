@@ -1,0 +1,77 @@
+import Toybox.Lang;
+import Toybox.Position;
+import Distance;
+import Waypoints;
+
+class EventRegistry extends Events
+{
+    var _listeners = [] as Array<Events>;
+
+    function initialize()
+    {
+        Events.initialize();
+    }
+
+    function register(listener as Events)
+    {
+        _listeners.add(listener);
+    }
+
+    function onBearing(bearing as Numeric or Null) as Void
+    {
+        for(var i = 0; i < _listeners.size(); i++)
+        {
+            _listeners[i].onBearing(bearing);
+        }
+    }
+
+    function onDistance(value as DistanceValue or Null) as Void
+    {
+        for(var i = 0; i < _listeners.size(); i++)
+        {
+            _listeners[i].onDistance(value);
+        }
+    }
+
+    function onStart() as Void
+    {
+        for(var i = 0; i < _listeners.size(); i++)
+        {
+            _listeners[i].onStart();
+        }
+    }
+
+    function onPulse() as Void
+    {
+        for(var i = 0; i < _listeners.size(); i++)
+        {
+            _listeners[i].onPulse();
+        }
+        WatchUi.requestUpdate();
+    }
+
+    function onCurrentPosition(currentPosition as Location or Null) as Void
+    {
+        for(var i = 0; i < _listeners.size(); i++)
+        {
+            _listeners[i].onCurrentPosition(currentPosition);
+        }
+    }
+
+    function onCurrentWaypoint(waypoint as Waypoint or Null) as Void
+    {
+        for(var i = 0; i < _listeners.size(); i++)
+        {
+            _listeners[i].onCurrentWaypoint(waypoint);
+        }
+    }
+
+    function onWaypointCounter(displayIndex as Number, displayCount as Number) as Void
+    {
+        for(var i = 0; i < _listeners.size(); i++)
+        {
+            _listeners[i].onWaypointCounter(displayIndex, displayCount);
+        }
+        WatchUi.requestUpdate();
+    }
+}

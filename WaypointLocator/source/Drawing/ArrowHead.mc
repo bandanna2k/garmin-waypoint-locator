@@ -3,13 +3,18 @@ import Toybox.Lang;
 
 module Drawing
 {
-    class ArrowHead
+    class ArrowHead extends Events
     {
-        var _bearing = 0;
+        var _bearing;
+
+        function initialize()
+        {
+            Events.initialize();
+        }
 
         function draw(dc as Dc) as Void
         {
-            if(bearing == null)
+            if(_bearing == null)
             {
                 return;
             }
@@ -46,7 +51,7 @@ module Drawing
             return pts;
         }
 
-        function bearing(bearing as Numeric) as Void
+        function onBearing(bearing as Numeric or Null) as Void
         {
             _bearing = bearing;
         }

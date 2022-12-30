@@ -5,12 +5,13 @@ import Toybox.Graphics;
 
 module Drawing
 {
-    class CyclicLabel
+    class CyclicLabel extends Events
     {
         var _cyclicString;
 
         function initialize(cyclicString as CyclicString)
         {
+            Events.initialize();
             _cyclicString = cyclicString;
         }
 
@@ -22,6 +23,11 @@ module Drawing
         }
 
         function cycle() as Void
+        {
+            _cyclicString.cycle();
+        }
+
+        function onPulse() as Void
         {
             _cyclicString.cycle();
         }
