@@ -21,7 +21,8 @@ class EventRegistry extends Events
     {
         for(var i = 0; i < _listeners.size(); i++)
         {
-            _listeners[i].onBearing(bearing);
+
+            (_listeners as Array<Events>)[i].onBearing(bearing);
         }
     }
 
@@ -29,7 +30,7 @@ class EventRegistry extends Events
     {
         for(var i = 0; i < _listeners.size(); i++)
         {
-            _listeners[i].onDistance(value);
+            (_listeners as Array<Events>)[i].onDistance(value);
         }
     }
 
@@ -37,7 +38,7 @@ class EventRegistry extends Events
     {
         for(var i = 0; i < _listeners.size(); i++)
         {
-            _listeners[i].onStart();
+            (_listeners as Array<Events>)[i].onStart();
         }
     }
 
@@ -45,7 +46,7 @@ class EventRegistry extends Events
     {
         for(var i = 0; i < _listeners.size(); i++)
         {
-            _listeners[i].onPulse();
+            (_listeners as Array<Events>)[i].onPulse();
         }
         WatchUi.requestUpdate();
     }
@@ -54,7 +55,7 @@ class EventRegistry extends Events
     {
         for(var i = 0; i < _listeners.size(); i++)
         {
-            _listeners[i].onCurrentPosition(currentPosition);
+            (_listeners as Array<Events>)[i].onCurrentPosition(currentPosition);
         }
     }
 
@@ -62,7 +63,7 @@ class EventRegistry extends Events
     {
         for(var i = 0; i < _listeners.size(); i++)
         {
-            _listeners[i].onCurrentWaypoint(waypoint);
+            (_listeners as Array<Events>)[i].onCurrentWaypoint(waypoint);
         }
     }
 
@@ -70,7 +71,7 @@ class EventRegistry extends Events
     {
         for(var i = 0; i < _listeners.size(); i++)
         {
-            _listeners[i].onWaypointCounter(displayIndex, displayCount);
+            (_listeners as Array<Events>)[i].onWaypointCounter(displayIndex, displayCount);
         }
         WatchUi.requestUpdate();
     }

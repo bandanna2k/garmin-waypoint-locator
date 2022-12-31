@@ -33,7 +33,7 @@ module Waypoints
                 _currentWaypointIndex = 0;
             }
 
-            _listener.onCurrentWaypoint(_waypoints[_currentWaypointIndex]);
+            _listener.onCurrentWaypoint((_waypoints as Array<Waypoint>)[_currentWaypointIndex]);
             _listener.onWaypointCounter(_currentWaypointIndex + 1, _waypoints.size());
         }
 
@@ -56,7 +56,7 @@ module Waypoints
             }
 
             _currentWaypointIndex = Utilities.mod(_currentWaypointIndex + 1, _waypoints.size());
-            _listener.onCurrentWaypoint(_waypoints[_currentWaypointIndex]);
+            _listener.onCurrentWaypoint((_waypoints as Array<Waypoint>)[_currentWaypointIndex]);
             _listener.onWaypointCounter(_currentWaypointIndex + 1, _waypoints.size());
             return true;
         }
@@ -70,7 +70,7 @@ module Waypoints
             }
 
             _currentWaypointIndex = Utilities.mod(_currentWaypointIndex - 1 + _waypoints.size(), _waypoints.size());
-            _listener.onCurrentWaypoint(_waypoints[_currentWaypointIndex]);
+            _listener.onCurrentWaypoint((_waypoints as Array<Waypoint>)[_currentWaypointIndex]);
             _listener.onWaypointCounter(_currentWaypointIndex + 1, _waypoints.size());
             return true;
         }
