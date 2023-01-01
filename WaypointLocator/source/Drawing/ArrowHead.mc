@@ -6,6 +6,8 @@ module Drawing
     class ArrowHead extends Events
     {
         var _bearing;
+        var _heading;
+        var _bearingToHeading;
 
         function initialize()
         {
@@ -14,8 +16,9 @@ module Drawing
 
         function draw(dc as Dc) as Void
         {
-            if(_bearing == null)
+            if(_bearingToHeading == null)
             {
+                dc.drawCircle(dc.getWidth() / 2, dc.getHeight() / 2, 1);
                 return;
             }
 
@@ -46,7 +49,7 @@ module Drawing
                 [ backLeftX, backLeftY ]
             ];
 
-            Drawing.rotate(pts, [ originX, originY ], _bearing);
+            Drawing.rotate(pts, [ originX, originY ], _bearingToHeading);
 
             return pts;
         }
@@ -54,6 +57,25 @@ module Drawing
         function onBearing(bearing as Numeric or Null) as Void
         {
             _bearing = bearing;
+            calculateBearingToHeading();
+        }
+
+        function onHeading(heading as Numeric or Null) as Void
+        {
+            _heading = heading;
+            calculateBearingToHeading();
+        }        
+
+        function calculateBearingToHeading() as Void
+        {
+            if(_bearing == null || _heading == null)
+            {
+                _bearingToHeading = null;
+            }
+            else
+            {
+                _bearingToHeading = Utilities.mod(_bearing - _heading + 360, 360);
+            }
         }
     }
 }
