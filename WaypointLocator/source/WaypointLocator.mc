@@ -1,6 +1,7 @@
 import Toybox.Lang;
 import Toybox.WatchUi;
 import Toybox.Position;
+import Toybox.Sensor;
 import Toybox.Timer;
 import Distance;
 import Bearing;
@@ -29,6 +30,8 @@ class WaypointLocator extends Events
         Position.enableLocationEvents(Position.LOCATION_CONTINUOUS, method(:onPosition));
         Attention.playTone(Attention.TONE_KEY);
         
+        Sensor.enableSensorEvents(method(:onSensor));
+
         _waypointTracker.addWaypoint(
             "This is the waypoint number 1",
             new Position.Location({
@@ -70,6 +73,11 @@ class WaypointLocator extends Events
     function onPosition(info as Position.Info) as Void
     {
         _eventRegistry.onCurrentPosition(info.position);
+    }
+
+    function onSensor(sensorInfo as Sensor.Info) as Void
+    {
+        _eventRegistry.onHeading(sensorInfo.heading);
     }
 
     function waypointTracker() as WaypointTracker

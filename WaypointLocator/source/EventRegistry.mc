@@ -26,6 +26,15 @@ class EventRegistry extends Events
         }
     }
 
+    function onHeading(heading as Numeric or Null) as Void
+    {
+        for(var i = 0; i < _listeners.size(); i++)
+        {
+
+            (_listeners as Array<Events>)[i].onHeading(heading);
+        }
+    }
+
     function onDistance(value as DistanceValue or Null) as Void
     {
         for(var i = 0; i < _listeners.size(); i++)
@@ -75,4 +84,5 @@ class EventRegistry extends Events
         }
         WatchUi.requestUpdate();
     }
+
 }

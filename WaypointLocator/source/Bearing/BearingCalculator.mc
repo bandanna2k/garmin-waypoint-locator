@@ -1,5 +1,4 @@
 import Toybox.Lang;
-import Toybox.System;
 import Toybox.Math;
 import Toybox.Position;
 import Waypoints;
@@ -60,28 +59,27 @@ Note: this value is in radians!
                 _eventRegistry.onBearing(bearing);
             }
         }
+        
+        static function calculate(
+            positionA as Location, 
+            positionB as Location) as Numeric
+        {
+            var deltaLong = Math.toRadians(Utilities.longitude(positionB) - Utilities.longitude(positionA));
+            var latA = Math.toRadians(Utilities.latitude(positionA));
+            var latB = Math.toRadians(Utilities.latitude(positionB));
+            var x = Math.cos(latB) * Math.sin(deltaLong);
+            var y = 
+                (Math.cos(latA) * Math.sin(latB)) -
+                (Math.sin(latA) * Math.cos(latB) * Math.cos(deltaLong));
+
+            return radiansToBearing(Math.atan2(x, y));
+        }
     }
 
-    function calculate(
-        positionA as Location, 
-        positionB as Location) as Numeric
+    function radiansToBearing(inputInRadians as Numeric) as Number
     {
-        var deltaLong = Math.toRadians(Utilities.longitude(positionB) - Utilities.longitude(positionA));
-        var latA = Math.toRadians(Utilities.latitude(positionA));
-        var latB = Math.toRadians(Utilities.latitude(positionB));
-        var x = Math.cos(latB) * Math.sin(deltaLong);
-        var y = 
-            (Math.cos(latA) * Math.sin(latB)) -
-            (Math.sin(latA) * Math.cos(latB) * Math.cos(deltaLong));
-
-        var bearing;
-        bearing = Math.toDegrees(Math.atan2(x, y));
-        bearing = bearing + 360;
-        bearing = Utilities.mod(bearing, 360);
-        // System.println("delta Long = " + deltaLong);
-        // System.println("x = " + x);
-        // System.println("y = " + y);
-        // System.println("bearing = " + bearing);
-        return bearing;
+        var result = Math.toDegrees(inputInRadians);
+        result = result + 360;
+        return Utilities.mod(result, 360);
     }
 }

@@ -31,4 +31,8 @@ class Events
     function onPulse() as Void
     {
     }
+
+    function onHeading(heading as Numeric) as Void
+    {        
+    }
 }

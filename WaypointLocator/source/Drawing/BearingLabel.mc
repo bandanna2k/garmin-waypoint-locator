@@ -7,6 +7,7 @@ module Drawing
     class BearingLabel extends Events
     {
         var _bearing;
+        var _heading;
 
         function initialize()
         {
@@ -22,13 +23,27 @@ module Drawing
 
             var w = dc.getWidth();
             var h = dc.getHeight();
-            var string = _bearing.format("%03d");
-            dc.drawText(w / 2, h - 35, Graphics.FONT_LARGE, string, Graphics.TEXT_JUSTIFY_CENTER);
+            var bearing = _bearing.format("%03d");
+            var heading;
+            if(_heading == null)
+            {
+                heading = "";
+            } 
+            else
+            {
+                heading = Bearing.radiansToBearing(_heading).format("%03d");
+            }
+            dc.drawText(w / 2, h - 35, Graphics.FONT_LARGE, bearing + " " + heading, Graphics.TEXT_JUSTIFY_CENTER);
         }
 
         function onBearing(bearing as Numeric) as Void
         {
             _bearing = bearing;
+        }
+
+        function onHeading(heading as Numeric or Null) as Void
+        {
+            _heading = heading;
         }
     }
 }
