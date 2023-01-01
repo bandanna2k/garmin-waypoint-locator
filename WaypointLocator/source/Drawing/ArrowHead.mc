@@ -46,7 +46,7 @@ module Drawing
                 [ backLeftX, backLeftY ]
             ];
 
-            DrawingUtilities.rotate(pts, [ originX, originY ], _bearing);
+            Drawing.rotate(pts, [ originX, originY ], _bearing);
 
             return pts;
         }

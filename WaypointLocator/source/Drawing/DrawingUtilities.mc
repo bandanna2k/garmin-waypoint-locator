@@ -1,7 +1,7 @@
 import Toybox.Math;
 import Toybox.Lang;
 
-module DrawingUtilities
+module Drawing
 {
     function rotate(
         points as Array<Array<Numeric>>, 

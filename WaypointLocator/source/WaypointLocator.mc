@@ -77,7 +77,14 @@ class WaypointLocator extends Events
 
     function onSensor(sensorInfo as Sensor.Info) as Void
     {
-        _eventRegistry.onHeading(sensorInfo.heading);
+        if(sensorInfo.heading == null)
+        {
+            _eventRegistry.onHeading(null);
+        }
+        else
+        {
+            _eventRegistry.onHeading(Bearing.radiansToBearing(sensorInfo.heading));
+        }
     }
 
     function waypointTracker() as WaypointTracker

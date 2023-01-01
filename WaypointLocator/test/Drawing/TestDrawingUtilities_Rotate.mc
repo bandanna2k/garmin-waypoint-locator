@@ -28,7 +28,7 @@ module TestRotate
         points as Array<Array<Numeric>>, 
         bearing as Numeric) as Void
     {
-        DrawingUtilities.rotate(points, [0, 0], bearing);
+        Drawing.rotate(points, [0, 0], bearing);
     }
 
     function arePointsEqual(

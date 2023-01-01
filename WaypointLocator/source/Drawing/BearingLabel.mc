@@ -31,7 +31,7 @@ module Drawing
             } 
             else
             {
-                heading = Bearing.radiansToBearing(_heading).format("%03d");
+                heading = _heading.format("%03d");
             }
             dc.drawText(w / 2, h - 35, Graphics.FONT_LARGE, bearing + " " + heading, Graphics.TEXT_JUSTIFY_CENTER);
         }
