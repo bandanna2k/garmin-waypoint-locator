@@ -32,6 +32,19 @@ module Menu
             {
                 menu.popView(WatchUi.SLIDE_IMMEDIATE);
                 _selection = "";
+
+                var url = "https://davidnorthtennis.com/gpx/2.gpx";
+
+                // Make the image request
+                var options = {
+                    :method => Communications.HTTP_REQUEST_METHOD_GET,
+                    :headers => 
+                    {                                           
+                        "Content-Type" => Communications.REQUEST_CONTENT_TYPE_URL_ENCODED
+                    },                                             
+                    :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
+                };
+                Communications.makeWebRequest(url, {}, options, method(:responseCallback));
                 return;
             }
 
@@ -45,5 +58,38 @@ module Menu
         {
             WatchUi.pushView(menu, _menuInput, WatchUi.SLIDE_IMMEDIATE);
             return true;
-        }}
+        }
+
+        function responseCallback(
+            responseCode as Number, 
+            data as Dictionary or String or Null) as Void 
+        {
+            Toybox.System.println(responseCode);
+            responseCode = responseCode;
+            if (responseCode < 400) 
+            {
+                if(data instanceof Dictionary)
+                {
+                    Toybox.System.println("DICT");
+                    Toybox.System.println(data);
+                }   
+                else if(data instanceof String)
+                {
+                    Toybox.System.println("STRING");
+                    Toybox.System.println(data);
+                }   
+                else
+                {
+                    Toybox.System.println(data);
+                    Toybox.System.println("Not a file I understand");
+                }
+            }
+            else 
+            {
+                Toybox.System.println("Failed " + responseCode);
+            }
+        }
+
+
+    }
 }
