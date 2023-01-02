@@ -5,6 +5,7 @@ import Toybox.Position;
 import Toybox.System;
 import Toybox.Attention;
 import Waypoints;
+import Menu;
 
 class Main extends Application.AppBase 
 {
@@ -52,9 +53,11 @@ class Main extends Application.AppBase
     // Return the initial view of your application here
     // Views first
     // Input delegates after
-    function getInitialView() as Array<Views or InputDelegates>? {
+    function getInitialView() as Array<Views or InputDelegates>? 
+    {
         return [ 
             _view,
+            new MenuBehaviourDelegate(),
             _waypointLocator.waypointTracker()
         ] as Array<Views or InputDelegates>;
     }
