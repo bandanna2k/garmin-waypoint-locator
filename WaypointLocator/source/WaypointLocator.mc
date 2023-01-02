@@ -75,6 +75,11 @@ class WaypointLocator extends Events
         _eventRegistry.onCurrentPosition(info.position);
     }
 
+    function onWaypoints(arrayOfWaypoints as Array<Waypoint>) as Void
+    {
+        Toybox.System.println("Save waypoints here.");
+    }
+
     function onSensor(sensorInfo as Sensor.Info) as Void
     {
         if(sensorInfo.heading == null)

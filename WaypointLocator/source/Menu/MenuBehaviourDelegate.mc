@@ -1,5 +1,6 @@
 import Toybox.WatchUi;
 import Toybox.Lang;
+import Toybox.Application;
 import Waypoints;
 
 module Menu
@@ -46,10 +47,6 @@ module Menu
                 // Make the image request
                 var options = {
                     :method => Communications.HTTP_REQUEST_METHOD_GET,
-                    // :headers => 
-                    // {                                           
-                    //     "Content-Type" => Communications.REQUEST_CONTENT_TYPE_URL_ENCODED
-                    // },                                             
                     :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
                 };
                 Communications.makeWebRequest(url, {}, options, method(:responseCallback));
