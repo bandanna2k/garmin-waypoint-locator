@@ -22,6 +22,9 @@ module Menu
             _menu = new Menu2({:title=>selectionString()});
             _menu.addItem(new MenuItem("0", null, "0", {}));
             _menu.addItem(new MenuItem("1", null, "1", {}));
+            _menu.addItem(new MenuItem("2", null, "2", {}));
+            _menu.addItem(new MenuItem("3", null, "3", {}));
+            _menu.addItem(new MenuItem("4", null, "4", {}));
             _menu.addItem(new MenuItem("Done", null, "itemDone", {}));
             _menuInput = new MenuInputDelegate(new Method(self, :onSelection));
         }
@@ -36,9 +39,9 @@ module Menu
             if("itemDone".equals(selection))
             {
                 _menu.popView(WatchUi.SLIDE_IMMEDIATE);
-                _selection = "";
 
-                var url = "https://davidnorthtennis.com/gpx/2.json";
+                var url = "https://davidnorthtennis.com/gpx/" + _selection + ".json";
+                _selection = "";
 
                 // Make the image request
                 var options = {
