@@ -33,8 +33,12 @@ module Drawing
             _cyclicString.cycle();
         }
 
-        function onCurrentWaypoint(waypoint as Waypoint) as Void
+        function onCurrentWaypoint(waypoint as Waypoint or Null) as Void
         {
+            if(waypoint == null)
+            {
+                return;
+            }
             _cyclicString.setText(waypoint.title());
         }
     }

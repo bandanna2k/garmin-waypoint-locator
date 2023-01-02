@@ -6,10 +6,12 @@ module Menu
 {        
     class MenuBehaviourDelegate extends BehaviorDelegate 
     {
-        var _menuInput;
-        var menu;
-        var _selection;
         var _eventRegistry;
+
+        var _menu;
+        var _menuInput;
+
+        var _selection;
 
         function initialize(eventRegistry as EventRegistry) 
         {
@@ -17,10 +19,10 @@ module Menu
 
             _eventRegistry = eventRegistry;
             _selection = "";
-            menu = new Menu2({:title=>selectionString()});
-            menu.addItem(new MenuItem("0", null, "0", {}));
-            menu.addItem(new MenuItem("1", null, "1", {}));
-            menu.addItem(new MenuItem("Done", null, "itemDone", {}));
+            _menu = new Menu2({:title=>selectionString()});
+            _menu.addItem(new MenuItem("0", null, "0", {}));
+            _menu.addItem(new MenuItem("1", null, "1", {}));
+            _menu.addItem(new MenuItem("Done", null, "itemDone", {}));
             _menuInput = new MenuInputDelegate(new Method(self, :onSelection));
         }
 
@@ -33,7 +35,7 @@ module Menu
         {
             if("itemDone".equals(selection))
             {
-                menu.popView(WatchUi.SLIDE_IMMEDIATE);
+                _menu.popView(WatchUi.SLIDE_IMMEDIATE);
                 _selection = "";
 
                 var url = "https://davidnorthtennis.com/gpx/2.json";
@@ -41,10 +43,10 @@ module Menu
                 // Make the image request
                 var options = {
                     :method => Communications.HTTP_REQUEST_METHOD_GET,
-                    :headers => 
-                    {                                           
-                        "Content-Type" => Communications.REQUEST_CONTENT_TYPE_URL_ENCODED
-                    },                                             
+                    // :headers => 
+                    // {                                           
+                    //     "Content-Type" => Communications.REQUEST_CONTENT_TYPE_URL_ENCODED
+                    // },                                             
                     :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
                 };
                 Communications.makeWebRequest(url, {}, options, method(:responseCallback));
@@ -53,13 +55,13 @@ module Menu
 
             _selection = _selection + selection;
 
-            menu.setTitle(selectionString());
-            menu.setFocus(0);
+            _menu.setTitle(selectionString());
+            _menu.setFocus(0);
         }
 
         function onMenu()
         {
-            WatchUi.pushView(menu, _menuInput, WatchUi.SLIDE_IMMEDIATE);
+            WatchUi.pushView(_menu, _menuInput, WatchUi.SLIDE_IMMEDIATE);
             return true;
         }
 
@@ -67,7 +69,6 @@ module Menu
             responseCode as Number, 
             data as Dictionary or String or Null) as Void 
         {
-            Toybox.System.println(responseCode);
             responseCode = responseCode;
             if (responseCode < 400) 
             {
@@ -90,7 +91,7 @@ module Menu
                             }));
                         newWaypoints.add(waypoint);
                     }
-                    _eventRegistry.onResetWaypoints(newWaypoints);
+                    _eventRegistry.onWaypoints(newWaypoints);
                 }   
                 else
                 {
@@ -104,6 +105,16 @@ module Menu
             }
         }
 
+        function onNextPage() as Boolean
+        {
+            _eventRegistry.onNextWaypoint();
+            return true;
+        }
 
+        function onPreviousPage() as Boolean
+        {
+            _eventRegistry.onPreviousWaypoint();
+            return true;
+        }
     }
 }

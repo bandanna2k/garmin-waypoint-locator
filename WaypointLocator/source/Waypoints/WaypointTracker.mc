@@ -4,75 +4,64 @@ import Toybox.WatchUi;
 
 module Waypoints
 {
-    class WaypointTracker extends BehaviorDelegate
+    class WaypointTracker extends Events
     {
         var _waypoints;
         var _currentWaypointIndex;
 
-        var _listener;
+        var _eventRegistry;
 
-        function initialize(listener as Events)
+        function initialize(eventRegistry as EventRegistry)
         {
-            BehaviorDelegate.initialize();
+            Events.initialize();
 
-            _listener = listener;
+            _eventRegistry = eventRegistry;
+            _eventRegistry.register(self);
 
             _waypoints = [];
             _currentWaypointIndex = null;
         }
 
-        function addWaypoint(
-            title as String,
-            value as Position.Location) as Void
+        function onNextWaypoint() as Void
         {
-            var waypoint = new Waypoint(title, value);
-
-            _waypoints.add(waypoint);
             if(_currentWaypointIndex == null)
+            {
+                _eventRegistry.onCurrentWaypoint(null);
+                return;
+            }
+
+            _currentWaypointIndex = Utilities.mod(_currentWaypointIndex + 1, _waypoints.size());
+            _eventRegistry.onCurrentWaypoint((_waypoints as Array<Waypoint>)[_currentWaypointIndex]);
+            _eventRegistry.onWaypointCounter(_currentWaypointIndex + 1, _waypoints.size());
+        }
+
+        function onPreviousWaypoint() as Void
+        {
+            if(_currentWaypointIndex == null)
+            {
+                _eventRegistry.onCurrentWaypoint(null);
+                return;
+            }
+
+            _currentWaypointIndex = Utilities.mod(_currentWaypointIndex - 1 + _waypoints.size(), _waypoints.size());
+            _eventRegistry.onCurrentWaypoint((_waypoints as Array<Waypoint>)[_currentWaypointIndex]);
+            _eventRegistry.onWaypointCounter(_currentWaypointIndex + 1, _waypoints.size());
+        }
+
+        function onWaypoints(array as Array<Waypoint>) as Void
+        {
+            _waypoints = array;
+            if(array.size() == 0)
+            {
+                _currentWaypointIndex = null;
+            }
+            else
             {
                 _currentWaypointIndex = 0;
             }
 
-            _listener.onCurrentWaypoint((_waypoints as Array<Waypoint>)[_currentWaypointIndex]);
-            _listener.onWaypointCounter(_currentWaypointIndex + 1, _waypoints.size());
-        }
-
-        function onNextPage() as Boolean
-        {
-            return onNextWaypoint();
-        }
-
-        function onPreviousPage() as Boolean
-        {
-            return onPreviousWaypoint();
-        }
-
-        function onNextWaypoint() as Boolean
-        {
-            if(_currentWaypointIndex == null)
-            {
-                _listener.onCurrentWaypoint(null);
-                return false;
-            }
-
-            _currentWaypointIndex = Utilities.mod(_currentWaypointIndex + 1, _waypoints.size());
-            _listener.onCurrentWaypoint((_waypoints as Array<Waypoint>)[_currentWaypointIndex]);
-            _listener.onWaypointCounter(_currentWaypointIndex + 1, _waypoints.size());
-            return true;
-        }
-
-        function onPreviousWaypoint() as Boolean
-        {
-            if(_currentWaypointIndex == null)
-            {
-                _listener.onCurrentWaypoint(null);
-                return false;
-            }
-
-            _currentWaypointIndex = Utilities.mod(_currentWaypointIndex - 1 + _waypoints.size(), _waypoints.size());
-            _listener.onCurrentWaypoint((_waypoints as Array<Waypoint>)[_currentWaypointIndex]);
-            _listener.onWaypointCounter(_currentWaypointIndex + 1, _waypoints.size());
-            return true;
+            _eventRegistry.onCurrentWaypoint((_waypoints as Array<Waypoint>)[_currentWaypointIndex]);
+            _eventRegistry.onWaypointCounter(_currentWaypointIndex + 1, _waypoints.size());
         }
     }
 }

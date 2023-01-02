@@ -32,34 +32,34 @@ class WaypointLocator extends Events
         
         Sensor.enableSensorEvents(method(:onSensor));
 
-        _waypointTracker.addWaypoint(
-            "This is the waypoint number 1",
-            new Position.Location({
-                :latitude => -36.89442018242911, 
-                :longitude => 174.78806550227148, 
-                :format => :degrees
-            }));
-        _waypointTracker.addWaypoint(
-            "This is the waypoint number 2",
-            new Position.Location({
-                :latitude => -36.89750395214885, 
-                :longitude => 174.78971581679005, 
-                :format => :degrees
-            }));
-        _waypointTracker.addWaypoint(
-            "Britomart",
-            new Position.Location({
-                :latitude => -36.83994648776584, 
-                :longitude => 174.76830573854085, 
-                :format => :degrees
-            }));
-        _waypointTracker.addWaypoint(
-            "Okahu Bay Wharf",
-            new Position.Location({
-                :latitude => -36.845450811519804, 
-                :longitude => 174.81746726099607, 
-                :format => :degrees
-            }));
+        // _waypointTracker.addWaypoint(
+        //     "This is the waypoint number 1",
+        //     new Position.Location({
+        //         :latitude => -36.89442018242911, 
+        //         :longitude => 174.78806550227148, 
+        //         :format => :degrees
+        //     }));
+        // _waypointTracker.addWaypoint(
+        //     "This is the waypoint number 2",
+        //     new Position.Location({
+        //         :latitude => -36.89750395214885, 
+        //         :longitude => 174.78971581679005, 
+        //         :format => :degrees
+        //     }));
+        // _waypointTracker.addWaypoint(
+        //     "Britomart",
+        //     new Position.Location({
+        //         :latitude => -36.83994648776584, 
+        //         :longitude => 174.76830573854085, 
+        //         :format => :degrees
+        //     }));
+        // _waypointTracker.addWaypoint(
+        //     "Okahu Bay Wharf",
+        //     new Position.Location({
+        //         :latitude => -36.845450811519804, 
+        //         :longitude => 174.81746726099607, 
+        //         :format => :degrees
+        //     }));
 
         var timer = new Timer.Timer();
         timer.start(method(:onTimer), 1000, true);

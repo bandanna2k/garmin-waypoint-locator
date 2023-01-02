@@ -60,6 +60,24 @@ class EventRegistry extends Events
         WatchUi.requestUpdate();
     }
 
+    function onNextWaypoint() as Void
+    {
+        for(var i = 0; i < _listeners.size(); i++)
+        {
+            (_listeners as Array<Events>)[i].onNextWaypoint();
+        }
+        WatchUi.requestUpdate();
+    }
+
+    function onPreviousWaypoint() as Void
+    {
+        for(var i = 0; i < _listeners.size(); i++)
+        {
+            (_listeners as Array<Events>)[i].onPreviousWaypoint();
+        }
+        WatchUi.requestUpdate();
+    }
+
     function onCurrentPosition(currentPosition as Location or Null) as Void
     {
         for(var i = 0; i < _listeners.size(); i++)
@@ -82,15 +100,13 @@ class EventRegistry extends Events
         {
             (_listeners as Array<Events>)[i].onWaypointCounter(displayIndex, displayCount);
         }
-        WatchUi.requestUpdate();
     }
 
-    function onResetWaypoints(arrayOfWaypoints as Array<Waypoints>) as Void
+    function onWaypoints(arrayOfWaypoints as Array<Waypoint>) as Void
     {
-        for(var i = 0; i < arrayOfWaypoints.size(); i++)
+        for(var i = 0; i < _listeners.size(); i++)
         {
-            var waypoint = arrayOfWaypoints[i];
-            Toybox.System.println(waypoint.toString());
+            (_listeners as Array<Events>)[i].onWaypoints(arrayOfWaypoints);
         }
     }
 }
