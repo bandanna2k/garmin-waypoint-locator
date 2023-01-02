@@ -53,10 +53,11 @@ module Menu
                     :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
                 };
                 Communications.makeWebRequest(url, {}, options, method(:responseCallback));
-                return;
             }
-
-            _selection = _selection + selection;
+            else
+            {
+                _selection = _selection + selection;
+            }
 
             _menu.setTitle(selectionString());
             _menu.setFocus(0);
