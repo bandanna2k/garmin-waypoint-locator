@@ -85,4 +85,12 @@ class EventRegistry extends Events
         WatchUi.requestUpdate();
     }
 
+    function onResetWaypoints(arrayOfWaypoints as Array<Waypoints>) as Void
+    {
+        for(var i = 0; i < arrayOfWaypoints.size(); i++)
+        {
+            var waypoint = arrayOfWaypoints[i];
+            Toybox.System.println(waypoint.toString());
+        }
+    }
 }

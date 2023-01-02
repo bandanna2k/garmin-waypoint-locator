@@ -1,5 +1,6 @@
 import Toybox.WatchUi;
 import Toybox.Lang;
+import Waypoints;
 
 module Menu
 {        
@@ -8,11 +9,13 @@ module Menu
         var _menuInput;
         var menu;
         var _selection;
+        var _eventRegistry;
 
-        function initialize() 
+        function initialize(eventRegistry as EventRegistry) 
         {
             BehaviorDelegate.initialize();
 
+            _eventRegistry = eventRegistry;
             _selection = "";
             menu = new Menu2({:title=>selectionString()});
             menu.addItem(new MenuItem("0", null, "0", {}));
@@ -33,7 +36,7 @@ module Menu
                 menu.popView(WatchUi.SLIDE_IMMEDIATE);
                 _selection = "";
 
-                var url = "https://davidnorthtennis.com/gpx/2.gpx";
+                var url = "https://davidnorthtennis.com/gpx/2.json";
 
                 // Make the image request
                 var options = {
@@ -70,13 +73,24 @@ module Menu
             {
                 if(data instanceof Dictionary)
                 {
-                    Toybox.System.println("DICT");
-                    Toybox.System.println(data);
-                }   
-                else if(data instanceof String)
-                {
-                    Toybox.System.println("STRING");
-                    Toybox.System.println(data);
+                    var newWaypoints = [] as Array<Waypoint>;
+
+                    var waypoints = data.get("waypoints") as Array;
+                    for(var i = 0 ; i < waypoints.size(); i++)
+                    {
+                        var title = waypoints[i].get("title");
+                        var latitude = waypoints[i].get("latitude");
+                        var longitude = waypoints[i].get("longitude");
+                        var waypoint = new Waypoint(
+                            title, 
+                            new Position.Location({
+                                :latitude => latitude, 
+                                :longitude => longitude, 
+                                :format => :degrees
+                            }));
+                        newWaypoints.add(waypoint);
+                    }
+                    _eventRegistry.onResetWaypoints(newWaypoints);
                 }   
                 else
                 {

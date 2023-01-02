@@ -16,14 +16,19 @@ module Waypoints
             _position = position;
         }
 
-        public function position() as Position.Location
+        function position() as Position.Location
         {
             return _position;
         }
 
-        public function title() as String
+        function title() as String
         {
             return _title;
         }
+
+        function toString() as String
+        {
+            return _title + " " + Utilities.longitude(_position) + " " + Utilities.latitude(_position);
+        } 
     }
 }

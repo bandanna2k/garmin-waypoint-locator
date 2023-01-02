@@ -57,7 +57,7 @@ class Main extends Application.AppBase
     {
         return [ 
             _view,
-            new MenuBehaviourDelegate(),
+            new MenuBehaviourDelegate(_eventRegistry),
             _waypointLocator.waypointTracker()
         ] as Array<Views or InputDelegates>;
     }

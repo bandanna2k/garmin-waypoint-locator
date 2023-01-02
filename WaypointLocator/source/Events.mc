@@ -35,4 +35,8 @@ class Events
     function onHeading(heading as Numeric) as Void
     {        
     }
+
+    function onResetWaypoints(arrayOfWaypoints as Array<Waypoints>)
+    {  
+    }
 }
