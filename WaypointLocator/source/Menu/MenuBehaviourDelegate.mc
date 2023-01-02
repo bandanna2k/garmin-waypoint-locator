@@ -20,12 +20,12 @@ module Menu
             _eventRegistry = eventRegistry;
             _selection = "";
             _menu = new Menu2({:title=>selectionString()});
-            _menu.addItem(new MenuItem("0", null, "0", {}));
-            _menu.addItem(new MenuItem("1", null, "1", {}));
-            _menu.addItem(new MenuItem("2", null, "2", {}));
-            _menu.addItem(new MenuItem("3", null, "3", {}));
-            _menu.addItem(new MenuItem("4", null, "4", {}));
-            _menu.addItem(new MenuItem("Done", null, "itemDone", {}));
+            _menu.addItem(new MenuItem("  0", null, "0", {}));
+            _menu.addItem(new MenuItem("  1", null, "1", {}));
+            _menu.addItem(new MenuItem("  2", null, "2", {}));
+            _menu.addItem(new MenuItem("  3", null, "3", {}));
+            _menu.addItem(new MenuItem("  4", null, "4", {}));
+            _menu.addItem(new MenuItem(" Done", null, "itemDone", {}));
             _menuInput = new MenuInputDelegate(new Method(self, :onSelection));
         }
 
@@ -83,22 +83,13 @@ module Menu
                     var waypoints = data.get("waypoints") as Array;
                     for(var i = 0 ; i < waypoints.size(); i++)
                     {
-                        var title = waypoints[i].get("title");
-                        var latitude = waypoints[i].get("latitude");
-                        var longitude = waypoints[i].get("longitude");
-                        var waypoint = new Waypoint(
-                            title, 
-                            new Position.Location({
-                                :latitude => latitude, 
-                                :longitude => longitude, 
-                                :format => :degrees
-                            }));
-                        newWaypoints.add(waypoint);
+                        newWaypoints.add(Waypoints.toWaypoint(waypoints[i]));
                     }
                     _eventRegistry.onWaypoints(newWaypoints);
                 }   
                 else
                 {
+                    Toybox.System.println(responseCode);
                     Toybox.System.println(data);
                     Toybox.System.println("Not a file I understand");
                 }

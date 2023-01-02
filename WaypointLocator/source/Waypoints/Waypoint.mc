@@ -10,13 +10,13 @@ module Waypoints
 
         function initialize(
             title as String,
-            position as Position.Location)
+            position as Location)
         {
             _title = title;
             _position = position;
         }
 
-        function position() as Position.Location
+        function position() as Location
         {
             return _position;
         }
@@ -26,23 +26,23 @@ module Waypoints
             return _title;
         }
 
-        // static function from(dict as Dictionary) as Waypoint
-        // {
-        //     var title = dict.get("title");
-        //     var latitude = dict.get("latitude");
-        //     var longitude = dict.get("longitude");
-        //     return new Waypoint(
-        //         title, 
-        //         new Position.Location({
-        //             :latitude => latitude, 
-        //             :longitude => longitude, 
-        //             :format => :degrees
-        //         }));
-        // }
-
         function toString() as String
         {
             return _title + " " + Utilities.longitude(_position) + " " + Utilities.latitude(_position);
         } 
+    }
+
+    function toWaypoint(dict as Dictionary) as Waypoint
+    {
+        var title = dict.get("title") as String;
+        var latitude = dict.get("latitude") as Numeric;
+        var longitude = dict.get("longitude") as Numeric;
+        return new Waypoint(
+            title, 
+            new Location({
+                :latitude => latitude, 
+                :longitude => longitude, 
+                :format => :degrees
+            }));
     }
 }
