@@ -3,9 +3,9 @@ import Toybox.Lang;
 import Toybox.Application;
 import Waypoints;
 
-module Menu
+module Inputs
 {        
-    class MenuBehaviourDelegate extends BehaviorDelegate 
+    class InputBehaviour extends BehaviorDelegate 
     {
         var _eventRegistry;
 

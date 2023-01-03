@@ -1,7 +1,7 @@
 import Toybox.WatchUi;
 import Toybox.Lang;
 
-module Menu
+module Inputs
 {
     class MenuInputDelegate extends Menu2InputDelegate 
     {

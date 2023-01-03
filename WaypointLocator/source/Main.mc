@@ -5,7 +5,7 @@ import Toybox.Position;
 import Toybox.System;
 import Toybox.Attention;
 import Waypoints;
-import Menu;
+import Inputs;
 
 class Main extends Application.AppBase 
 {
@@ -57,7 +57,7 @@ class Main extends Application.AppBase
     {
         return [ 
             _view,
-            new MenuBehaviourDelegate(_eventRegistry),
+            new InputBehaviour(_eventRegistry),
             _waypointLocator.waypointTracker()
         ] as Array<Views or InputDelegates>;
     }
