@@ -1,16 +1,15 @@
 import Toybox.WatchUi;
 import Toybox.Lang;
 
-module Inputs
+module Inputs { module Menus 
 {
-    class MenuInputDelegate extends Menu2InputDelegate 
+    class MenuInput extends Menu2InputDelegate 
     {
         var _callback;
 
         function initialize(callback as Method) 
         {
             Menu2InputDelegate.initialize();
-
             _callback = callback;
         }
 
@@ -19,4 +18,4 @@ module Inputs
             _callback.invoke(item.getId());
         }
     }
-}
+}}
