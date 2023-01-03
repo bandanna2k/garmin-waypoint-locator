@@ -51,3 +51,5 @@ Thumbs.db
 # Garmin
 bin/
 developer_key
+mir/
+internal-mir/
