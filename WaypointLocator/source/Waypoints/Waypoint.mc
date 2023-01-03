@@ -1,5 +1,7 @@
 import Toybox.Position;
 import Toybox.Lang;
+import Toybox.Application;
+import Utilities;
 
 module Waypoints
 {
@@ -32,7 +34,7 @@ module Waypoints
         } 
     }
 
-    function toWaypoint(dict as Dictionary) as Waypoint
+    function toWaypointFromDictionary(dict as Dictionary) as Waypoint
     {
         var title = dict.get("title") as String;
         var latitude = dict.get("latitude") as Numeric;
@@ -44,5 +46,75 @@ module Waypoints
                 :longitude => longitude, 
                 :format => :degrees
             }));
+    }
+
+    function toWaypointFromStorage(index as Number) as Waypoint
+    {
+        var title = Storage.getValue("waypoint." + index + ".title") as String;
+        var latitude = Storage.getValue("waypoint." + index + ".latitude") as Numeric;
+        var longitude = Storage.getValue("waypoint." + index + ".longitude") as Numeric;
+        return new Waypoint(
+            title, 
+            new Location({
+                :latitude => latitude, 
+                :longitude => longitude, 
+                :format => :degrees
+            }));
+    }
+
+    function saveWaypoints(arrayOfWaypoints as Array<Waypoint>) as Void
+    {
+        // Clear waypoints
+        var count = Storage.getValue("waypoint.count");
+        if(count == null)
+        {
+            // Do nothing
+        }
+        else
+        {
+            for(var i = 0; i < count; i++)
+            {
+                Storage.deleteValue("waypoint." + i + ".title");
+                Storage.deleteValue("waypoint." + i + ".latitude");
+                Storage.deleteValue("waypoint." + i + ".longitude");
+            }
+        }
+
+        // Save waypoints
+        Storage.setValue("waypoint.count", arrayOfWaypoints.size());
+        for(var i = 0; i < arrayOfWaypoints.size(); i++)
+        {
+            var waypoint = arrayOfWaypoints[i];
+            Storage.setValue("waypoint." + i + ".title", waypoint.title());
+            Storage.setValue("waypoint." + i + ".latitude", Utilities.latitude(waypoint.position()));
+            Storage.setValue("waypoint." + i + ".longitude", Utilities.longitude(waypoint.position()));
+        }
+    }
+
+    function loadWaypoints(eventRegistry as EventRegistry) as Void
+    {
+        try
+        {
+            var arrayOfWaypoints = [] as Array<Waypoint>;
+            var count = Storage.getValue("waypoint.count");
+            if(count == null)
+            {
+                // Do nothing
+            }
+            else
+            {
+                for(var i = 0; i < count; i++)
+                {
+                    var waypoint = Waypoints.toWaypointFromStorage(i);
+                    arrayOfWaypoints.add(waypoint);
+                }
+                eventRegistry.onWaypoints(arrayOfWaypoints);
+            }        
+        }
+        catch(ex)
+        {
+            Toybox.System.println("Error loading waypoints. " + ex.getErrorMessage());
+            Storage.clearValues();
+        }
     }
 }

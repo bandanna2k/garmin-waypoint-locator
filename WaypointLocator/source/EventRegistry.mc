@@ -94,7 +94,9 @@ class EventRegistry extends Events
         }
     }
 
-    function onWaypointCounter(displayIndex as Number, displayCount as Number) as Void
+    function onWaypointCounter(
+        displayIndex as Number, 
+        displayCount as Number) as Void
     {
         for(var i = 0; i < _listeners.size(); i++)
         {

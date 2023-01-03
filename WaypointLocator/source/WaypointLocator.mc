@@ -3,6 +3,7 @@ import Toybox.WatchUi;
 import Toybox.Position;
 import Toybox.Sensor;
 import Toybox.Timer;
+import Toybox.Application;
 import Distance;
 import Bearing;
 import Waypoints;
@@ -27,39 +28,12 @@ class WaypointLocator extends Events
 
     function onStart() as Void
     {
+        Waypoints.loadWaypoints(_eventRegistry);
+
         Position.enableLocationEvents(Position.LOCATION_CONTINUOUS, method(:onPosition));
         Attention.playTone(Attention.TONE_KEY);
         
         Sensor.enableSensorEvents(method(:onSensor));
-
-        // _waypointTracker.addWaypoint(
-        //     "This is the waypoint number 1",
-        //     new Position.Location({
-        //         :latitude => -36.89442018242911, 
-        //         :longitude => 174.78806550227148, 
-        //         :format => :degrees
-        //     }));
-        // _waypointTracker.addWaypoint(
-        //     "This is the waypoint number 2",
-        //     new Position.Location({
-        //         :latitude => -36.89750395214885, 
-        //         :longitude => 174.78971581679005, 
-        //         :format => :degrees
-        //     }));
-        // _waypointTracker.addWaypoint(
-        //     "Britomart",
-        //     new Position.Location({
-        //         :latitude => -36.83994648776584, 
-        //         :longitude => 174.76830573854085, 
-        //         :format => :degrees
-        //     }));
-        // _waypointTracker.addWaypoint(
-        //     "Okahu Bay Wharf",
-        //     new Position.Location({
-        //         :latitude => -36.845450811519804, 
-        //         :longitude => 174.81746726099607, 
-        //         :format => :degrees
-        //     }));
 
         var timer = new Timer.Timer();
         timer.start(method(:onTimer), 1000, true);
@@ -73,11 +47,6 @@ class WaypointLocator extends Events
     function onPosition(info as Position.Info) as Void
     {
         _eventRegistry.onCurrentPosition(info.position);
-    }
-
-    function onWaypoints(arrayOfWaypoints as Array<Waypoint>) as Void
-    {
-        Toybox.System.println("Save waypoints here.");
     }
 
     function onSensor(sensorInfo as Sensor.Info) as Void

@@ -80,8 +80,10 @@ module Menu
                     var waypoints = data.get("waypoints") as Array;
                     for(var i = 0 ; i < waypoints.size(); i++)
                     {
-                        newWaypoints.add(Waypoints.toWaypoint(waypoints[i]));
+                        newWaypoints.add(Waypoints.toWaypointFromDictionary(waypoints[i]));
                     }
+
+                    Waypoints.saveWaypoints(newWaypoints);
                     _eventRegistry.onWaypoints(newWaypoints);
                 }   
                 else
