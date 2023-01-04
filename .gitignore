@@ -53,3 +53,5 @@ bin/
 developer_key
 mir/
 internal-mir/
+*.iq
+*.prg*
