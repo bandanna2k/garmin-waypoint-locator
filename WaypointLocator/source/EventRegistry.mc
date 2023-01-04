@@ -21,17 +21,18 @@ class EventRegistry extends Events
     {
         for(var i = 0; i < _listeners.size(); i++)
         {
-
             (_listeners as Array<Events>)[i].onBearing(bearing);
         }
     }
 
     function onHeading(heading as Numeric or Null) as Void
     {
-        for(var i = 0; i < _listeners.size(); i++)
+        if(heading == null || heading != 0)
         {
-
-            (_listeners as Array<Events>)[i].onHeading(heading);
+            for(var i = 0; i < _listeners.size(); i++)
+            {
+                (_listeners as Array<Events>)[i].onHeading(heading);
+            }
         }
     }
 
@@ -103,12 +104,18 @@ class EventRegistry extends Events
             (_listeners as Array<Events>)[i].onWaypointCounter(displayIndex, displayCount);
         }
     }
-
     function onWaypoints(arrayOfWaypoints as Array<Waypoint>) as Void
     {
         for(var i = 0; i < _listeners.size(); i++)
         {
             (_listeners as Array<Events>)[i].onWaypoints(arrayOfWaypoints);
+        }
+    }
+    function onWaypointProximity(proximity as Number) as Void
+    {
+        for(var i = 0; i < _listeners.size(); i++)
+        {
+            (_listeners as Array<Events>)[i].onWaypointProximity(proximity);
         }
     }
 }

@@ -23,17 +23,17 @@ module Distance
 
         function kilometres() as Numeric
         {
-            return metres() / 1000;
+            return metres() / 1000d;
         }
 
         function metres() as Numeric
         {
-            return _valueInMm / 1000;
+            return _valueInMm / 1000d;
         }
 
         function miles() as Numeric
         {
-            return 0;
+            return _valueInMm / 1609344d;
         }
     }
 }

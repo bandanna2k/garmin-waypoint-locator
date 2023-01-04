@@ -24,6 +24,19 @@ module Utilities { module Test { module Assertions
         actual as Object or Null, 
         expected as Object or Null) as Boolean
     {
+        if(actual == null && expected == null) 
+        {
+            return true;
+        }
+        if(actual == null && expected != null)
+        {
+            throw new AssertionException("Actual: null, Expected: " + expected);
+        }
+        if(actual != null && expected == null)
+        {
+            throw new AssertionException("Actual: " + actual + ", Expected: null");
+        }
+
         var result = actual.toString().equals(expected.toString());
         if(result)
         {
@@ -57,6 +70,11 @@ module Utilities { module Test { module Assertions
                 "Expected (" + expected + " ± " + tolerance + ")");
         }
         return true;
+    }
+
+    function fail(message as String) as Void
+    {
+        throw new AssertionException(message);
     }
 }}}
 

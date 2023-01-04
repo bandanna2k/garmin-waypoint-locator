@@ -7,6 +7,16 @@ import Toybox.Test;
 module TestDistanceCalculator
 {
     (:test)
+    function testConversions(logger as Logger) as Boolean
+    {
+        var distance = DistanceValue.fromMetres(1000);
+        Assertions.areEqual(1d, distance.kilometres());
+        Assertions.areEqual(1000d, distance.metres());
+        Assertions.areApproximatelyEquals(0.6214, distance.miles(), 0.0001);
+        return true;
+    }
+
+    (:test)
     function testDistances(logger as Logger) as Boolean
     {
         return 

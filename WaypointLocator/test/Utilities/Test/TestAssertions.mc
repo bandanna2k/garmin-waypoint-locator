@@ -8,12 +8,32 @@ module Utilities { module Test
 {
     (:test) function testAreEqualNumber(logger as Logger) as Boolean { return Assertions.areEqual(1, 1); }
     (:test) function testAreEqualString(logger as Logger) as Boolean { return Assertions.areEqual("X", "X"); }
-    // (:test) function testNullNotAreEqual(logger as Logger) as Boolean 
-    // { 
-    //     return Assertions.doesThrow(new Method(self, :assertNullAndXXX));
-    // }
-    // function assertNullAndXXX() as Void
-    // {
-    //     Assertions.areEqual(null, "XXX");
-    // }
+    (:test) function shouldThrowComparingNullAndX(logger as Logger) as Boolean 
+    { 
+        try
+        {
+            var result = Assertions.areEqual(null, "X");
+            Assertions.fail("Should not get here");
+            return result;
+        }   
+        catch(ex)
+        {
+            // Expected to get here
+        }   
+        return true;  
+    }
+    (:test) function shouldThrowComparingXAndNull(logger as Logger) as Boolean 
+    { 
+        try
+        {
+            var result = Assertions.areEqual("X", null);
+            Assertions.fail("Should not get here");
+            return result;
+        }   
+        catch(ex)
+        {
+            // Expected to get here
+        }   
+        return true;  
+    }
 }}

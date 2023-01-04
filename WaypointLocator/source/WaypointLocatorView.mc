@@ -8,6 +8,7 @@ class WaypointLocatorView extends WatchUi.View
     var _distanceLabel = new Drawing.DistanceLabel();
     var _waypointLabel = new Drawing.WaypointLabel();
     var _compass = new Drawing.Compass();
+    var _proximityBar = new Drawing.ProximityBar();
 
     var _cyclicString = new Utilities.Text.CyclicString("Waypoint Locator by David North", 18);
     var _cyclicLabel = new Drawing.CyclicLabel(_cyclicString);
@@ -22,6 +23,7 @@ class WaypointLocatorView extends WatchUi.View
         _eventRegistry.register(_waypointLabel);
         _eventRegistry.register(_cyclicLabel);
         _eventRegistry.register(_compass);
+        _eventRegistry.register(_proximityBar);
    }
 
     // Load your resources here
@@ -57,6 +59,7 @@ Instinct® 2S / Solar / Dual Power
         _distanceLabel.draw(dc);
         _waypointLabel.draw(dc);
         _cyclicLabel.draw(dc);
+        _proximityBar.draw(dc);
     }
 
     // Called when this View is removed from the screen. Save the
