@@ -29,6 +29,7 @@ class WaypointLocator extends Events
         _proximityCalculator = new ProximityCalculator(eventRegistry);
         _waypointTracker = new WaypointTracker(eventRegistry);
         _autoNextWaypoint = new AutoNextWaypoint(eventRegistry);
+        new ProximityAlarm(eventRegistry);
     }
 
     function onStart() as Void

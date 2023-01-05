@@ -23,48 +23,41 @@ module Proximity
         _eventRegistry.onDistance(DistanceValue.fromMetres(1001));
         Assertions.areEqual(_assertions.proximity(), null);
 
-        _eventRegistry.onDistance(DistanceValue.fromMetres(1001));
-        Assertions.areEqual(_assertions.proximity(), null);
-
-        // Getting close, but not yet
-        _eventRegistry.onDistance(DistanceValue.fromMetres(1000));
-        Assertions.areEqual(_assertions.proximity(), null);
-
         // Getting close
         _eventRegistry.onDistance(DistanceValue.fromMetres(1000));
-        Assertions.areEqual(_assertions.proximity(), 1);
-
-        // Fairly close, but not yet
-        _eventRegistry.onDistance(DistanceValue.fromMetres(500));
         Assertions.areEqual(_assertions.proximity(), 1);
 
         // Fairly close
         _eventRegistry.onDistance(DistanceValue.fromMetres(500));
         Assertions.areEqual(_assertions.proximity(), 2);
 
-        // Close, but not yet
+        // Close
         _eventRegistry.onDistance(DistanceValue.fromMetres(100));
-        Assertions.areEqual(_assertions.proximity(), 2);
+        Assertions.areEqual(_assertions.proximity(), 3);
+
+        // Very close
+        _eventRegistry.onDistance(DistanceValue.fromMetres(50));
+        Assertions.areEqual(_assertions.proximity(), 4);
+
+        // Extremely close
+        _eventRegistry.onDistance(DistanceValue.fromMetres(25));
+        Assertions.areEqual(_assertions.proximity(), 5);
+
+        // Very close
+        _eventRegistry.onDistance(DistanceValue.fromMetres(50));
+        Assertions.areEqual(_assertions.proximity(), 4);
 
         // Close
         _eventRegistry.onDistance(DistanceValue.fromMetres(100));
         Assertions.areEqual(_assertions.proximity(), 3);
 
-        // Very close, but not yet
-        _eventRegistry.onDistance(DistanceValue.fromMetres(20));
-        Assertions.areEqual(_assertions.proximity(), 3);
+        // Getting close
+        _eventRegistry.onDistance(DistanceValue.fromMetres(1000));
+        Assertions.areEqual(_assertions.proximity(), 1);
 
-        // Very close
-        _eventRegistry.onDistance(DistanceValue.fromMetres(20));
-        Assertions.areEqual(_assertions.proximity(), 4);
-
-        // Extremely close, but not yet
-        _eventRegistry.onDistance(DistanceValue.fromMetres(10));
-        Assertions.areEqual(_assertions.proximity(), 4);
-
-        // Extremely close
-        _eventRegistry.onDistance(DistanceValue.fromMetres(10));
-        Assertions.areEqual(_assertions.proximity(), 5);
+        // Not close
+        _eventRegistry.onDistance(DistanceValue.fromMetres(1001));
+        Assertions.areEqual(_assertions.proximity(), 0);
 
         return true;
     }
@@ -78,7 +71,7 @@ module Proximity
             Events.initialize();
         }
 
-        function onWaypointProximity(proximity as Number) as Void
+        function onWaypointProximity(proximity as Proximity) as Void
         {
             _proximity = proximity;
         }

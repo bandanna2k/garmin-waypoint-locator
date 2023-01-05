@@ -15,6 +15,24 @@ module Utilities
         return position.toDegrees()[1];
     } 
 
+    function min(a as Number, b as Number) as Number
+    {
+        if(a < b) 
+        {
+            return a;
+        }
+        return b;
+    }
+
+    function max(a as Number, b as Number) as Number
+    {
+        if(a > b) 
+        {
+            return a;
+        }
+        return b;
+    }
+
     function mod(
         value as Numeric, 
         modulus as Numeric) as Numeric

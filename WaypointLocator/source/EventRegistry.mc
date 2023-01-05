@@ -114,7 +114,6 @@ class EventRegistry extends Events
     }
     function onWaypointProximity(proximity as Proximity) as Void
     {
-Toybox.System.println("onWaypointProximity " + proximity);
         for(var i = 0; i < _listeners.size(); i++)
         {
             (_listeners as Array<Events>)[i].onWaypointProximity(proximity);

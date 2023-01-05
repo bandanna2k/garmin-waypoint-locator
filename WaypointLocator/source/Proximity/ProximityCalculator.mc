@@ -61,47 +61,29 @@ module Proximity
             }
 
             var metres = value.metres();
-
-            if(metres <= PROXIMITY_GETTING_CLOSE)
-            {
-                _proximityGettingClose++;
-            }
-            if(metres <= PROXIMITY_FAIRLY_CLOSE)
-            {
-                _proximityFairlyClose++;
-            }
-            if(metres <= PROXIMITY_CLOSE)
-            {
-                _proximityClose++;
-            }
-            if(metres <= PROXIMITY_VERY_CLOSE)
-            {
-                _proximityVeryClose++;
-            }
             if(metres <= PROXIMITY_EXTREMELY_CLOSE)
-            {
-                _proximityExtremelyClose++;
-            }
-
-            if(_proximityExtremelyClose >= 2)
             {
                 updateState(Proximity.ExtremelyClose);
             }
-            else if(_proximityVeryClose >= 2)
+            else if(metres <= PROXIMITY_VERY_CLOSE)
             {
                 updateState(Proximity.VeryClose);
             }
-            else if(_proximityClose >= 2)
+            else if(metres <= PROXIMITY_CLOSE)
             {
                 updateState(Proximity.Close);
             }
-            else if(_proximityFairlyClose >= 2)
+            else if(metres <= PROXIMITY_FAIRLY_CLOSE)
             {
                 updateState(Proximity.FairlyClose);
             }
-            else if(_proximityGettingClose >= 2)
+            else if(metres <= PROXIMITY_GETTING_CLOSE)
             {
                 updateState(Proximity.GettingClose);
+            }
+            else
+            {
+                updateState(Proximity.FarAway);
             }
         }
 

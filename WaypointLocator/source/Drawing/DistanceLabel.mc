@@ -21,7 +21,15 @@ module Drawing
             }
 
             var w = dc.getWidth();
-            var text = _dist.kilometres().format("%0.2f");
+            var text;
+            if(_dist.metres() < 1000)
+            {
+                text = _dist.metres().format("%3.0f");
+            }
+            else
+            {
+                text = _dist.kilometres().format("%0.2f");
+            }
             dc.drawText(w - 32, 15, Graphics.FONT_MEDIUM, text, Graphics.TEXT_JUSTIFY_CENTER);
         }
 
