@@ -29,9 +29,14 @@ module Drawing
             }
         }
 
-        function onWaypointProximity(proximity as Number) as Void
+        function onWaypointProximity(proximity as Proximity) as Void
         {
-            _value = proximity;
+            if(proximity == Proximity.FarAway) { _value = 0; return; }
+            if(proximity == Proximity.GettingClose) { _value = 1; return; }
+            if(proximity == Proximity.FairlyClose) { _value = 2; return; }
+            if(proximity == Proximity.Close) { _value = 3; return; }
+            if(proximity == Proximity.VeryClose) {  _value = 4; return; }
+            if(proximity == Proximity.ExtremelyClose) { _value = 5; return; }
         }
     }
 }

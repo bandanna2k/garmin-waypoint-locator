@@ -16,5 +16,5 @@ class Events
     function onWaypoints(arrayOfWaypoints as Array<Waypoint>) as Void {}
     function onNextWaypoint() as Void {}
     function onPreviousWaypoint() as Void {}
-    function onWaypointProximity(proximity as Number) as Void {}
+    function onWaypointProximity(proximity as Proximity) as Void {}
 }

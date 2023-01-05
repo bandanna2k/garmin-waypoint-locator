@@ -7,12 +7,15 @@ import Toybox.Application;
 import Distance;
 import Bearing;
 import Waypoints;
+import Proximity;
 
 class WaypointLocator extends Events
 {
     var _waypointTracker;
     var _bearingCalculator;
     var _distanceCalculator;
+    var _proximityCalculator;
+    var _autoNextWaypoint;
 
     var _eventRegistry;
 
@@ -23,7 +26,9 @@ class WaypointLocator extends Events
         _eventRegistry.register(self);        
         _bearingCalculator = new BearingCalculator(eventRegistry);        
         _distanceCalculator = new DistanceCalculator(eventRegistry);
+        _proximityCalculator = new ProximityCalculator(eventRegistry);
         _waypointTracker = new WaypointTracker(eventRegistry);
+        _autoNextWaypoint = new AutoNextWaypoint(eventRegistry);
     }
 
     function onStart() as Void
@@ -31,9 +36,10 @@ class WaypointLocator extends Events
         Waypoints.loadWaypoints(_eventRegistry);
 
         Position.enableLocationEvents(Position.LOCATION_CONTINUOUS, method(:onPosition));
-        Attention.playTone(Attention.TONE_KEY);
         
         Sensor.enableSensorEvents(method(:onSensor));
+
+        Attention.playTone(Attention.TONE_KEY);
 
         var timer = new Timer.Timer();
         timer.start(method(:onTimer), 1000, true);

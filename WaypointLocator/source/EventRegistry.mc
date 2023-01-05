@@ -2,6 +2,7 @@ import Toybox.Lang;
 import Toybox.Position;
 import Distance;
 import Waypoints;
+import Proximity;
 
 class EventRegistry extends Events
 {
@@ -111,8 +112,9 @@ class EventRegistry extends Events
             (_listeners as Array<Events>)[i].onWaypoints(arrayOfWaypoints);
         }
     }
-    function onWaypointProximity(proximity as Number) as Void
+    function onWaypointProximity(proximity as Proximity) as Void
     {
+Toybox.System.println("onWaypointProximity " + proximity);
         for(var i = 0; i < _listeners.size(); i++)
         {
             (_listeners as Array<Events>)[i].onWaypointProximity(proximity);

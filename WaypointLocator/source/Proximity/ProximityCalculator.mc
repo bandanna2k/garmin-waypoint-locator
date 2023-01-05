@@ -1,5 +1,6 @@
 import Distance;
 import Toybox.Lang;
+import Proximity;
 
 module Proximity
 {
@@ -8,11 +9,11 @@ module Proximity
         var _eventRegistry;
 
         /*
-        Getting close       1000 metres
-        Fairly close        500 metres
-        Close               100 metres
-        Very Close          50 metres
-        Extremely Close     10 metres
+        Getting close       1000 metres   1 km
+        Fairly close        500 metres    0.5 km
+        Close               100 metres    0.1 km
+        Very Close          50 metres     0.05 km
+        Extremely Close     25 metres     0.25 km
         */
 
         const PROXIMITY_GETTING_CLOSE = 1000;
@@ -27,10 +28,10 @@ module Proximity
         const PROXIMITY_VERY_CLOSE = 50;
         var   _proximityVeryClose;
 
-        const PROXIMITY_EXTREMELY_CLOSE = 10;
+        const PROXIMITY_EXTREMELY_CLOSE = 25;
         var   _proximityExtremelyClose;
 
-        var _state = 0;
+        var _proximity;
 
         function initialize(eventRegistry as EventRegistry)
         {
@@ -43,6 +44,8 @@ module Proximity
 
         function resetCounters()
         {
+            _proximity = Proximity.FarAway;
+
             _proximityGettingClose = 0;
             _proximityFairlyClose = 0;
             _proximityClose = 0;
@@ -52,6 +55,11 @@ module Proximity
 
         function onDistance(value as DistanceValue or Null) as Void
         {
+            if(value == null)
+            {
+                return;
+            }
+
             var metres = value.metres();
 
             if(metres <= PROXIMITY_GETTING_CLOSE)
@@ -77,34 +85,39 @@ module Proximity
 
             if(_proximityExtremelyClose >= 2)
             {
-                updateState(5);
+                updateState(Proximity.ExtremelyClose);
             }
             else if(_proximityVeryClose >= 2)
             {
-                updateState(4);
+                updateState(Proximity.VeryClose);
             }
             else if(_proximityClose >= 2)
             {
-                updateState(3);
+                updateState(Proximity.Close);
             }
             else if(_proximityFairlyClose >= 2)
             {
-                updateState(2);
+                updateState(Proximity.FairlyClose);
             }
             else if(_proximityGettingClose >= 2)
             {
-                updateState(1);
+                updateState(Proximity.GettingClose);
             }
         }
 
-        function updateState(state as Number) as Void
+        function onNextWaypoint()
         {
-            if(_state == state)
+            resetCounters();
+        }
+
+        function updateState(proximity as Proximity) as Void
+        {
+            if(_proximity == proximity)
             {
                 return;
             }
-            _state = state;
-            _eventRegistry.onWaypointProximity(_state);
+            _proximity = proximity;
+            _eventRegistry.onWaypointProximity(_proximity);
         }
     }
 }
