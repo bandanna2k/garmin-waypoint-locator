@@ -11,24 +11,19 @@ import Proximity;
 
 class WaypointLocator extends Events
 {
-    var _waypointTracker;
-    var _bearingCalculator;
-    var _distanceCalculator;
-    var _proximityCalculator;
-    var _autoNextWaypoint;
-
     var _eventRegistry;
+    var _counter = 0;
 
     function initialize(eventRegistry as EventRegistry)
     {
         Events.initialize();
         _eventRegistry = eventRegistry;
         _eventRegistry.register(self);        
-        _bearingCalculator = new BearingCalculator(eventRegistry);        
-        _distanceCalculator = new DistanceCalculator(eventRegistry);
-        _proximityCalculator = new ProximityCalculator(eventRegistry);
-        _waypointTracker = new WaypointTracker(eventRegistry);
-        _autoNextWaypoint = new AutoNextWaypoint(eventRegistry);
+        new WaypointTracker(eventRegistry);
+        new BearingCalculator(eventRegistry);        
+        new DistanceCalculator(eventRegistry);
+        new ProximityCalculator(eventRegistry);
+        new AutoNextWaypoint(eventRegistry);
         new ProximityAlarm(eventRegistry);
     }
 
@@ -43,12 +38,21 @@ class WaypointLocator extends Events
         Attention.playTone(Attention.TONE_KEY);
 
         var timer = new Timer.Timer();
-        timer.start(method(:onTimer), 1000, true);
+        timer.start(method(:onTimer), 250, true);
     }
 
     function onTimer() as Void
     {
-        _eventRegistry.onPulse();
+        _eventRegistry.onFastPulse();
+        if(_counter == 3)
+        {
+            _eventRegistry.onPulse();
+            _counter = 0;
+        }
+        else
+        {
+            _counter++;
+        }
     }
 
     function onPosition(info as Position.Info) as Void
@@ -66,10 +70,5 @@ class WaypointLocator extends Events
         {
             _eventRegistry.onHeading(Bearing.radiansToBearing(sensorInfo.heading));
         }
-    }
-
-    function waypointTracker() as WaypointTracker
-    {
-        return _waypointTracker;
     }
 }

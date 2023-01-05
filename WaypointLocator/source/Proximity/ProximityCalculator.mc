@@ -13,7 +13,7 @@ module Proximity
         Fairly close        500 metres    0.5 km
         Close               100 metres    0.1 km
         Very Close          50 metres     0.05 km
-        Extremely Close     25 metres     0.25 km
+        Extremely Close     25 metres     0.025 km
         */
 
         const PROXIMITY_GETTING_CLOSE = 1000;
@@ -87,7 +87,7 @@ module Proximity
             }
         }
 
-        function onNextWaypoint()
+        function onCurrentWaypoint(currentWaypoint)
         {
             resetCounters();
         }

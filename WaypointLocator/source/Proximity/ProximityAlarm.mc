@@ -8,8 +8,8 @@ module Proximity
 {
     class ProximityAlarm extends Events
     {
-        const _vibe = [ new Attention.VibeProfile(25, 250) ];
-        const _tone = [ new Attention.ToneProfile(2000, 250) ];
+        const _vibe = [ new Attention.VibeProfile(25, 150) ];
+        const _tone = [ new Attention.ToneProfile(2000, 150) ];
 
         var _delta = 1000000;
         var _counter = _delta;
@@ -23,17 +23,17 @@ module Proximity
 
         function onWaypointProximity(proximity as Proximity) as Void
         {
-            if(proximity == Proximity.FarAway)             { _delta = 1000000; }
-            else if(proximity == Proximity.GettingClose)   { _delta = 20; }
-            else if(proximity == Proximity.FairlyClose)    { _delta = 10; }
-            else if(proximity == Proximity.Close)          { _delta = 3; }
-            else if(proximity == Proximity.VeryClose)      { _delta = 1; }
-            else if(proximity == Proximity.ExtremelyClose) { _delta = 0; }
+            if(proximity == Proximity.FarAway)             { _delta = 1000000 * 4; }
+            else if(proximity == Proximity.GettingClose)   { _delta = 20 * 4; }
+            else if(proximity == Proximity.FairlyClose)    { _delta = 10 * 4; }
+            else if(proximity == Proximity.Close)          { _delta = 3 * 4; }
+            else if(proximity == Proximity.VeryClose)      { _delta = 1 * 4; }
+            else if(proximity == Proximity.ExtremelyClose) { _delta = 1 * 1; }
 
             _counter = Utilities.min(_delta, _counter);
         }
 
-        function onPulse() as Void
+        function onFastPulse() as Void
         {
             _counter--;
             if(_counter <= 0)
