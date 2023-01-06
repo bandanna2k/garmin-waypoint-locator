@@ -11,7 +11,6 @@ class Events
     function onDistance(value as DistanceValue or Null) as Void {}
     function onCurrentPosition(currentPosition as Location or Null) as Void {}
     function onStart() as Void {}
-    function onFastPulse() as Void {}
     function onPulse() as Void {}
     function onHeading(heading as Numeric) as Void {}
     function onWaypoints(arrayOfWaypoints as Array<Waypoint>) as Void {}

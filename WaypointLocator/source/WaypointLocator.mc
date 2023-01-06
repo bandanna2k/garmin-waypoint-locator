@@ -12,7 +12,6 @@ import Proximity;
 class WaypointLocator extends Events
 {
     var _eventRegistry;
-    var _counter = 0;
 
     function initialize(eventRegistry as EventRegistry)
     {
@@ -43,16 +42,7 @@ class WaypointLocator extends Events
 
     function onTimer() as Void
     {
-        _eventRegistry.onFastPulse();
-        if(_counter == 3)
-        {
-            _eventRegistry.onPulse();
-            _counter = 0;
-        }
-        else
-        {
-            _counter++;
-        }
+        _eventRegistry.onPulse();
     }
 
     function onPosition(info as Position.Info) as Void

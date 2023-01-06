@@ -62,14 +62,6 @@ class EventRegistry extends Events
         WatchUi.requestUpdate();
     }
 
-    function onFastPulse() as Void
-    {
-        for(var i = 0; i < _listeners.size(); i++)
-        {
-            (_listeners as Array<Events>)[i].onFastPulse();
-        }
-    }
-
     function onNextWaypoint() as Void
     {
         for(var i = 0; i < _listeners.size(); i++)
