@@ -37,7 +37,7 @@ class WaypointLocator extends Events
         Attention.playTone(Attention.TONE_KEY);
 
         var timer = new Timer.Timer();
-        timer.start(method(:onTimer), 250, true);
+        timer.start(method(:onTimer), 1000, true);
     }
 
     function onTimer() as Void
