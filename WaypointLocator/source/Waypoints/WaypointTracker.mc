@@ -58,51 +58,53 @@ module Waypoints
         */
         function onWaypoints(array as Array<Waypoint>) as Void
         {
-            _waypoints = array;
             if(array.size() == 0)
             {
-                _currentWaypointIndex = null;
+                return;
             }
-            else
-            {
-                _currentWaypointIndex = 0;
-            }
+
+            _waypoints = array;
+            _currentWaypointIndex = 0;
             _eventRegistry.onCurrentWaypoint((_waypoints as Array<Waypoint>)[_currentWaypointIndex]);
+            _eventRegistry.onWaypointCounter(_currentWaypointIndex + 1, _waypoints.size());
         }
 
         function onStart() as Void
         {
-            loadWaypoints();
-            loadCurrentWaypoint();
+            try
+            {
+                loadWaypoints();
+                loadCurrentWaypoint();
+            }
+            catch(ex)
+            {
+Toybox.System.println("Failed to start. Clearing all waypoints. " + ex.getErrorMessage());
+                reset();
+            }
         }
 
         function loadWaypoints() as Void
         {
-            var count; 
-            try
+            var count = Storage.getValue("waypoint.count");
+            var arrayOfWaypoints = [] as Array<Waypoint>;
+            if(count == null || count == 0)
             {
-                count = Storage.getValue("waypoint.count");
-                var arrayOfWaypoints = [] as Array<Waypoint>;
-                if(count == null)
-                {
-                    return;
-                }
-                else
-                {
-                    for(var i = 0; i < count; i++)
-                    {
-                        var waypoint = Waypoints.toWaypointFromStorage(i);
-                        arrayOfWaypoints.add(waypoint);
-                    }
-                    _eventRegistry.onWaypoints(arrayOfWaypoints);
-                }        
-            }
-            catch(ex)
-            {
-Toybox.System.println("Error loading waypoints. " + ex.getErrorMessage());
-                Storage.clearValues();
                 return;
             }
+            else
+            {
+                for(var i = 0; i < count; i++)
+                {
+                    var waypoint = Waypoints.toWaypointFromStorage(i);
+                    arrayOfWaypoints.add(waypoint);
+                
+                }
+                _currentWaypointIndex = 0;
+
+                _eventRegistry.onWaypoints(arrayOfWaypoints);
+                _eventRegistry.onCurrentWaypoint((_waypoints as Array<Waypoint>)[_currentWaypointIndex]);
+                _eventRegistry.onWaypointCounter(_currentWaypointIndex + 1, _waypoints.size());
+            }        
         }
 
         function loadCurrentWaypoint() 
@@ -116,8 +118,17 @@ Toybox.System.println("Error loading waypoints. " + ex.getErrorMessage());
             }
             else
             {
-                _currentWaypointIndex = 0;
+                _currentWaypointIndex = null;
             }
+        }
+
+        function reset() 
+        {
+            _waypoints = [];
+            _currentWaypointIndex = null;
+
+            Storage.clearValues();
+            _eventRegistry.onCurrentWaypoint(null);
         }
     }
 }
