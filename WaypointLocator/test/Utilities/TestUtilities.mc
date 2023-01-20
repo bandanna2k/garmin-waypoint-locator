@@ -1,10 +1,10 @@
-import Utilities.Test.Assertions;
+import Utilities;
 import Toybox.Test;
 import Toybox.Lang;
 import Toybox.Position;
 import Toybox.System;
 
-module Utilities
+module Test { module Utilities
 {
     (:test)
     function testLatitude(logger as Logger) as Boolean
@@ -44,4 +44,4 @@ module Utilities
     (:test) function testMod1(logger as Logger) as Boolean { return Utilities.mod(1, 2).equals(1); }
     (:test) function testMod2(logger as Logger) as Boolean { return Utilities.mod(3, 2).equals(1); }
     (:test) function testMod3(logger as Logger) as Boolean { return Utilities.mod(-1, 2).equals(-1); }
-}
+}}

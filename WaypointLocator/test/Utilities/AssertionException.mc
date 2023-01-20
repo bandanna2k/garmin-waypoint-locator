@@ -1,7 +1,7 @@
 import Toybox.Lang;
 import Toybox.System;
 
-module Utilities { module Test 
+module Test { module Utilities
 {
     class AssertionException extends Exception 
     {

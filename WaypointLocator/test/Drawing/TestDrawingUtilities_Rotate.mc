@@ -1,10 +1,10 @@
-import Utilities.Test.Assertions;
+import Test.Utilities.Assertions;
 import Toybox.Position;
 import Toybox.Lang;
 import Toybox.Test;
 import Toybox.System;
 
-module TestRotate
+module Test { module TestRotate
 {
     const CLOSE_TOLERANCE = 0.000001;
 
@@ -57,4 +57,4 @@ module TestRotate
        }
        return true;
     }
-}
+}}

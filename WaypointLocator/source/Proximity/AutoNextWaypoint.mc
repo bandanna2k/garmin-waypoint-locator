@@ -9,6 +9,7 @@ module Proximity
         const _vibe = [ new Toybox.Attention.VibeProfile(25, 250) ];
         
         var _counter = 0;
+        var _eventRegistry;
 
         function initialize(eventRegistry as EventRegistry)
         {

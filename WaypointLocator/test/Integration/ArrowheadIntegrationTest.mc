@@ -1,11 +1,11 @@
-import Utilities.Test;
+import Test.Utilities.Assertions;
 import Toybox.Lang;
 import Toybox.Test;
 import Toybox.System;
 import Toybox.Position;
 import Waypoints;
 
-module Integration
+module Test { module Integration
 {
     (:test) 
     function testArrowhead(logger as Logger) as Boolean 
@@ -31,4 +31,4 @@ module Integration
 
         return true;
     }
-}
+}}

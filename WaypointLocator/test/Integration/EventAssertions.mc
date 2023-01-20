@@ -1,8 +1,8 @@
 import Toybox.Lang;
 import Toybox.Position;
-import Utilities.Test;
+import Test.Utilities;
 
-module Integration
+module Test { module Integration
 {
     class EventAssertions extends Events
     {
@@ -33,4 +33,4 @@ module Integration
             _headings.add(heading);
         }
     }
-}
+}}

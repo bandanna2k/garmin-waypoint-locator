@@ -16,6 +16,7 @@ module Proximity
         var _delta = 1000000;
         var _counter = _delta;
         var _proximity = Proximity.FarAway;
+        var _eventRegistry;
 
         function initialize(eventRegistry as EventRegistry)
         {

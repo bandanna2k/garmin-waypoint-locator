@@ -1,7 +1,7 @@
 import Toybox.Lang;
-import Utilities.Test;
+import Test.Utilities;
 
-module Utilities { module Test { module Assertions
+module Test { module Utilities { module Assertions 
 {
     // function doesThrow(inputMethod as Method) as Boolean
     // {
@@ -77,4 +77,3 @@ module Utilities { module Test { module Assertions
         throw new AssertionException(message);
     }
 }}}
-

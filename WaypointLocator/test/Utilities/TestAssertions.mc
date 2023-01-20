@@ -1,10 +1,10 @@
-import Utilities.Test.Assertions;
+import Test.Utilities.Assertions;
 import Toybox.Test;
 import Toybox.Lang;
 import Toybox.Position;
 import Toybox.System;
 
-module Utilities { module Test
+module Test { module Utilities
 {
     (:test) function testAreEqualNumber(logger as Logger) as Boolean { return Assertions.areEqual(1, 1); }
     (:test) function testAreEqualString(logger as Logger) as Boolean { return Assertions.areEqual("X", "X"); }

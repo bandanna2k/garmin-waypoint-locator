@@ -1,10 +1,10 @@
-import Utilities.Test.Assertions;
+import Test.Utilities.Assertions;
 import Distance;
 import Toybox.Position;
 import Toybox.Lang;
 import Toybox.Test;
 
-module TestDistanceCalculator
+module Test { module TestDistanceCalculator
 {
     (:test)
     function testConversions(logger as Logger) as Boolean
@@ -66,4 +66,4 @@ module TestDistanceCalculator
             )
             .kilometres(), expectedDistance, tolerance);
     }
-}
+}}

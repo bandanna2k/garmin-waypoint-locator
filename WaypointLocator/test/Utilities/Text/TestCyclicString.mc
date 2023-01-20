@@ -1,10 +1,11 @@
-import Utilities.Test.Assertions;
+import Test.Utilities.Assertions;
 import Toybox.Position;
 import Toybox.Lang;
 import Toybox.Test;
 import Toybox.System;
+import Utilities.Text;
 
-module Utilities { module Text
+module Test { module Utilities { module Text
 {
     (:test) 
     function testStringThatIsLonger(logger as Logger) as Boolean 
@@ -46,4 +47,4 @@ module Utilities { module Text
         Assertions.areEqual(cyclicString.get(), "0123456789");
         return true;
     } 
-}}
+}}}

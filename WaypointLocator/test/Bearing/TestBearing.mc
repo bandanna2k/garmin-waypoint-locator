@@ -1,11 +1,11 @@
-import Utilities.Test.Assertions;
+import Test.Utilities.Assertions;
 import Bearing;
 import Toybox.Position;
 import Toybox.Lang;
 import Toybox.Test;
 import Toybox.Math;
 
-module TestBearing
+module Test { module TestBearing
 {
     (:test) function testRadiansToBearing0(logger as Logger) as Boolean { return testRadiansToBearing(0d, 0d); }
     (:test) function testRadiansToBearing45(logger as Logger) as Boolean { return testRadiansToBearing(Math.PI / 4, 45d); }
@@ -51,4 +51,4 @@ module TestBearing
             ), 
             expected, tolerance);
     }
-}
+}}

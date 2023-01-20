@@ -1,11 +1,11 @@
-import Utilities.Test;
+import Test.Utilities.Assertions;
 import Proximity;
 import Toybox.Lang;
 import Toybox.Test;
 import Toybox.System;
 import Distance;
 
-module Proximity
+module Test { module Proximity
 {
     var _eventRegistry = new EventRegistry();
     var _proximityCalculator = new ProximityCalculator(_eventRegistry);
@@ -81,4 +81,4 @@ module Proximity
             return _proximity;
         }
     }
-}
+}}
