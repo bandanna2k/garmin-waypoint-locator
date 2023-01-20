@@ -11,6 +11,7 @@ import Proximity;
 
 class WaypointLocator extends Events
 {
+    var _timer;
     var _eventRegistry;
 
     function initialize(eventRegistry as EventRegistry)
@@ -28,17 +29,22 @@ class WaypointLocator extends Events
 
     function onStart() as Void
     {
-        Waypoints.loadWaypoints(_eventRegistry);
-
         Position.enableLocationEvents(Position.LOCATION_CONTINUOUS, method(:onPosition));
         
         Sensor.enableSensorEvents(method(:onSensor));
 
         Attention.playTone(Attention.TONE_KEY);
 
-        var timer = new Timer.Timer();
-        timer.start(method(:onTimer), 1000, true);
+        _timer = new Timer.Timer();
+        _timer.start(method(:onTimer), 1000, true);
     }
+
+    function onStop() as Void
+    {
+        _timer.stop();
+        _timer = null;
+    }
+
 
     function onTimer() as Void
     {

@@ -27,6 +27,7 @@ class Main extends Application.AppBase
     // onStop() is called when your application is exiting
     function onStop(state as Dictionary?) as Void 
     {
+        _eventRegistry.onStop();
     }
 
     // Return the initial view of your application here

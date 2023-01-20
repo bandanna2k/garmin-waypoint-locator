@@ -35,7 +35,7 @@ module Proximity
             // else if(proximity == Proximity.VeryClose)      { _delta = 2; }
             // else if(proximity == Proximity.ExtremelyClose) { _delta = 1; }
 
-            if(proximity == Proximity.FarAway)             { _delta = 1000000; }
+            if(proximity == Proximity.FarAway)             { _delta = 60; }
             else if(proximity == Proximity.GettingClose)   { _delta = 10; }
             else if(proximity == Proximity.FairlyClose)    { _delta = 5; }
             else if(proximity == Proximity.Close)          { _delta = 2; }

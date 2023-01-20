@@ -90,31 +90,4 @@ module Waypoints
             Storage.setValue("waypoint." + i + ".longitude", Utilities.longitude(waypoint.position()));
         }
     }
-
-    function loadWaypoints(eventRegistry as EventRegistry) as Void
-    {
-        try
-        {
-            var arrayOfWaypoints = [] as Array<Waypoint>;
-            var count = Storage.getValue("waypoint.count");
-            if(count == null)
-            {
-                // Do nothing
-            }
-            else
-            {
-                for(var i = 0; i < count; i++)
-                {
-                    var waypoint = Waypoints.toWaypointFromStorage(i);
-                    arrayOfWaypoints.add(waypoint);
-                }
-                eventRegistry.onWaypoints(arrayOfWaypoints);
-            }        
-        }
-        catch(ex)
-        {
-            Toybox.System.println("Error loading waypoints. " + ex.getErrorMessage());
-            Storage.clearValues();
-        }
-    }
 }

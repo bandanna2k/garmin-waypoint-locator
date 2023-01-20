@@ -53,6 +53,14 @@ class EventRegistry extends Events
         }
     }
 
+    function onStop() as Void
+    {
+        for(var i = 0; i < _listeners.size(); i++)
+        {
+            (_listeners as Array<Events>)[i].onStop();
+        }
+    }
+
     function onPulse() as Void
     {
         for(var i = 0; i < _listeners.size(); i++)

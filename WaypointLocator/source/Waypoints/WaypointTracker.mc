@@ -1,5 +1,6 @@
 import Toybox.Lang;
 import Toybox.Position;
+import Toybox.Application;
 import Toybox.WatchUi;
 
 module Waypoints
@@ -33,6 +34,8 @@ module Waypoints
             _currentWaypointIndex = Utilities.mod(_currentWaypointIndex + 1, _waypoints.size());
             _eventRegistry.onCurrentWaypoint((_waypoints as Array<Waypoint>)[_currentWaypointIndex]);
             _eventRegistry.onWaypointCounter(_currentWaypointIndex + 1, _waypoints.size());
+
+            Storage.setValue("waypoint.currentIndex", _currentWaypointIndex);
         }
 
         function onPreviousWaypoint() as Void
@@ -46,8 +49,13 @@ module Waypoints
             _currentWaypointIndex = Utilities.mod(_currentWaypointIndex - 1 + _waypoints.size(), _waypoints.size());
             _eventRegistry.onCurrentWaypoint((_waypoints as Array<Waypoint>)[_currentWaypointIndex]);
             _eventRegistry.onWaypointCounter(_currentWaypointIndex + 1, _waypoints.size());
+
+            Storage.setValue("waypoint.currentIndex", _currentWaypointIndex);
         }
 
+        /*
+        called from import and onStart when loading
+        */
         function onWaypoints(array as Array<Waypoint>) as Void
         {
             _waypoints = array;
@@ -59,9 +67,57 @@ module Waypoints
             {
                 _currentWaypointIndex = 0;
             }
-
             _eventRegistry.onCurrentWaypoint((_waypoints as Array<Waypoint>)[_currentWaypointIndex]);
-            _eventRegistry.onWaypointCounter(_currentWaypointIndex + 1, _waypoints.size());
+        }
+
+        function onStart() as Void
+        {
+            loadWaypoints();
+            loadCurrentWaypoint();
+        }
+
+        function loadWaypoints() as Void
+        {
+            var count; 
+            try
+            {
+                count = Storage.getValue("waypoint.count");
+                var arrayOfWaypoints = [] as Array<Waypoint>;
+                if(count == null)
+                {
+                    return;
+                }
+                else
+                {
+                    for(var i = 0; i < count; i++)
+                    {
+                        var waypoint = Waypoints.toWaypointFromStorage(i);
+                        arrayOfWaypoints.add(waypoint);
+                    }
+                    _eventRegistry.onWaypoints(arrayOfWaypoints);
+                }        
+            }
+            catch(ex)
+            {
+Toybox.System.println("Error loading waypoints. " + ex.getErrorMessage());
+                Storage.clearValues();
+                return;
+            }
+        }
+
+        function loadCurrentWaypoint() 
+        {
+            var currentIndex = Storage.getValue("waypoint.currentIndex");
+            if(currentIndex != null)
+            {
+                _currentWaypointIndex = currentIndex.toNumber();
+                _eventRegistry.onCurrentWaypoint((_waypoints as Array<Waypoint>)[_currentWaypointIndex]);
+                _eventRegistry.onWaypointCounter(_currentWaypointIndex + 1, _waypoints.size());
+            }
+            else
+            {
+                _currentWaypointIndex = 0;
+            }
         }
     }
 }

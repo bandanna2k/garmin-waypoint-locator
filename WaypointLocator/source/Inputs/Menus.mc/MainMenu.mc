@@ -15,7 +15,7 @@ module Inputs { module Menus
 
             _eventRegistry = eventRegistry;
 
-            addItem(new MenuItem(" Ripley Mode (n/a)", null, "_main1", {}));
+            addItem(new MenuItem(" Ripley Mode (on)", null, "_main1", {}));
             addItem(new MenuItem(" Import Waypoints", null, "_mainImportWaypoints", {}));
             _menuInput = new MenuInput(new Method(self, :onSelection));
         }
