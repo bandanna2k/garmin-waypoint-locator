@@ -27,6 +27,10 @@ module Test { module Integration
         {
             _bearings.assertValue(bearing);
         }
+        function assertBearingWithTolerance(bearing as Numeric, tolerance as Numeric)
+        {
+            _bearings.assertValueWithTolerance(bearing, tolerance);
+        }
 
         function onHeading(heading as Numeric or Null) as Void
         {

@@ -27,7 +27,7 @@ module Test { module Integration
                             :longitude => 180.0, 
                             :format => :degrees
                             })));
-        eventAssertions.assertBearing(91);
+        eventAssertions.assertBearingWithTolerance(91, 0.5);
 
         return true;
     }

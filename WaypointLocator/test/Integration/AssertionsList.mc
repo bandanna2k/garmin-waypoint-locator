@@ -31,6 +31,30 @@ module Test { module Integration
             displayValues();
             throw new AssertionException("Value '" + expectedValue + "' not found.");
         }
+        function assertValueWithTolerance(expectedValue as Numeric, tolerance as Numeric) as Object
+        {
+            var records = records();
+            for(var i = 0; i < records.size(); i++)
+            {
+                var record = records[i];
+                var value = record.value();
+                if(value instanceof Float || value instanceof Double)
+                {
+                    try
+                    {
+                        Assertions.areApproximatelyEquals(value, expectedValue, tolerance);
+                        record.setMatched();
+                        return value;
+                    }
+                    catch(ex)
+                    {
+                        // Not this one
+                    }
+                }
+            }
+            displayValues();
+            throw new AssertionException("Value '" + expectedValue + "' not found.");
+        }
         function assertNoMoreValues() as Void
         {
             for(var i = 0; i < _list.size(); i++)
