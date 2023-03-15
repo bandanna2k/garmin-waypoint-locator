@@ -35,6 +35,7 @@ module Waypoints
             _eventRegistry.onCurrentWaypoint((_waypoints as Array<Waypoint>)[_currentWaypointIndex]);
             _eventRegistry.onWaypointCounter(_currentWaypointIndex + 1, _waypoints.size());
 
+Toybox.System.println("WaypointTracker.onNextWaypoint");
             Storage.setValue("waypoint.currentIndex", _currentWaypointIndex);
         }
 
@@ -50,6 +51,7 @@ module Waypoints
             _eventRegistry.onCurrentWaypoint((_waypoints as Array<Waypoint>)[_currentWaypointIndex]);
             _eventRegistry.onWaypointCounter(_currentWaypointIndex + 1, _waypoints.size());
 
+Toybox.System.println("WaypointTracker.onPreviousWaypoint");
             Storage.setValue("waypoint.currentIndex", _currentWaypointIndex);
         }
 
@@ -58,6 +60,7 @@ module Waypoints
         */
         function onWaypoints(array as Array<Waypoint>) as Void
         {
+Toybox.System.println("WaypointTracker.onWaypoints. array.size:" + array.size());
             if(array.size() == 0)
             {
                 return;
@@ -86,6 +89,7 @@ Toybox.System.println("Failed to start. Clearing all waypoints. " + ex.getErrorM
         function loadWaypoints() as Void
         {
             var count = Storage.getValue("waypoint.count");
+Toybox.System.println("WaypointTracker.loadWaypoints. count:" + count);
             var arrayOfWaypoints = [] as Array<Waypoint>;
             if(count == null || count == 0)
             {
@@ -110,21 +114,30 @@ Toybox.System.println("Failed to start. Clearing all waypoints. " + ex.getErrorM
         function loadCurrentWaypoint() 
         {
             var currentIndex = Storage.getValue("waypoint.currentIndex");
-            if(currentIndex != null)
+Toybox.System.println("WaypointTracker.loadCurrentWaypoint. currentIndex:" + currentIndex);
+            if(currentIndex == null)
+            {
+                if(_waypoints.size() > 0)
+                {
+                    _currentWaypointIndex = 0;
+                }
+                else
+                {
+                    _currentWaypointIndex = null;
+                }
+            }
+            else
             {
                 _currentWaypointIndex = currentIndex.toNumber();
                 _eventRegistry.onCurrentWaypoint((_waypoints as Array<Waypoint>)[_currentWaypointIndex]);
                 _eventRegistry.onWaypointCounter(_currentWaypointIndex + 1, _waypoints.size());
             }
-            else
-            {
-                _currentWaypointIndex = null;
-            }
         }
 
         function reset() 
         {
-            _waypoints = [];
+ Toybox.System.println("WaypointTracker.reset");
+           _waypoints = [];
             _currentWaypointIndex = null;
 
             Storage.clearValues();

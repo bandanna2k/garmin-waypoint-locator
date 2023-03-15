@@ -27,12 +27,14 @@ module Inputs
 
         function onNextPage() as Boolean
         {
+Toybox.System.println("InputBehaviour.onNextPage");
             _eventRegistry.onNextWaypoint();
             return true;
         }
 
         function onPreviousPage() as Boolean
         {
+Toybox.System.println("InputBehaviour.onPreviousPage");
             _eventRegistry.onPreviousWaypoint();
             return true;
         }

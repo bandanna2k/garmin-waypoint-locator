@@ -28,13 +28,14 @@ class EventRegistry extends Events
 
     function onHeading(heading as Numeric or Null) as Void
     {
-        if(heading == null || heading != 0)
+        if(heading != null)
         {
             for(var i = 0; i < _listeners.size(); i++)
             {
                 (_listeners as Array<Events>)[i].onHeading(heading);
             }
         }
+        WatchUi.requestUpdate();
     }
 
     function onDistance(value as DistanceValue or Null) as Void
@@ -67,7 +68,7 @@ class EventRegistry extends Events
         {
             (_listeners as Array<Events>)[i].onPulse();
         }
-        WatchUi.requestUpdate();
+        WatchUi.requestUpdate();    // Show text moving
     }
 
     function onNextWaypoint() as Void
@@ -76,7 +77,7 @@ class EventRegistry extends Events
         {
             (_listeners as Array<Events>)[i].onNextWaypoint();
         }
-        WatchUi.requestUpdate();
+        WatchUi.requestUpdate();    // Update waypoint text 
     }
 
     function onPreviousWaypoint() as Void
@@ -85,7 +86,7 @@ class EventRegistry extends Events
         {
             (_listeners as Array<Events>)[i].onPreviousWaypoint();
         }
-        WatchUi.requestUpdate();
+        WatchUi.requestUpdate();    // Update waypoint text 
     }
 
     function onCurrentPosition(currentPosition as Location or Null) as Void
@@ -94,6 +95,7 @@ class EventRegistry extends Events
         {
             (_listeners as Array<Events>)[i].onCurrentPosition(currentPosition);
         }
+//        WatchUi.requestUpdate();
     }
 
     function onCurrentWaypoint(waypoint as Waypoint or Null) as Void
