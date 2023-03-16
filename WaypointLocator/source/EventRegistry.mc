@@ -18,21 +18,21 @@ class EventRegistry extends Events
         _listeners.add(listener);
     }
 
-    function onBearing(bearing as Numeric or Null) as Void
+    function onWaypointBearing(bearing as Numeric or Null) as Void
     {
         for(var i = 0; i < _listeners.size(); i++)
         {
-            (_listeners as Array<Events>)[i].onBearing(bearing);
+            (_listeners as Array<Events>)[i].onWaypointBearing(bearing);
         }
     }
 
-    function onHeading(heading as Numeric or Null) as Void
+    function onCompassHeading(heading as Numeric or Null) as Void
     {
         if(heading != null)
         {
             for(var i = 0; i < _listeners.size(); i++)
             {
-                (_listeners as Array<Events>)[i].onHeading(heading);
+                (_listeners as Array<Events>)[i].onCompassHeading(heading);
             }
         }
         WatchUi.requestUpdate();

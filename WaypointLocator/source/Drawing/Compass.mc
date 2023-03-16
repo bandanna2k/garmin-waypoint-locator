@@ -7,7 +7,7 @@ module Drawing
 {
     class Compass extends Events
     {
-        var _heading;
+        var _north;
 
         function initialize()
         {
@@ -16,7 +16,7 @@ module Drawing
 
         function draw(dc as Dc) as Void
         {
-            if(_heading == null)
+            if(_north == null)
             {
                 return;
             }
@@ -27,14 +27,14 @@ module Drawing
             var halfH = h / 2;
 
             var points = [[halfW, halfH - 100]];
-            Drawing.rotate(points, [halfW, halfH], _heading);
+            Drawing.rotate(points, [halfW, halfH], _north);
 
             dc.drawLine(halfW, halfH, (points as Array<Array<Numeric>>)[0][0], (points as Array<Array<Numeric>>)[0][1]);
         }
 
-        function onHeading(heading as Numeric or Null) as Void
+        function onCompassHeading(heading as Numeric or Null) as Void
         {
-            _heading = heading;
+            _north = 360 - heading;
         }
     }
 }

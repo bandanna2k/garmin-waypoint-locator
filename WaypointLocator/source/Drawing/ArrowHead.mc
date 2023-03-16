@@ -54,13 +54,13 @@ module Drawing
             return pts;
         }
 
-        function onBearing(bearing as Numeric or Null) as Void
+        function onWaypointBearing(bearing as Numeric or Null) as Void
         {
             _bearing = bearing;
             calculateBearingToHeading();
         }
 
-        function onHeading(heading as Numeric or Null) as Void
+        function onCompassHeading(heading as Numeric or Null) as Void
         {
             _heading = heading;
             calculateBearingToHeading();
@@ -74,7 +74,7 @@ module Drawing
             }
             else
             {
-                _bearingToHeading = Utilities.mod(_bearing - _heading + 360, 360);
+                _bearingToHeading = _bearing;
             }
         }
     }

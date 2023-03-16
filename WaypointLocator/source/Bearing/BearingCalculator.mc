@@ -51,12 +51,12 @@ Note: this value is in radians!
         {
             if(_currentPosition == null || _currentWaypoint == null)
             {
-                _eventRegistry.onBearing(null);
+                _eventRegistry.onWaypointBearing(null);
             }
             else
             {
                 var bearing = calculate(_currentPosition, _currentWaypoint.position());
-                _eventRegistry.onBearing(bearing);
+                _eventRegistry.onWaypointBearing(bearing);
             }
         }
         
@@ -76,10 +76,19 @@ Note: this value is in radians!
         }
     }
 
-    function radiansToBearing(inputInRadians as Numeric) as Number
+    function radiansToBearing(inputInRadians as Numeric) as Number 
     {
         var result = Math.toDegrees(inputInRadians);
         result = result + 360;
         return Utilities.mod(result, 360);
     }
+
+    function radiansToNorthToBearingFrom0(inputInRadians as Numeric) as Number
+    {
+        var bearingInRadians = 0 - inputInRadians;
+        var result = Math.toDegrees(bearingInRadians);
+        result = result + 360;
+        return Utilities.mod(result, 360);
+    }
 }
+

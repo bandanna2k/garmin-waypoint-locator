@@ -8,6 +8,7 @@ module Drawing
     {
         var _bearing;
         var _heading;
+        var _counter = 0;
 
         function initialize()
         {
@@ -33,17 +34,18 @@ module Drawing
             {
                 heading = _heading.format("%03d");
             }
-            dc.drawText(w / 2, h - 35, Graphics.FONT_LARGE, bearing + " " + heading, Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(w / 2, h - 35, Graphics.FONT_LARGE, bearing + " " + heading + " " + _counter, Graphics.TEXT_JUSTIFY_CENTER);
         }
 
-        function onBearing(bearing as Numeric) as Void
+        function onWaypointBearing(bearing as Numeric) as Void
         {
             _bearing = bearing;
         }
 
-        function onHeading(heading as Numeric or Null) as Void
+        function onCompassHeading(heading as Numeric or Null) as Void
         {
             _heading = heading;
+            _counter = (_counter + 1) % 100;
         }
     }
 }

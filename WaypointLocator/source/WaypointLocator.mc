@@ -61,11 +61,11 @@ Toybox.System.println("WaypointLocator.onStop");
     {
         if(sensorInfo.heading == null)
         {
-            _eventRegistry.onHeading(null);
+            _eventRegistry.onCompassHeading(null);
         }
         else
         {
-            _eventRegistry.onHeading(Bearing.radiansToBearing(sensorInfo.heading));
+            _eventRegistry.onCompassHeading(Bearing.radiansToNorthToBearingFrom0(sensorInfo.heading));
         }
     }
 }

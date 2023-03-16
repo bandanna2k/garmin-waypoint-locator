@@ -1,7 +1,7 @@
 import Toybox.Lang;
 import Test.Utilities;
 
-module Test { module Integration
+module Test { module Integration { module Support
 {
     class AssertionsList
     {
@@ -124,4 +124,4 @@ Toybox.System.println(record);
             }
         }
     }
-}}
+}}}
