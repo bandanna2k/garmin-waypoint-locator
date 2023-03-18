@@ -38,5 +38,12 @@ Toybox.System.println("InputBehaviour.onPreviousPage");
             _eventRegistry.onPreviousWaypoint();
             return true;
         }
+
+        function onSelect() as Boolean
+        {
+Toybox.System.println("InputBehaviour.onSelect");
+            _eventRegistry.onActivityNext();
+            return true;
+        }
     }
 }

@@ -7,6 +7,7 @@ import Toybox.Application;
 import Distance;
 import Bearing;
 import Waypoints;
+import Activity;
 import Proximity;
 
 class WaypointLocator extends Events
@@ -25,6 +26,7 @@ class WaypointLocator extends Events
         new ProximityCalculator(eventRegistry);
         new AutoNextWaypoint(eventRegistry);
         new ProximityAlarm(eventRegistry);
+        new ActivityController(eventRegistry);
     }
 
     function onStart() as Void

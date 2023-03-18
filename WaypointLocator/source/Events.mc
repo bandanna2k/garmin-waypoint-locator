@@ -18,4 +18,5 @@ class Events
     function onNextWaypoint() as Void {}
     function onPreviousWaypoint() as Void {}
     function onWaypointProximity(proximity as Proximity) as Void {}
+    function onActivityNext() as Void {}
 }
