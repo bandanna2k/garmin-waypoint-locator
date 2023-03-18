@@ -6,8 +6,8 @@ module Drawing
     class ArrowHead extends Events
     {
         var _bearing;
-        var _heading;
-        var _bearingToHeading;
+        var _compassHeading;
+        var _bearingToCompassHeading;
 
         function initialize()
         {
@@ -16,7 +16,7 @@ module Drawing
 
         function draw(dc as Dc) as Void
         {
-            if(_bearingToHeading == null)
+            if(_bearingToCompassHeading == null)
             {
                 dc.drawCircle(dc.getWidth() / 2, dc.getHeight() / 2, 1);
                 return;
@@ -49,7 +49,7 @@ module Drawing
                 [ backLeftX, backLeftY ]
             ];
 
-            Drawing.rotate(pts, [ originX, originY ], _bearingToHeading);
+            Drawing.rotate(pts, [ originX, originY ], _bearingToCompassHeading);
 
             return pts;
         }
@@ -57,24 +57,24 @@ module Drawing
         function onWaypointBearing(bearing as Numeric or Null) as Void
         {
             _bearing = bearing;
-            calculateBearingToHeading();
+            calculateBearingToCompassHeading();
         }
 
         function onCompassHeading(heading as Numeric or Null) as Void
         {
-            _heading = heading;
-            calculateBearingToHeading();
+            _compassHeading = heading;
+            calculateBearingToCompassHeading();
         }        
 
-        function calculateBearingToHeading() as Void
+        function calculateBearingToCompassHeading() as Void
         {
-            if(_bearing == null || _heading == null)
+            if(_bearing == null || _compassHeading == null)
             {
-                _bearingToHeading = null;
+                _bearingToCompassHeading = null;
             }
             else
             {
-                _bearingToHeading = _bearing;
+                _bearingToCompassHeading = Utilities.mod(360 - _compassHeading + _bearing, 360) ;
             }
         }
     }

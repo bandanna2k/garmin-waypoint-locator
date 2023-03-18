@@ -42,7 +42,8 @@ module Test { module Integration
         eventAssertions.assertCompassHeadingWithTolerance(60, 1);
 
         // Assert arrowhead heading
-        Assertions.areApproximatelyEquals(arrowHead._bearingToHeading, 60 + (91 - 60), 1);
+        var expectedArrowHeadBearing = 31; // (360 - 60 + 91) % 360
+        Assertions.areApproximatelyEquals(arrowHead._bearingToCompassHeading, expectedArrowHeadBearing, 1);
         return true;
     }
 
