@@ -30,13 +30,12 @@ Toybox.System.println("ActivityController.recordingActivity");
                 }
                 else if ((_session != null) && _session.isRecording()) 
                 {
+                    _session.stop();                                      // stop the session
                     if(_distance > 1)
                     {
-                        _session.stop();                                      // stop the session
                         _session.save();                                      // save the session
 Toybox.System.println("ActivityController.savingActivity");
                     }
-                    _session = null;                                      // set session control variable to null
 Toybox.System.println("ActivityController.stoppingRecordingActivity");
                 }
             }
