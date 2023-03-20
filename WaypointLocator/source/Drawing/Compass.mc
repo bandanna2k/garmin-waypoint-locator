@@ -8,10 +8,12 @@ module Drawing
     class Compass extends Events
     {
         var _north;
+        var _rotator;
 
         function initialize()
         {
             Events.initialize();
+            _rotator = new Rotator(DRAWING_TYPE_COMPUTER);
         }
 
         function draw(dc as Dc) as Void
@@ -31,7 +33,7 @@ module Drawing
             var points = [[halfW, halfH - 100]];
 
 // Toybox.System.println("Compass.draw 1 points " + points);
-            Drawing.rotate(points, [halfW, halfH], _north);
+            _rotator.rotate(points, [halfW, halfH], _north);
 // Toybox.System.println("Compass.draw 2 points " + points);
 
             dc.drawLine(halfW, halfH, (points as Array<Array<Numeric>>)[0][0], (points as Array<Array<Numeric>>)[0][1]);

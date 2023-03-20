@@ -3,36 +3,50 @@ import Toybox.Lang;
 
 module Drawing
 {
-    function rotate(
-        points as Array<Array<Numeric>>, 
-        origin as Array<Numeric>,
-        bearing as Numeric) as Void
+    const DRAWING_TYPE_COMPUTER = 0;
+    const DRAWING_TYPE_SCHOOL = 1;
+    
+    class Rotator
     {
-        var angle;
-        //angle = 0 - bearing;    // School drawing, X left, Y up
-        angle = bearing;        // Computer drawing, X left, Y down
+        var _drawingTypeMultiplier;
 
-        var cos = Math.cos(Math.toRadians(angle));
-        var sin = Math.sin(Math.toRadians(angle));
-
-        var originX = origin[0];
-        var originY = origin[1];
-
-        for(var i = 0 ; i < points.size(); i++)
+        function initialize(drawingType as Number)
         {
-            var x = points[i][0];
-            var y = points[i][1];
-            // System.println("A" + x);
-            // System.println("A " + y);
+            if(drawingType == DRAWING_TYPE_COMPUTER)
+            {
+               _drawingTypeMultiplier = 1;
+            }
+            else
+            {
+               _drawingTypeMultiplier = -1;
+            }
+        }
 
-            var newX = (((x - originX) * cos) - (y - originY) * sin) + originX;
-            var newY = (((x - originX) * sin) + (y - originY) * cos) + originY; 
-            
-            points[i][0] = newX;
-            points[i][1] = newY;
+        function rotate(
+            points as Array<Array<Numeric>>, 
+            origin as Array<Numeric>,
+            bearing as Numeric) as Void
+        {
+            var angle;
+            angle = bearing * _drawingTypeMultiplier;
 
-            // System.println("B" + points[i][0]);
-            // System.println("B " + points[i][1]);
+            var cos = Math.cos(Math.toRadians(angle));
+            var sin = Math.sin(Math.toRadians(angle));
+
+            var originX = origin[0];
+            var originY = origin[1];
+
+            for(var i = 0 ; i < points.size(); i++)
+            {
+                var x = points[i][0];
+                var y = points[i][1];
+
+                var newX = (((x - originX) * cos) - (y - originY) * sin) + originX;
+                var newY = (((x - originX) * sin) + (y - originY) * cos) + originY; 
+                
+                points[i][0] = newX;
+                points[i][1] = newY;
+            }
         }
     }
 }

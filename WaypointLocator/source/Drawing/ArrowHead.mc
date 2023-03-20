@@ -8,10 +8,12 @@ module Drawing
         var _bearing;
         var _compassHeading;
         var _bearingToCompassHeading;
+        var _rotator;
 
         function initialize()
         {
             Events.initialize();
+            _rotator = new Rotator(DRAWING_TYPE_COMPUTER);
         }
 
         function draw(dc as Dc) as Void
@@ -49,7 +51,7 @@ module Drawing
                 [ backLeftX, backLeftY ]
             ];
 
-            Drawing.rotate(pts, [ originX, originY ], _bearingToCompassHeading);
+            _rotator.rotate(pts, [ originX, originY ], _bearingToCompassHeading);
 
             return pts;
         }

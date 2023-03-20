@@ -5,18 +5,18 @@ import Toybox.Lang;
 import Toybox.Test;
 import Toybox.System;
 
-module Test { module TestRotate
+module Test { module TestRotateForSchool
 {
     const CLOSE_TOLERANCE = 0.000001;
 
-    var _rotator = new Rotator(Drawing.DRAWING_TYPE_COMPUTER);
+    var _rotator = new Rotator(Drawing.DRAWING_TYPE_SCHOOL);
 
     (:test) function test0degrees(logger as Logger) as Boolean { return testRotate([[ 0, 1 ]], 0, [[ 0, 1 ]]); } 
-    (:test) function test90degrees(logger as Logger) as Boolean { return testRotate([[ 0, 1 ]], 90, [[ -1, 0 ]]); } 
+    (:test) function test90degrees(logger as Logger) as Boolean { return testRotate([[ 0, 1 ]], 90, [[ 1, 0 ]]); } 
     (:test) function test180degrees(logger as Logger) as Boolean { return testRotate([[ 0, 1 ]], 180, [[ 0, -1 ]]); } 
-    (:test) function test270degrees(logger as Logger) as Boolean { return testRotate([[ 0, 1 ]], 270, [[ 1, 0 ]]); } 
+    (:test) function test270degrees(logger as Logger) as Boolean { return testRotate([[ 0, 1 ]], 270, [[ -1, 0 ]]); } 
 
-    (:test) function test45degrees(logger as Logger) as Boolean { return testRotate([[ 0, 1 ]], 45, [[ -0.707107, 0.707107 ]]); } 
+    (:test) function test45degrees(logger as Logger) as Boolean { return testRotate([[ 0, 1 ]], 45, [[ 0.707107, 0.707107 ]]); } 
 
     function testRotate(
         input as Array<Array<Numeric>>,
