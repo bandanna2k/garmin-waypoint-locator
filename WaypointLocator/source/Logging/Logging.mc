@@ -9,7 +9,7 @@ module Logging
     const LOGGING_LEVEL_DEBUG = 1;
     const LOGGING_LEVEL_INFO = 2;
 
-    var _loggingLevel = LOGGING_LEVEL_DEBUG;
+    var _loggingLevel = LOGGING_LEVEL_INFO;
 
     function setLoggingLevel(loggingLevel as Number) as Void
     {
