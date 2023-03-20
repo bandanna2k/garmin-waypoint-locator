@@ -129,11 +129,32 @@ class EventRegistry extends Events
             (_listeners as Array<Events>)[i].onWaypointProximity(proximity);
         }
     }
-    function onActivityNext() as Void
+    function onActivityInitiate() as Void
     {
         for(var i = 0; i < _listeners.size(); i++)
         {
-            (_listeners as Array<Events>)[i].onActivityNext();
+            (_listeners as Array<Events>)[i].onActivityInitiate();
+        }
+    }
+    function onActivityStarted() as Void
+    {
+        for(var i = 0; i < _listeners.size(); i++)
+        {
+            (_listeners as Array<Events>)[i].onActivityStarted();
+        }
+    }
+    function onActivityStopped() as Void
+    {
+        for(var i = 0; i < _listeners.size(); i++)
+        {
+            (_listeners as Array<Events>)[i].onActivityStopped();
+        }
+    }
+    function onActivitySaved() as Void
+    {
+        for(var i = 0; i < _listeners.size(); i++)
+        {
+            (_listeners as Array<Events>)[i].onActivitySaved();
         }
     }
 }

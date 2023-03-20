@@ -1,4 +1,6 @@
+import Toybox.Lang;
 import Toybox.Activity;
+import Toybox.ActivityRecording;
 import Logging;
 
 module Activity
@@ -7,15 +9,16 @@ module Activity
     {
         var _session;
         var _distance = 0;
+        var _eventRegistry;
 
         function initialize(eventRegistry as EventRegistry)
         {
             Events.initialize();
-            var _eventRegistry = eventRegistry;
+            _eventRegistry = eventRegistry;
             _eventRegistry.register(self);
         }
 
-        function onActivityNext() as Void
+        function onActivityInitiate() as Void
         {
             if (Toybox has :ActivityRecording) // check device for activity recording 
             {                         
@@ -27,17 +30,21 @@ module Activity
                         :subSport=>Activity.SUB_SPORT_GENERIC          // set sub sport type
                     });
                     _session.start();                                     // call start session
+                    _eventRegistry.onActivityStarted();
 Logging.debug("ActivityController.recordingActivity");
                 }
                 else if ((_session != null) && _session.isRecording()) 
                 {
                     _session.stop();                                      // stop the session
-                    if(_distance > 1)
+                    if(_distance >= 1)
                     {
                         _session.save();                                      // save the session
+                        _eventRegistry.onActivitySaved();
 Logging.debug("ActivityController.savingActivity");
                     }
+                    _session = null;
 Logging.debug("ActivityController.stoppingRecordingActivity");
+                    _eventRegistry.onActivityStopped();
                 }
             }
         }

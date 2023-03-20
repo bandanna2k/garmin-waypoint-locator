@@ -43,7 +43,7 @@ Logging.trace("InputBehaviour.onPreviousPage");
         function onSelect() as Boolean
         {
 Logging.trace("InputBehaviour.onSelect");
-            _eventRegistry.onActivityNext();
+            _eventRegistry.onActivityInitiate();
             return true;
         }
     }
