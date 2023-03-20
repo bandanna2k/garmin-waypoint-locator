@@ -1,4 +1,5 @@
 import Toybox.Activity;
+import Logging;
 
 module Activity
 {
@@ -26,7 +27,7 @@ module Activity
                         :subSport=>Activity.SUB_SPORT_GENERIC          // set sub sport type
                     });
                     _session.start();                                     // call start session
-Toybox.System.println("ActivityController.recordingActivity");
+Logging.debug("ActivityController.recordingActivity");
                 }
                 else if ((_session != null) && _session.isRecording()) 
                 {
@@ -34,9 +35,9 @@ Toybox.System.println("ActivityController.recordingActivity");
                     if(_distance > 1)
                     {
                         _session.save();                                      // save the session
-Toybox.System.println("ActivityController.savingActivity");
+Logging.debug("ActivityController.savingActivity");
                     }
-Toybox.System.println("ActivityController.stoppingRecordingActivity");
+Logging.debug("ActivityController.stoppingRecordingActivity");
                 }
             }
         }

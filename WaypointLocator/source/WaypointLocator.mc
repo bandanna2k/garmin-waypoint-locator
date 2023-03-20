@@ -31,7 +31,7 @@ class WaypointLocator extends Events
 
     function onStart() as Void
     {
-Toybox.System.println("WaypointLocator.onStart");
+Logging.debug("WaypointLocator.onStart");
         Position.enableLocationEvents(Position.LOCATION_CONTINUOUS, method(:onPosition));
         
         Sensor.enableSensorEvents(method(:onSensor));
@@ -44,7 +44,7 @@ Toybox.System.println("WaypointLocator.onStart");
 
     function onStop() as Void
     {
-Toybox.System.println("WaypointLocator.onStop");
+Logging.debug("WaypointLocator.onStop");
         _timer.stop();
         _timer = null;
     }

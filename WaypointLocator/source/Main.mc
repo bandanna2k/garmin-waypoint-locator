@@ -6,6 +6,7 @@ import Toybox.System;
 import Toybox.Attention;
 import Waypoints;
 import Inputs;
+import Logging;
 
 class Main extends Application.AppBase 
 {
@@ -16,6 +17,7 @@ class Main extends Application.AppBase
     function initialize() 
     {
         AppBase.initialize();
+        Logging.setLoggingLevel(Logging.LOGGING_LEVEL_DEBUG);
     }
 
     // onStart() is called on application start up

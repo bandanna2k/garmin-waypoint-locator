@@ -2,6 +2,7 @@ import Toybox.Lang;
 import Toybox.Position;
 import Toybox.Application;
 import Toybox.WatchUi;
+import Logging;
 
 module Waypoints
 {
@@ -35,7 +36,7 @@ module Waypoints
             _eventRegistry.onCurrentWaypoint((_waypoints as Array<Waypoint>)[_currentWaypointIndex]);
             _eventRegistry.onWaypointCounter(_currentWaypointIndex + 1, _waypoints.size());
 
-Toybox.System.println("WaypointTracker.onNextWaypoint");
+Logging.debug("WaypointTracker.onNextWaypoint");
             Storage.setValue("waypoint.currentIndex", _currentWaypointIndex);
         }
 
@@ -51,7 +52,7 @@ Toybox.System.println("WaypointTracker.onNextWaypoint");
             _eventRegistry.onCurrentWaypoint((_waypoints as Array<Waypoint>)[_currentWaypointIndex]);
             _eventRegistry.onWaypointCounter(_currentWaypointIndex + 1, _waypoints.size());
 
-Toybox.System.println("WaypointTracker.onPreviousWaypoint");
+Logging.debug("WaypointTracker.onPreviousWaypoint");
             Storage.setValue("waypoint.currentIndex", _currentWaypointIndex);
         }
 
@@ -60,7 +61,7 @@ Toybox.System.println("WaypointTracker.onPreviousWaypoint");
         */
         function onWaypoints(array as Array<Waypoint>) as Void
         {
-Toybox.System.println("WaypointTracker.onWaypoints. array.size:" + array.size());
+Logging.debug("WaypointTracker.onWaypoints. array.size:" + array.size());
             if(array.size() == 0)
             {
                 return;
@@ -81,7 +82,7 @@ Toybox.System.println("WaypointTracker.onWaypoints. array.size:" + array.size())
             }
             catch(ex)
             {
-Toybox.System.println("Failed to start. Clearing all waypoints. " + ex.getErrorMessage());
+Logging.debug("Failed to start. Clearing all waypoints. " + ex.getErrorMessage());
                 reset();
             }
         }
@@ -89,7 +90,7 @@ Toybox.System.println("Failed to start. Clearing all waypoints. " + ex.getErrorM
         function loadWaypoints() as Void
         {
             var count = Storage.getValue("waypoint.count");
-Toybox.System.println("WaypointTracker.loadWaypoints. count:" + count);
+Logging.debug("WaypointTracker.loadWaypoints. count:" + count);
             var arrayOfWaypoints = [] as Array<Waypoint>;
             if(count == null || count == 0)
             {
@@ -114,7 +115,7 @@ Toybox.System.println("WaypointTracker.loadWaypoints. count:" + count);
         function loadCurrentWaypoint() 
         {
             var currentIndex = Storage.getValue("waypoint.currentIndex");
-Toybox.System.println("WaypointTracker.loadCurrentWaypoint. currentIndex:" + currentIndex);
+Logging.debug("WaypointTracker.loadCurrentWaypoint. currentIndex:" + currentIndex);
             if(currentIndex == null)
             {
                 if(_waypoints.size() > 0)
@@ -136,7 +137,7 @@ Toybox.System.println("WaypointTracker.loadCurrentWaypoint. currentIndex:" + cur
 
         function reset() 
         {
- Toybox.System.println("WaypointTracker.reset");
+ Logging.debug("WaypointTracker.reset");
            _waypoints = [];
             _currentWaypointIndex = null;
 

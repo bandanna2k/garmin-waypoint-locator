@@ -2,6 +2,7 @@ import Toybox.WatchUi;
 import Toybox.Lang;
 import Toybox.Application;
 import Waypoints;
+import Logging;
 import Inputs.Menus;
 
 module Inputs
@@ -27,21 +28,21 @@ module Inputs
 
         function onNextPage() as Boolean
         {
-Toybox.System.println("InputBehaviour.onNextPage");
+Logging.trace("InputBehaviour.onNextPage");
             _eventRegistry.onNextWaypoint();
             return true;
         }
 
         function onPreviousPage() as Boolean
         {
-Toybox.System.println("InputBehaviour.onPreviousPage");
+Logging.trace("InputBehaviour.onPreviousPage");
             _eventRegistry.onPreviousWaypoint();
             return true;
         }
 
         function onSelect() as Boolean
         {
-Toybox.System.println("InputBehaviour.onSelect");
+Logging.trace("InputBehaviour.onSelect");
             _eventRegistry.onActivityNext();
             return true;
         }
