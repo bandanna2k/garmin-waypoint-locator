@@ -17,8 +17,7 @@ class Main extends Application.AppBase
     function initialize() 
     {
         AppBase.initialize();
-        Logging.setLoggingLevel(Logging.LOGGING_LEVEL_DEBUG);
-    }
+     }
 
     // onStart() is called on application start up
     function onStart(state as Dictionary?) as Void 

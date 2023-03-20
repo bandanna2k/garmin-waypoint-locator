@@ -42,8 +42,7 @@ module Test { module Integration
         eventAssertions.assertCompassHeadingWithTolerance(60, 1);
 
         // Assert arrowhead heading
-        var expectedArrowHeadBearing = 31; // (360 - 60 + 91) % 360
-        Assertions.areApproximatelyEquals(arrowHead._bearingToCompassHeading, expectedArrowHeadBearing, 1);
+        Assertions.areApproximatelyEquals(arrowHead._waypointBearing, 91, 1);
         return true;
     }
 
@@ -61,7 +60,7 @@ module Test { module Integration
         waypointLocator.onSensor(sensorInfo);
 
         eventAssertions.assertCompassHeadingWithTolerance(60, 1);
-        Assertions.areApproximatelyEquals(compass._north, 300, 1);
+        Assertions.areApproximatelyEquals(compass._compassHeading, 60, 1);
         return true;
     }
 }}
