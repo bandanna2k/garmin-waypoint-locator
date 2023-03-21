@@ -22,4 +22,5 @@ class Events
     function onActivityStarted() as Void {}
     function onActivityStopped() as Void {}
     function onActivitySaved() as Void {}
+    function onMessage(message as String) as Void {}
 }

@@ -157,4 +157,11 @@ class EventRegistry extends Events
             (_listeners as Array<Events>)[i].onActivitySaved();
         }
     }
+    function onMessage(message as String) as Void
+    {
+        for(var i = 0; i < _listeners.size(); i++)
+        {
+            (_listeners as Array<Events>)[i].onMessage(message);
+        }
+    }
 }

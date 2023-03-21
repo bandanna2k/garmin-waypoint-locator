@@ -31,20 +31,24 @@ module Activity
                     });
                     _session.start();                                     // call start session
                     _eventRegistry.onActivityStarted();
+                    _eventRegistry.onMessage("Recording");
 Logging.debug("ActivityController.recordingActivity");
                 }
                 else if ((_session != null) && _session.isRecording()) 
                 {
                     _session.stop();                                      // stop the session
-                    if(_distance >= 1)
+                    if(_distance >= 0)
                     {
+                        _eventRegistry.onMessage("Saving");
                         _session.save();                                      // save the session
                         _eventRegistry.onActivitySaved();
+                        _eventRegistry.onMessage("Saved");
 Logging.debug("ActivityController.savingActivity");
                     }
                     _session = null;
 Logging.debug("ActivityController.stoppingRecordingActivity");
                     _eventRegistry.onActivityStopped();
+                    _eventRegistry.onMessage("Finished");
                 }
             }
         }
