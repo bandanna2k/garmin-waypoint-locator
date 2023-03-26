@@ -1,9 +1,9 @@
 
 - Increase freq of refresh compass event.
 
-- Have start stop of cycling activity.
-- Show activity on display
-- Set type of activity
+- Have start stop of cycling activity. DONE
+- Show activity on display.
+- Set type of activity.
   
-- Give routes a name
-- Save multiple routes
+- Give routes a name.
+- Save multiple routes.

@@ -5,7 +5,10 @@ module Drawing
 {
     class ArrowHead extends Events
     {
+        var _compassHeading;
         var _waypointBearing;
+        var _waypointBearingComparedToNorth;
+
         var _rotator;
 
         function initialize()
@@ -16,12 +19,12 @@ module Drawing
 
         function draw(dc as Dc) as Void
         {
-            if(_waypointBearing == null)
+            if(_waypointBearingComparedToNorth == null)
             {
-                dc.drawCircle(dc.getWidth() / 2, dc.getHeight() / 2, 1);
                 return;
             }
 
+            //dc.drawCircle(dc.getWidth() / 2, dc.getHeight() / 2, 1);
             dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
 
             var pts = points(dc.getWidth(), dc.getHeight());
@@ -49,14 +52,31 @@ module Drawing
                 [ backLeftX, backLeftY ]
             ];
 
-            _rotator.rotate(pts, [ originX, originY ], _waypointBearing);
-
+            _rotator.rotate(pts, [ originX, originY ], _waypointBearingComparedToNorth);
             return pts;
         }
 
         function onWaypointBearing(bearing as Numeric or Null) as Void
         {
             _waypointBearing = bearing;
+            calculate();
+        }
+
+        function onCompassHeading(heading as Numeric or Null) as Void
+        {
+            _compassHeading = heading;
+            calculate();
+        }
+
+        function calculate() as Void
+        {
+            if(_waypointBearing == null || _compassHeading == null)
+            {
+                _waypointBearingComparedToNorth = null;
+                return;
+            }
+
+            _waypointBearingComparedToNorth = Utilities.mod(_compassHeading + _waypointBearing, 360);
         }
     }
 }
