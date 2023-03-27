@@ -17,7 +17,9 @@ module Inputs
             BehaviorDelegate.initialize();
 
             _eventRegistry = eventRegistry;
-            _menu = new MainMenu(_eventRegistry);            
+
+            var waypointCollection = new Collection(); 
+            _menu = new MenuMain(_eventRegistry, waypointCollection);            
         }
 
         function onMenu()
