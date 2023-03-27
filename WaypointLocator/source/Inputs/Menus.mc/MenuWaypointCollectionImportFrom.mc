@@ -4,26 +4,23 @@ import Waypoints;
 
 module Inputs { module Menus
 {        
-    class MenuWaypointCollectionImport extends Menu2
+    class MenuWaypointCollectionImportFrom extends Menu2
     {
         var _menuInput;
-        var _eventRegistry;
         var _waypointCollection;
 
         function initialize(
-            eventRegistry as EventRegistry,
             waypointCollection as Collection)
         {
-            Menu2.initialize({:title=>"Import Collection"});
+            Menu2.initialize({:title=>"Import From"});
 
-            _eventRegistry = eventRegistry;
             _waypointCollection = waypointCollection;
 
             var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             for(var i = 0; i < alphabet.length(); i++)
             {
                 var item = alphabet.substring(i, i + 1);
-                addItem(new MenuItem(" " + item, null, "_mainWaypointCollectionsImport" + item, {}));
+                addItem(new MenuItem(" Source " + item, null, "_mainWaypointCollectionsImport" + item, {}));
             }
             _menuInput = new MenuInput(new Method(self, :onSelection));
         }
@@ -35,11 +32,12 @@ module Inputs { module Menus
 
         function onSelection(selection as String) as Void
         {
-            var letter = selection.substring(selection.length() - 1, selection.length());
+            var source = selection.substring(selection.length() - 1, selection.length());
 
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
 
-            _waypointCollection.importCollection(letter);
+            var subMenu = new MenuWaypointCollectionImportTo(_waypointCollection, source);
+            subMenu.showMenu();
             return;
         }
     }

@@ -7,16 +7,12 @@ module Inputs { module Menus
     class MenuWaypointCollection extends Menu2
     {
         var _menuInput;
-        var _eventRegistry;
         var _waypointCollection;
 
-        function initialize(
-            eventRegistry as EventRegistry,
-            waypointCollection as Collection)
+        function initialize(waypointCollection as Collection)
         {
-            Menu2.initialize({:title=>"Waypoint Collections"});
+            Menu2.initialize({:title=>"Waypoints"});
 
-            _eventRegistry = eventRegistry;
             _waypointCollection = waypointCollection;
 
             addItem(new MenuItem(" Import", repositoryString(), "_mainWaypointCollectionsImport", {}));
@@ -46,7 +42,7 @@ module Inputs { module Menus
             {
                 WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
 
-                var subMenu = new MenuWaypointCollectionImport(_eventRegistry, _waypointCollection);
+                var subMenu = new MenuWaypointCollectionImportFrom(_waypointCollection);
                 subMenu.showMenu();
                 return;
             }

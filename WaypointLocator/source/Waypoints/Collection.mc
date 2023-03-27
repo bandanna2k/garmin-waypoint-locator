@@ -24,13 +24,15 @@ module Waypoints
             return _repository;
         }
 
-        function importCollection(letter as String) as Void
+        function importCollection(source as String, destination as String) as Void
         {
+Logging.info("Source:" + source + ", Destination:" + destination); 
+
             var options = {
                 :method => Communications.HTTP_REQUEST_METHOD_GET,
                 :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
             };
-            var url = _repository + letter + ".json";
+            var url = _repository + source + ".json";
             Communications.makeWebRequest(url, {}, options, method(:responseCallback));
         }
 

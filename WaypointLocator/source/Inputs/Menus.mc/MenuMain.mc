@@ -45,7 +45,7 @@ module Inputs { module Menus
             {
                 WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
 
-                var subMenu = new MenuWaypointCollection(_eventRegistry, _waypointCollection);
+                var subMenu = new MenuWaypointCollection(_waypointCollection);
                 subMenu.showMenu();
                 return;
             }
