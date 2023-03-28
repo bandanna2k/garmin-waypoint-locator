@@ -36,9 +36,24 @@ module Waypoints
 
     function toWaypointFromDictionary(dict as Dictionary) as Waypoint
     {
+        // Maybe not used
         var title = dict.get("title") as String;
         var latitude = dict.get("latitude") as Numeric;
         var longitude = dict.get("longitude") as Numeric;
+        return new Waypoint(
+            title, 
+            new Location({
+                :latitude => latitude, 
+                :longitude => longitude, 
+                :format => :degrees
+            }));
+    }
+
+    function instanceOf(data as Dictionary) as Waypoint
+    {
+        var title = data.get("title") as String;
+        var latitude = data.get("latitude") as Numeric;
+        var longitude = data.get("longitude") as Numeric;
         return new Waypoint(
             title, 
             new Location({

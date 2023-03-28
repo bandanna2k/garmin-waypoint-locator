@@ -22,7 +22,7 @@ module Inputs { module Menus
 
             addItem(new MenuItem(" Ripley Mode (on)", null, "_main1", {}));
             addItem(new MenuItem(" Import Waypoints", null, "_mainImportWaypoints", {}));
-            addItem(new MenuItem(" Waypoint Collections", null, "_mainWaypointCollections", {}));
+            addItem(new MenuItem(" Routes", null, "_mainRoutes", {}));
             _menuInput = new MenuInput(new Method(self, :onSelection));
         }
 
@@ -41,11 +41,11 @@ module Inputs { module Menus
                 subMenu.showMenu();
                 return;
             }
-            if("_mainWaypointCollections".equals(selection))
+            if("_mainRoutes".equals(selection))
             {
                 WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
 
-                var subMenu = new MenuWaypointCollection(_waypointCollection);
+                var subMenu = new MenuRoutes(_waypointCollection);
                 subMenu.showMenu();
                 return;
             }

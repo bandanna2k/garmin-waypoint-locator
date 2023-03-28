@@ -4,19 +4,19 @@ import Waypoints;
 
 module Inputs { module Menus
 {        
-    class MenuWaypointCollection extends Menu2
+    class MenuRoutes extends Menu2
     {
         var _menuInput;
         var _waypointCollection;
 
         function initialize(waypointCollection as Collection)
         {
-            Menu2.initialize({:title=>"Waypoints"});
+            Menu2.initialize({:title=>"Routes"});
 
             _waypointCollection = waypointCollection;
 
-            addItem(new MenuItem(" Import", repositoryString(), "_mainWaypointCollectionsImport", {}));
-            addItem(new MenuItem(" Select", currentSelectionString(), "_mainWaypointCollectionsSelect", {}));
+            addItem(new MenuItem(" Import", repositoryString(), "_mainRoutesImport", {}));
+            addItem(new MenuItem(" Select", currentSelectionString(), "_mainRoutesSelect", {}));
             _menuInput = new MenuInput(new Method(self, :onSelection));
         }
 
@@ -38,18 +38,18 @@ module Inputs { module Menus
 
         function onSelection(selection as String) as Void
         {
-            if("_mainWaypointCollectionsImport".equals(selection))
+            if("_mainRoutesImport".equals(selection))
             {
                 WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
 
-                var subMenu = new MenuWaypointCollectionImportFrom(_waypointCollection);
+                var subMenu = new MenuRouteImportFrom(_waypointCollection);
                 subMenu.showMenu();
                 return;
             }
-            if("_mainWaypointCollections".equals(selection))
+            if("_mainRoutesSelect".equals(selection))
             {
                 WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
-Logging.debug("_mainWaypointCollections");
+Logging.debug("_mainRoutesSelect");
 
                 // var subMenu = new MenuWaypointCollections(_eventRegistry);
                 // subMenu.showMenu();

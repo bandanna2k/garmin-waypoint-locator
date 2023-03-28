@@ -4,7 +4,7 @@ import Waypoints;
 
 module Inputs { module Menus
 {        
-    class MenuWaypointCollectionImportFrom extends Menu2
+    class MenuRouteImportFrom extends Menu2
     {
         var _menuInput;
         var _waypointCollection;
@@ -20,7 +20,7 @@ module Inputs { module Menus
             for(var i = 0; i < alphabet.length(); i++)
             {
                 var item = alphabet.substring(i, i + 1);
-                addItem(new MenuItem(" Source " + item, null, "_mainWaypointCollectionsImport" + item, {}));
+                addItem(new MenuItem(" Source " + item, null, "_mainRouteImportTo" + item, {}));
             }
             _menuInput = new MenuInput(new Method(self, :onSelection));
         }
@@ -36,7 +36,7 @@ module Inputs { module Menus
 
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
 
-            var subMenu = new MenuWaypointCollectionImportTo(_waypointCollection, source);
+            var subMenu = new MenuRouteImportTo(_waypointCollection, source);
             subMenu.showMenu();
             return;
         }

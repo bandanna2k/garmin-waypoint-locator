@@ -4,7 +4,7 @@ import Waypoints;
 
 module Inputs { module Menus
 {        
-    class MenuWaypointCollectionImportTo extends Menu2
+    class MenuRouteImportTo extends Menu2
     {
         var _menuInput;
         var _waypointCollection;
@@ -23,7 +23,7 @@ module Inputs { module Menus
             for(var i = 0; i < numbers.length(); i++)
             {
                 var item = numbers.substring(i, i + 1);
-                addItem(new MenuItem(" Destination " + item, null, "_mainWaypointCollectionsImportTo" + item, {}));
+                addItem(new MenuItem(" Destination " + item, null, "_mainRouteImportTo" + item, {}));
             }
             _menuInput = new MenuInput(new Method(self, :onSelection));
         }

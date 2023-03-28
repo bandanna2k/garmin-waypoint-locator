@@ -42,6 +42,14 @@ module Logging
         }
     }
 
+    function warning(message as String) as Void
+    {
+        if(_loggingLevel <= LOGGING_LEVEL_WARN)
+        {
+            System.println("WARN: " + message);
+        }
+    }
+
     function error(message as String) as Void
     {
         if(_loggingLevel <= LOGGING_LEVEL_ERROR)

@@ -9,6 +9,10 @@ module Waypoints
     class Collection
     {
         var _repository = "https://davidnorthtennis.com/waypoints/";
+        
+        var _requesting = false;
+        var _source;
+        var _destination;
 
         function initialize()
         {
@@ -26,7 +30,17 @@ module Waypoints
 
         function importCollection(source as String, destination as String) as Void
         {
-Logging.info("Source:" + source + ", Destination:" + destination); 
+            if(_requesting)
+            {
+                Logging.warning("Already requesting."); 
+                return;
+            }
+
+            _requesting = true;
+            _source = source;
+            _destination = destination;
+
+            Logging.info("Source:" + source + ", Destination:" + destination); 
 
             var options = {
                 :method => Communications.HTTP_REQUEST_METHOD_GET,
@@ -45,21 +59,15 @@ Logging.info("Source:" + source + ", Destination:" + destination);
             {
                 if(data instanceof Dictionary)
                 {
-                    var newWaypoints = [] as Array<Waypoint>;
+                    var route = Routes.instanceOf(data);
+                    Logging.info(route.toString());
 
-                    var title = data.get("name") as String;
-                    var waypoints = data.get("waypoints") as Array;
-                    for(var i = 0 ; i < waypoints.size(); i++)
-                    {
-                        newWaypoints.add(Waypoints.toWaypointFromDictionary(waypoints[i]));
-                    }
-
-                    Logging.info("Title:" + title);
-                    Logging.info("Waypoints:" + waypoints);
+                    //saveRoute(_destination, data);
                 }   
                 else
                 {
                     Logging.error("Not a file I understand. Response code:" + responseCode + ", Data:" + data);
+//                _eventRegistry.onMessage(message);
                 }
             }
             else 
@@ -68,6 +76,48 @@ Logging.info("Source:" + source + ", Destination:" + destination);
 //                _eventRegistry.onMessage(message);
                 Logging.error(message);
             }
+
+            _source = null;
+            _destination = null;
+            _requesting = false;
+        }
+
+        function saveRoute(destination as String, data as Dictionary)
+        {
+            var prefix = "route." + destination;
+            
+            // Clear route
+            var count = Storage.getValue(prefix + ".count");
+            Logging.debug("Clearing route. Count:" + count);
+            if(null != count)
+            {
+                for(var i = 0; i < count; i++)
+                {
+                    Storage.deleteValue(prefix + "." + i + ".name");
+                    Storage.deleteValue(prefix + "." + i + ".latitude");
+                    Storage.deleteValue(prefix + "." + i + ".longitude");
+                }
+            }
+
+            var listOfWaypoints = [] as Array<Waypoint>;
+            var waypoints = data.get("waypoints") as Array;
+            for(var i = 0 ; i < waypoints.size(); i++)
+            {
+                listOfWaypoints.add(Waypoints.toWaypointFromDictionary(waypoints[i]));
+            }
+
+            // Save route
+            var countOfWaypoints = listOfWaypoints.size();
+            Storage.setValue(prefix + ".count", countOfWaypoints);
+            Logging.debug("Saving route. Count:" + countOfWaypoints);
+            for(var i = 0; i < countOfWaypoints; i++)
+            {
+                var waypoint = listOfWaypoints[i];
+                Storage.setValue(prefix + "." + i + ".title", waypoint.title());
+                Storage.setValue(prefix + "." + i + ".latitude", Utilities.latitude(waypoint.position()));
+                Storage.setValue(prefix + "." + i + ".longitude", Utilities.longitude(waypoint.position()));
+            }
+            Logging.debug("Route saved.");
         }
     }
 }
