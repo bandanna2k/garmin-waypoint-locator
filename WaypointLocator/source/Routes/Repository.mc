@@ -23,34 +23,12 @@ module Routes
         var _destination;
 
         var _eventRegistry;
-        var _routes;
 
         function initialize(eventRegistry as EventRegistry)
         {
             Events.initialize();
 
             _eventRegistry = eventRegistry;
-            _routes = [];
-            for(var i = 0; i < 10; i++)
-            {
-                var object = Routes.NULL_ROUTE;
-                _routes.add(object);
-            }
-        }
-
-        function onStart()
-        {
-            importRoutesFromStorage();
-        }
-
-        function importRoutesFromStorage()
-        {
-            Logging.debug("Importing routes from storage");
-            for(var i = 0; i < 10; i++)
-            {
-                var route = importRouteFromStorage(i);
-                _routes[i] = route;
-            }
         }
 
         function importRouteFromStorage(index as Number) as Route
@@ -89,14 +67,22 @@ module Routes
 
         function selectRoute(index as Number)
         {
-            var route = route(index);
+            var route = importRouteFromStorage(index);
             _eventRegistry.onRouteUpdate(route);
         }
 
-        function route(index as Number) as Route
+        function routeTitle(index as Number) as String
         {
-            var route = (_routes as Array<Route>)[index];
-            return route;
+            var prefix = "route." + index;
+            var title = Storage.getValue(prefix + ".title");
+            if(title == null)
+            {
+                return "-";
+            }
+            else
+            {
+                return title;
+            }
         }
 
         function currentSelection() as Route
@@ -141,7 +127,6 @@ module Routes
                 if(data instanceof Dictionary)
                 {
                     var route = Routes.instanceOf(data);
-                    _routes[_destination] = route;
                     saveRoute(_destination, route);
                 }   
                 else
@@ -162,7 +147,9 @@ module Routes
             _isLocked = false;
         }
 
-        function saveRoute(destination as Number, route as Route)
+        function saveRoute(
+            destination as Number, 
+            route as Route)
         {
             var prefix = "route." + destination;
             

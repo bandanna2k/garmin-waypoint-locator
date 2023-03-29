@@ -18,8 +18,8 @@ module Inputs { module Menus
 
             for(var i = 0; i < 10; i++)
             {
-                var route = _routeRepository.route(i);
-                addItem(new MenuItem(" " + i + ": " + route.title(), null, "_mainRouteSelect" + i, {}));
+                var routeTitle = _routeRepository.routeTitle(i);
+                addItem(new MenuItem(" " + i + ": " + routeTitle, null, "_mainRouteSelect" + i, {}));
             }
             _menu = new MenuInput(new Method(self, :onSelection));
         }
