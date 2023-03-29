@@ -75,13 +75,14 @@ module Routes
 
         function selectRoute(index as Number)
         {
-            var route = _routes[index];
+            var route = route(index);
             _eventRegistry.onRouteUpdate(route);
         }
 
         function route(index as Number) as Route
         {
-            return _routes[index];
+            var route = (_routes as Array<Route>)[index];
+            return route;
         }
 
         function currentSelection() as Route
