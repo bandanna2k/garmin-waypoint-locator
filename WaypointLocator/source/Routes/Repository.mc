@@ -7,7 +7,14 @@ import Waypoints;
 
 module Routes
 {
-    class Repository
+    function createAndRegisterRepository(eventRegistry as EventRegistry)
+    {
+        var result = new Repository(eventRegistry);
+        eventRegistry.register(result);
+        return result;
+    }
+
+    class Repository extends Events
     {
         var _repositoryUrl = "https://davidnorthtennis.com/waypoints/";
         
@@ -20,6 +27,8 @@ module Routes
 
         function initialize(eventRegistry as EventRegistry)
         {
+            Events.initialize();
+
             _eventRegistry = eventRegistry;
             _routes = [];
             for(var i = 0; i < 10; i++)
@@ -27,6 +36,11 @@ module Routes
                 var object = Routes.NULL_ROUTE;
                 _routes.add(object);
             }
+        }
+
+        function onStart()
+        {
+            importRoutesFromStorage();
         }
 
         function importRoutesFromStorage()
@@ -59,7 +73,7 @@ module Routes
                 var latitude = Storage.getValue(prefix + "." + i + ".latitude");
                 var longitude = Storage.getValue(prefix + "." + i + ".longitude");
                 var waypoint = new Waypoint(
-                    title, 
+                    name, 
                     new Location({
                         :latitude => latitude, 
                         :longitude => longitude, 
@@ -128,7 +142,7 @@ module Routes
                 {
                     var route = Routes.instanceOf(data);
                     _routes[_destination] = route;
-                    Logging.info("Route imported: Destination:" + _destination + ", Route:" + route.toString());
+                    saveRoute(_destination, route);
                 }   
                 else
                 {
@@ -148,11 +162,11 @@ module Routes
             _isLocked = false;
         }
 
-        function saveRoute(destination as String, data as Dictionary)
+        function saveRoute(destination as Number, route as Route)
         {
             var prefix = "route." + destination;
             
-            // Clear route
+            // Clear route 
             var count = Storage.getValue(prefix + ".count");
             Logging.debug("Clearing route. Count:" + count);
             if(null != count)
@@ -165,25 +179,20 @@ module Routes
                 }
             }
 
-            var listOfWaypoints = [] as Array<Waypoint>;
-            var waypoints = data.get("waypoints") as Array;
-            for(var i = 0 ; i < waypoints.size(); i++)
-            {
-                listOfWaypoints.add(Waypoints.toWaypointFromDictionary(waypoints[i]));
-            }
-
             // Save route
-            var countOfWaypoints = listOfWaypoints.size();
+            Storage.setValue(prefix + ".title", route.title());
+            var countOfWaypoints = route.waypoints().size();
             Storage.setValue(prefix + ".count", countOfWaypoints);
             Logging.debug("Saving route. Count:" + countOfWaypoints);
             for(var i = 0; i < countOfWaypoints; i++)
             {
-                var waypoint = listOfWaypoints[i];
-                Storage.setValue(prefix + "." + i + ".title", waypoint.title());
+                var waypoint = route.waypoints()[i];
+                Storage.setValue(prefix + "." + i + ".name", waypoint.name());
                 Storage.setValue(prefix + "." + i + ".latitude", Utilities.latitude(waypoint.position()));
                 Storage.setValue(prefix + "." + i + ".longitude", Utilities.longitude(waypoint.position()));
             }
-            Logging.debug("Route saved.");
+
+            Logging.info("Route imported: Destination:" + _destination + ", Route:" + route.toString());
         }
     }
 }

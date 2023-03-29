@@ -50,8 +50,14 @@ module Utilities { module Text
         {
             _counter = 0;
             _direction = 1;
-            _fullText = text;
-
+            if(text == null)
+            {
+                _fullText = "";
+            }
+            else
+            {
+                _fullText = text;
+            }
             calculatePartText();
         }
 

@@ -12,9 +12,10 @@ import Routes;
 class Main extends Application.AppBase 
 {
     var _eventRegistry = new EventRegistry();
+
     var _waypointLocator = new WaypointLocator(_eventRegistry);
     var _view = new WaypointLocatorView(_eventRegistry);
-    var _routeRepository = new Repository(_eventRegistry);
+    var _routeRepository = Routes.createAndRegisterRepository(_eventRegistry);
 
     function initialize() 
     {
@@ -24,7 +25,6 @@ class Main extends Application.AppBase
     // onStart() is called on application start up
     function onStart(state as Dictionary?) as Void 
     {
-        _routeRepository.importRoutesFromStorage();
         _eventRegistry.onStart();
     }
 

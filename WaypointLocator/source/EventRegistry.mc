@@ -101,6 +101,7 @@ class EventRegistry extends Events
 
     function onCurrentWaypoint(waypoint as Waypoint or Null) as Void
     {
+Logging.trace("EventRegistry.onCurrentWaypoint:" + waypoint);
         for(var i = 0; i < _listeners.size(); i++)
         {
             (_listeners as Array<Events>)[i].onCurrentWaypoint(waypoint);

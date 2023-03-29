@@ -22,7 +22,6 @@ module Inputs { module Menus
             _routeRepository = routeRepository;
 
             addItem(new MenuItem(" Ripley Mode (on)", null, "_main1", {}));
-            addItem(new MenuItem(" Import Waypoints", null, "_mainImportWaypoints", {}));
             addItem(new MenuItem(" Routes", null, "_mainRoutes", {}));
             _menuInput = new MenuInput(new Method(self, :onSelection));
         }
@@ -34,18 +33,10 @@ module Inputs { module Menus
 
         function onSelection(selection as String) as Void
         {
-            if("_mainImportWaypoints".equals(selection))
-            {
-                WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
+            WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
 
-                var subMenu = new MenuWaypoints(_eventRegistry);
-                subMenu.showMenu();
-                return;
-            }
             if("_mainRoutes".equals(selection))
             {
-                WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
-
                 var subMenu = new MenuRoutes(_routeRepository);
                 subMenu.showMenu();
                 return;
