@@ -16,7 +16,7 @@ module Inputs { module Menus
 
             _routeRepository = routeRepository;
 
-            var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            var alphabet = "ABCDEFGHIJ";
             for(var i = 0; i < alphabet.length(); i++)
             {
                 var item = alphabet.substring(i, i + 1);

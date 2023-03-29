@@ -57,23 +57,6 @@ Logging.debug("WaypointTracker.onPreviousWaypoint");
             Storage.setValue("waypoint.currentIndex", _currentWaypointIndex);
         }
 
-//         /*
-//         called from import and onStart when loading
-//         */
-//         function onWaypoints(array as Array<Waypoint>) as Void
-//         {
-// Logging.debug("WaypointTracker.onWaypoints. array.size:" + array.size());
-//             if(array.size() == 0)
-//             {
-//                 return;
-//             }
-
-//             _waypoints = array;
-//             _currentWaypointIndex = 0;
-//             _eventRegistry.onCurrentWaypoint((_waypoints as Array<Waypoint>)[_currentWaypointIndex]);
-//             _eventRegistry.onWaypointCounter(_currentWaypointIndex + 1, _waypoints.size());
-//         }
-
         function onRouteUpdate(route as Route)
         {
 Logging.debug("WaypointTracker.onRoute:" + route);
@@ -83,6 +66,7 @@ Logging.warning("WaypointTracker.onRoute. Invalid route.");
                 return;
             }
 
+            _waypoints = null;
             _waypoints = route.waypoints();
             _currentWaypointIndex = 0;
             _eventRegistry.onCurrentWaypoint((_waypoints as Array<Waypoint>)[_currentWaypointIndex]);

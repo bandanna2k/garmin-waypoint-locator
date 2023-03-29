@@ -117,13 +117,6 @@ Logging.trace("EventRegistry.onCurrentWaypoint:" + waypoint);
             (_listeners as Array<Events>)[i].onWaypointCounter(displayIndex, displayCount);
         }
     }
-    function onWaypoints(arrayOfWaypoints as Array<Waypoint>) as Void
-    {
-        for(var i = 0; i < _listeners.size(); i++)
-        {
-            (_listeners as Array<Events>)[i].onWaypoints(arrayOfWaypoints);
-        }
-    }
     function onWaypointProximity(proximity as Proximity) as Void
     {
         for(var i = 0; i < _listeners.size(); i++)

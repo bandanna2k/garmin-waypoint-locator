@@ -42,6 +42,7 @@ module Inputs { module Menus
 
         function onSelection(selection as String)
         {
+Logging.debug("_mainRouteSelect " + selection);
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
 
             var selectionAsString = selection.substring(selection.length() - 1, selection.length());

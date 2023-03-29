@@ -49,7 +49,6 @@ module Inputs { module Menus
             if("_mainRoutesSelect".equals(selection))
             {
 Logging.debug("_mainRoutesSelect");
-
                 var subMenu = new MenuRouteSelect(_routeRepository);
                 subMenu.showMenu();
                 return;

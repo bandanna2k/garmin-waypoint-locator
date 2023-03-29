@@ -15,7 +15,6 @@ class Events
    function onStop() {}
    function onPulse() {}
    function onCompassHeading(heading as Numeric) {}
-   function onWaypoints(arrayOfWaypoints as Array<Waypoint>) {}
    function onNextWaypoint() {}
    function onPreviousWaypoint() {}
    function onWaypointProximity(proximity as Proximity) {}
