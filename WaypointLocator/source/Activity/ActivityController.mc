@@ -7,6 +7,8 @@ module Activity
 {
     class ActivityController extends Events
     {
+        const VIBRATE = [ new Attention.VibeProfile(25, 150) ];
+
         var _session;
         var _distance = 0;
         var _eventRegistry;
@@ -31,7 +33,12 @@ module Activity
                     });
                     _session.start();                                     // call start session
                     _eventRegistry.onActivityStarted();
+
                     _eventRegistry.onMessage("Recording");
+
+                    Attention.playTone(Attention.TONE_CANARY);
+                    Attention.vibrate(VIBRATE);
+
 Logging.debug("ActivityController.recordingActivity");
                 }
                 else if ((_session != null) && _session.isRecording()) 
@@ -49,6 +56,9 @@ Logging.debug("ActivityController.savingActivity");
 Logging.debug("ActivityController.stoppingRecordingActivity");
                     _eventRegistry.onActivityStopped();
                     _eventRegistry.onMessage("Finished");
+
+                    Attention.playTone(Attention.TONE_CANARY);
+                    Attention.vibrate(VIBRATE);
                 }
             }
         }
