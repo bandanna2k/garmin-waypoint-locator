@@ -1,19 +1,19 @@
 import Toybox.WatchUi;
 import Toybox.Lang;
-import Waypoints;
+import Routes;
 
 module Inputs { module Menus
 {        
     class MenuRoutes extends Menu2
     {
         var _menuInput;
-        var _waypointCollection;
+        var _routeRepository;
 
-        function initialize(waypointCollection as Collection)
+        function initialize(routeRepository as Repository)
         {
             Menu2.initialize({:title=>"Routes"});
 
-            _waypointCollection = waypointCollection;
+            _routeRepository = routeRepository;
 
             addItem(new MenuItem(" Import", repositoryString(), "_mainRoutesImport", {}));
             addItem(new MenuItem(" Select", currentSelectionString(), "_mainRoutesSelect", {}));
@@ -22,13 +22,13 @@ module Inputs { module Menus
 
         function currentSelectionString() as String 
         {
-            var currentSelection = _waypointCollection.currentSelection();
+            var currentSelection = _routeRepository.currentSelection();
             return " Current: " + (currentSelection == null ? "None" : currentSelection.toString());
         }
 
         function repositoryString() as String
         {
-            return " " + _waypointCollection.repository();
+            return " " + _routeRepository.repositoryUrl();
         }
 
         function showMenu()
@@ -38,21 +38,20 @@ module Inputs { module Menus
 
         function onSelection(selection as String) as Void
         {
+            WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
+
             if("_mainRoutesImport".equals(selection))
             {
-                WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
-
-                var subMenu = new MenuRouteImportFrom(_waypointCollection);
+                var subMenu = new MenuRouteImportFrom(_routeRepository);
                 subMenu.showMenu();
                 return;
             }
             if("_mainRoutesSelect".equals(selection))
             {
-                WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
 Logging.debug("_mainRoutesSelect");
 
-                // var subMenu = new MenuWaypointCollections(_eventRegistry);
-                // subMenu.showMenu();
+                var subMenu = new MenuRouteSelect(_routeRepository);
+                subMenu.showMenu();
                 return;
             }
         }

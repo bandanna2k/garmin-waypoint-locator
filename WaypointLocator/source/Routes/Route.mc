@@ -5,6 +5,8 @@ import Waypoints;
 
 module Routes
 {
+    const NULL_ROUTE = new Route("-", []); 
+
     class Route
     {
         var _title;
@@ -18,10 +20,25 @@ module Routes
             _waypoints = waypoints;
         }
 
+        function title() as String
+        {
+            return _title;
+        }
+
+        function waypoints() as Array<Waypoint>
+        {
+            return _waypoints;
+        }
+
         function toString() as String
         {
             return "Title:" + _title + ", Waypoint Count:" + _waypoints.size();
         } 
+    }
+
+    function isValid(route as Route) as Boolean
+    {
+        return route.waypoints().size() > 0;
     }
 
     function instanceOf(data as Dictionary) as Route

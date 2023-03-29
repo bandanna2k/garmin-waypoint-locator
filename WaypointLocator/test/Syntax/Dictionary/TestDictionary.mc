@@ -11,8 +11,6 @@ module Test { module Dictionary
     function testDictionary(logger as Logger) as Boolean 
     { 
         var jsonString = "{'name':'John', 'age':30, 'car':null}";
-        var dictionary;
-        Logging.info(dictionary);
         return true;
     }
 }}

@@ -1,20 +1,20 @@
 import Toybox.WatchUi;
 import Toybox.Lang;
-import Waypoints;
+import Routes;
 
 module Inputs { module Menus
 {        
     class MenuRouteImportFrom extends Menu2
     {
         var _menuInput;
-        var _waypointCollection;
+        var _routeRepository;
 
         function initialize(
-            waypointCollection as Collection)
+            routeRepository as Repository)
         {
             Menu2.initialize({:title=>"Import From"});
 
-            _waypointCollection = waypointCollection;
+            _routeRepository = routeRepository;
 
             var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             for(var i = 0; i < alphabet.length(); i++)
@@ -36,7 +36,7 @@ module Inputs { module Menus
 
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
 
-            var subMenu = new MenuRouteImportTo(_waypointCollection, source);
+            var subMenu = new MenuRouteImportTo(_routeRepository, source);
             subMenu.showMenu();
             return;
         }

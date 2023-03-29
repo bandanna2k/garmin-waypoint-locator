@@ -1,22 +1,23 @@
 import Toybox.WatchUi;
 import Toybox.Lang;
 import Waypoints;
+import Routes;
 
 module Inputs { module Menus
 {        
     class MenuRouteImportTo extends Menu2
     {
         var _menuInput;
-        var _waypointCollection;
+        var _routeRepository;
         var _source;
 
         function initialize(
-            waypointCollection as Collection,
+            routeRepository as Repository,
             source as String)
         {
             Menu2.initialize({:title=>"Save To"});
 
-            _waypointCollection = waypointCollection;
+            _routeRepository = routeRepository;
             _source = source;
 
             var numbers = "0123456789";
@@ -35,11 +36,12 @@ module Inputs { module Menus
 
         function onSelection(selection as String) as Void
         {
-            var destination = selection.substring(selection.length() - 1, selection.length());
+            var destinationAsString = selection.substring(selection.length() - 1, selection.length());
+            var destinationAsNumber = destinationAsString.toNumber();
 
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
 
-            _waypointCollection.importCollection(_source, destination);
+            _routeRepository.importRouteFromWeb(_source, destinationAsNumber);
             return;
         }
     }

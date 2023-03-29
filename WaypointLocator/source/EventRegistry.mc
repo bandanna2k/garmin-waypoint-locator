@@ -3,6 +3,7 @@ import Toybox.Position;
 import Distance;
 import Waypoints;
 import Proximity;
+import Routes;
 
 class EventRegistry extends Events
 {
@@ -162,6 +163,13 @@ class EventRegistry extends Events
         for(var i = 0; i < _listeners.size(); i++)
         {
             (_listeners as Array<Events>)[i].onMessage(message);
+        }
+    }
+    function onRouteUpdate(route as Route)
+    {
+        for(var i = 0; i < _listeners.size(); i++)
+        {
+            (_listeners as Array<Events>)[i].onRouteUpdate(route);
         }
     }
 }

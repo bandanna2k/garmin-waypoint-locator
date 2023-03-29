@@ -24,7 +24,7 @@ module Waypoints
             _currentWaypointIndex = null;
         }
 
-        function onNextWaypoint() as Void
+        function onNextWaypoint()
         {
             if(_currentWaypointIndex == null)
             {
@@ -40,7 +40,7 @@ Logging.debug("WaypointTracker.onNextWaypoint");
             Storage.setValue("waypoint.currentIndex", _currentWaypointIndex);
         }
 
-        function onPreviousWaypoint() as Void
+        function onPreviousWaypoint()
         {
             if(_currentWaypointIndex == null)
             {

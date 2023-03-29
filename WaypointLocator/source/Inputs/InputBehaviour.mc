@@ -4,6 +4,7 @@ import Toybox.Application;
 import Waypoints;
 import Logging;
 import Inputs.Menus;
+import Routes;
 
 module Inputs
 {        
@@ -12,14 +13,15 @@ module Inputs
         var _eventRegistry;
         var _menu;
 
-        function initialize(eventRegistry as EventRegistry) 
+        function initialize(
+            eventRegistry as EventRegistry,
+            routeRepository as Repository) 
         {
             BehaviorDelegate.initialize();
 
             _eventRegistry = eventRegistry;
 
-            var waypointCollection = new Collection(); 
-            _menu = new MenuMain(_eventRegistry, waypointCollection);            
+            _menu = new MenuMain(_eventRegistry, routeRepository);            
         }
 
         function onMenu()

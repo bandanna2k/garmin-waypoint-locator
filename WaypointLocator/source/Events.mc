@@ -2,6 +2,7 @@ import Toybox.Position;
 import Toybox.Lang;
 import Waypoints;
 import Distance;
+import Routes;
 
 class Events
 {
@@ -23,4 +24,5 @@ class Events
     function onActivityStopped() as Void {}
     function onActivitySaved() as Void {}
     function onMessage(message as String) as Void {}
+    function onRouteUpdate(route as Route) {}
 }

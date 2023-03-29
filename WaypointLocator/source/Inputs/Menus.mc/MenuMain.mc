@@ -2,6 +2,7 @@ import Toybox.WatchUi;
 import Toybox.Lang;
 import Waypoints;
 import Inputs.Menus;
+import Routes;
 
 module Inputs { module Menus
 {        
@@ -9,16 +10,16 @@ module Inputs { module Menus
     {
         var _menuInput;
         var _eventRegistry;
-        var _waypointCollection;
+        var _routeRepository;
 
         function initialize(
             eventRegistry as EventRegistry,
-            waypointCollection as Collection)
+            routeRepository as Repository)
         {
             Menu2.initialize({:title=>"Main Menu"});
 
             _eventRegistry = eventRegistry;
-            _waypointCollection = waypointCollection;
+            _routeRepository = routeRepository;
 
             addItem(new MenuItem(" Ripley Mode (on)", null, "_main1", {}));
             addItem(new MenuItem(" Import Waypoints", null, "_mainImportWaypoints", {}));
@@ -45,7 +46,7 @@ module Inputs { module Menus
             {
                 WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
 
-                var subMenu = new MenuRoutes(_waypointCollection);
+                var subMenu = new MenuRoutes(_routeRepository);
                 subMenu.showMenu();
                 return;
             }
