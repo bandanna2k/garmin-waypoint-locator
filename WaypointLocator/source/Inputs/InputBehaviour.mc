@@ -11,7 +11,7 @@ module Inputs
     class InputBehaviour extends BehaviorDelegate 
     {
         var _eventRegistry;
-        var _menu;
+        var _routeRepository;
 
         function initialize(
             eventRegistry as EventRegistry,
@@ -20,13 +20,13 @@ module Inputs
             BehaviorDelegate.initialize();
 
             _eventRegistry = eventRegistry;
-
-            _menu = new MenuMain(_eventRegistry, routeRepository);            
+            _routeRepository = routeRepository;
         }
 
-        function onMenu()
+        function onMenu() as Boolean
         {
-            _menu.showMenu();
+            var menu = new MenuMain(_eventRegistry, _routeRepository);            
+            menu.showMenu();
             return true;
         }
 
