@@ -1,5 +1,6 @@
 import Toybox.WatchUi;
 import Toybox.Lang;
+import Logging;
 
 module Inputs { module Menus 
 {

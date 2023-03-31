@@ -13,6 +13,10 @@ module Inputs
         var _eventRegistry;
         var _routeRepository;
 
+        var _menu = new Menu2({:title=>"-"});
+        var _menuModel;
+        var _menuInput;
+        
         function initialize(
             eventRegistry as EventRegistry,
             routeRepository as Repository) 
@@ -21,13 +25,37 @@ module Inputs
 
             _eventRegistry = eventRegistry;
             _routeRepository = routeRepository;
+
+            _menuInput = new MenuInput(new Method(self, :onSelection));
         }
 
         function onMenu() as Boolean
         {
-            var menu = new MenuMain(_eventRegistry, _routeRepository);            
-            menu.showMenu();
+            WatchUi.pushView(_menu, _menuInput, WatchUi.SLIDE_IMMEDIATE);
+            _menuModel = new MenuModelMain(_menu, _routeRepository);
+            _menuModel.updateMenu();
             return true;
+        }
+
+        function onSelection(selection as String) as Void
+        {
+Logging.trace("InputBehaviour.onMenuSelection " + selection);
+
+            var result = _menuModel.onSelection(selection);
+            if(result instanceof MenuModel)
+            {
+Logging.debug("instanceOf MenuModel " + result);
+                _menuModel = result;
+                _menuModel.updateMenu();
+                return;
+            }
+//             if(result instanceof Method)
+//             {
+// Logging.debug("instanceOf Method " + result);
+//                 result.invoke();
+//             }
+
+            WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         }
 
         function onNextPage() as Boolean
