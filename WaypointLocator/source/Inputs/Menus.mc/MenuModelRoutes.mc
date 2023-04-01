@@ -8,14 +8,17 @@ module Inputs { module Menus
     class MenuModelRoutes extends MenuModel
     {
         var _routeRepository;
+        var _menuEvents;
 
         function initialize(
             menu as Menu2,
+            menuEvents as MenuEvents,
             routeRepository as Repository)
         {
             MenuModel.initialize(menu);
 
             _routeRepository = routeRepository;
+            _menuEvents = menuEvents;
         }
 
         function updateMenu()
@@ -31,7 +34,11 @@ module Inputs { module Menus
         {
             if("menuRouteSelect".equals(selection))
             {
-                return new MenuModelRouteSelect(_menu, _routeRepository);
+                return new MenuModelRouteSelect(_menu, new MenuEvents(_routeRepository), _routeRepository);
+            }
+            if("menuRouteImport".equals(selection))
+            {
+                return new MenuModelRouteImportFrom(_menu, _menuEvents);
             }
             return null;
         }

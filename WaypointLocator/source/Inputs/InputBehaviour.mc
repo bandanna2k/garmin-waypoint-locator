@@ -8,7 +8,7 @@ import Routes;
 
 module Inputs
 {        
-    class InputBehaviour extends BehaviorDelegate 
+    class InputBehaviour extends BehaviorDelegate
     {
         var _eventRegistry;
         var _routeRepository;

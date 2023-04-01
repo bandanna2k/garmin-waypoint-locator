@@ -31,7 +31,7 @@ module Inputs { module Menus
         {
             if("menuMainRoutes".equals(selection))
             {
-                return new MenuModelRoutes(_menu, _routeRepository);
+                return new MenuModelRoutes(_menu, new MenuEvents(_routeRepository), _routeRepository);
             }
             return null;
         }

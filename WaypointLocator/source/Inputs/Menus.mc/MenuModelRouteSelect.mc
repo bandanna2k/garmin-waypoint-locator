@@ -8,14 +8,17 @@ module Inputs { module Menus
     class MenuModelRouteSelect extends MenuModel
     {
         var _routeRepository;
+        var _menuEvents;
 
         function initialize(
             menu as Menu2,
+            menuEvents as MenuEvents,
             routeRepository as Repository)
         {
             MenuModel.initialize(menu);
 
             _routeRepository = routeRepository;
+            _menuEvents = menuEvents;
         }
 
         function updateMenu()
