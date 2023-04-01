@@ -7,29 +7,20 @@ module Inputs { module Menus
 {        
     class MenuModelRouteSelect extends MenuModel
     {
-        var _routeRepository;
-        var _menuEvents;
-
-        function initialize(
-            menu as Menu2,
-            menuEvents as MenuEvents,
-            routeRepository as Repository)
+        function initialize(menu as MyMenu)
         {
             MenuModel.initialize(menu);
-
-            _routeRepository = routeRepository;
-            _menuEvents = menuEvents;
         }
 
         function updateMenu()
         {
             MenuModel.updateMenu();
 
-            _menu.setTitle("Select Route");
+            setTitle("Select Route");
             for(var i = 0; i < 10; i++)
             {
-                var routeTitle = _routeRepository.routeTitle(i);
-                _menu.addItem(new MenuItem(" " + i + ": " + routeTitle, null, "menuRouteSelect" + i, {}));
+                var routeTitle = "_routeRepository.routeTitle(i);";
+                addItem(new MenuItem(" " + i + ": " + routeTitle, null, "menuRouteSelect" + i, {}));
             }
         }
 
@@ -40,7 +31,7 @@ module Inputs { module Menus
                 var selectionAsString = selection.substring(selection.length() - 1, selection.length());
                 var selectionAsNumber = selectionAsString.toNumber();
 
-                _routeRepository.selectRoute(selectionAsNumber);
+                events().onRouteSelect(selectionAsNumber);
             }
             return null;
         }

@@ -7,31 +7,25 @@ module Inputs { module Menus
 {        
     class MenuModelMain extends MenuModel
     {
-        var _routeRepository;
-
-        function initialize(
-            menu as Menu2,
-            routeRepository as Repository)
+        function initialize(menu as MyMenu)
         {
             MenuModel.initialize(menu);
-
-            _routeRepository = routeRepository;
         }
 
         function updateMenu()
         {
             MenuModel.updateMenu();
 
-            _menu.setTitle("Main Menu");
-            _menu.addItem(new MenuItem(" Ripley Mode (on)", null, "menuMainRipleyMode", {}));
-            _menu.addItem(new MenuItem(" Routes", null, "menuMainRoutes", {}));
+            setTitle("Main Menu");
+            addItem(new MenuItem(" Ripley Mode (on)", null, "menuMainRipleyMode", {}));
+            addItem(new MenuItem(" Routes", null, "menuMainRoutes", {}));
         }
 
         function onSelection(selection as String) as MenuModel or Null
         {
             if("menuMainRoutes".equals(selection))
             {
-                return new MenuModelRoutes(_menu, new MenuEvents(_routeRepository), _routeRepository);
+                return new MenuModelRoutes(_menu);
             }
             return null;
         }

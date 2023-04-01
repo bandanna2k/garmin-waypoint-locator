@@ -8,15 +8,12 @@ module Inputs { module Menus
     class MenuModelRouteImportTo extends MenuModel
     {
         var _source;
-        var _menuEvents;
 
         function initialize(
-            menu as Menu2,
-            menuEvents as MenuEvents,
+            menu as MyMenu, 
             source as String)
         {
             MenuModel.initialize(menu);
-            _menuEvents = menuEvents;
             _source = source;
         }
 
@@ -24,13 +21,13 @@ module Inputs { module Menus
         {
             MenuModel.updateMenu();
 
-            _menu.setTitle("Save To");
+            setTitle("Save To");
 
             var numbers = "0123456789";
             for(var i = 0; i < numbers.length(); i++)
             {
                 var item = numbers.substring(i, i + 1);
-                _menu.addItem(new MenuItem(" Save to " + item, null, "menuRouteImportTo" + item, {}));
+                addItem(new MenuItem(" Save to " + item, null, "menuRouteImportTo" + item, {}));
             }
         }
 
@@ -41,9 +38,7 @@ module Inputs { module Menus
                 var destinationAsString = selection.substring(selection.length() - 1, selection.length());
                 var destinationAsNumber = destinationAsString.toNumber();
 
-Logging.debug(_source);
-Logging.debug(destinationAsNumber + "");
-                _menuEvents.onRouteImport(_source, destinationAsNumber);
+                events().onRouteImport(_source, destinationAsNumber);
             }
             return null;
         }

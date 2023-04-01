@@ -17,5 +17,10 @@ module Inputs { module Menus
         {
             _routeRepository.importRouteFromWeb(source, destination);
         } 
+
+        function onRouteSelect(selection as Number)
+        {
+            _routeRepository.selectRoute(selection);
+        }
     }
 }}
