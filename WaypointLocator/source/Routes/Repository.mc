@@ -68,7 +68,13 @@ module Routes
         function selectRoute(index as Number)
         {
             var route = importRouteFromStorage(index);
-            _eventRegistry.onRouteUpdate(route);
+            if(route != null)
+            {
+                _eventRegistry.onRouteUpdate(route);
+
+                Storage.setValue("route.selectedRoute", index);
+                Logging.debug("Selected route saved. Index:" + index);
+           }
         }
 
         function routeTitle(index as Number) as String
@@ -180,6 +186,15 @@ module Routes
             }
 
             Logging.info("Route imported: Destination:" + _destination + ", Route:" + route.toString());
+        }
+
+        function onStart()
+        {
+            var index = Storage.getValue("route.selectedRoute");
+            if(null != index)
+            {
+                selectRoute(index);
+            }
         }
     }
 }
