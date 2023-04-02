@@ -27,7 +27,7 @@ module Inputs
             _routeRepository = routeRepository;
             _menu = new MyMenu(
                 new Menu2({:title=>"-"}), 
-                new MenuEvents(_routeRepository));
+                new MenuAdapter(_routeRepository));
 
             _menuInput = new MenuInput(new Method(self, :onSelection));
         }

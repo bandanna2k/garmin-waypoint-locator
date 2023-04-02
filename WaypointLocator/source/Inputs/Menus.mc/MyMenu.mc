@@ -7,14 +7,14 @@ module Inputs { module Menus
     class MyMenu
     {
         var _menu2;
-        var _menuEvents;
+        var _menuAdapter;
 
         function initialize(
             menu2 as Menu2,
-            menuEvents as MenuEvents)
+            menuAdapter as MenuAdapter)
         {
             _menu2 = menu2;
-            _menuEvents = menuEvents;
+            _menuAdapter = menuAdapter;
         }
 
         function menu2()
@@ -22,9 +22,9 @@ module Inputs { module Menus
             return _menu2;
         }
 
-        function events()
+        function adapter()
         {
-            return _menuEvents;
+            return _menuAdapter;
         }
     }
 }}

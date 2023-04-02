@@ -4,7 +4,7 @@ import Routes;
 
 module Inputs { module Menus 
 {
-    class MenuEvents
+    class MenuAdapter
     {
         var _routeRepository;
 
@@ -21,6 +21,11 @@ module Inputs { module Menus
         function onRouteSelect(selection as Number)
         {
             _routeRepository.selectRoute(selection);
+        }
+
+        function routeTitle(index as Number) as String
+        {
+            return _routeRepository.routeTitle(index);
         }
     }
 }}

@@ -38,7 +38,7 @@ module Inputs { module Menus
                 var destinationAsString = selection.substring(selection.length() - 1, selection.length());
                 var destinationAsNumber = destinationAsString.toNumber();
 
-                events().onRouteImport(_source, destinationAsNumber);
+                adapter().onRouteImport(_source, destinationAsNumber);
             }
             return null;
         }

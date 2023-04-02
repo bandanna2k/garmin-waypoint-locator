@@ -19,7 +19,7 @@ module Inputs { module Menus
             setTitle("Select Route");
             for(var i = 0; i < 10; i++)
             {
-                var routeTitle = "_routeRepository.routeTitle(i);";
+                var routeTitle = adapter().routeTitle(i);
                 addItem(new MenuItem(" " + i + ": " + routeTitle, null, "menuRouteSelect" + i, {}));
             }
         }
@@ -31,7 +31,7 @@ module Inputs { module Menus
                 var selectionAsString = selection.substring(selection.length() - 1, selection.length());
                 var selectionAsNumber = selectionAsString.toNumber();
 
-                events().onRouteSelect(selectionAsNumber);
+                adapter().onRouteSelect(selectionAsNumber);
             }
             return null;
         }

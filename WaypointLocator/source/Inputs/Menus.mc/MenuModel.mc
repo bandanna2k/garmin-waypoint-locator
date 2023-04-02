@@ -31,9 +31,9 @@ module Inputs { module Menus
             _menu.menu2().addItem(menuItem);
         }
 
-        function events()
+        function adapter()
         {
-            return _menu.events();
+            return _menu.adapter();
         }
 
         function onSelection(selection as String) as MenuModel or Null 
