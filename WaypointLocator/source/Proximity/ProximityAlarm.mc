@@ -18,6 +18,8 @@ module Proximity
         var _proximity = Proximity.FarAway;
         var _eventRegistry;
 
+        var _enabled = false;
+
         function initialize(eventRegistry as EventRegistry)
         {
             Events.initialize();
@@ -58,6 +60,11 @@ module Proximity
 
         function alert() as Void
         {
+            if(!_enabled)
+            {
+                return;
+            }
+
             var tone;
             if(_proximity == Proximity.ExtremelyClose)
             {

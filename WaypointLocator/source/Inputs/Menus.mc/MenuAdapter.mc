@@ -1,6 +1,7 @@
 import Toybox.WatchUi;
 import Toybox.Lang;
 import Routes;
+import Toybox.Application.Storage;
 
 module Inputs { module Menus 
 {
@@ -26,6 +27,22 @@ module Inputs { module Menus
         function routeTitle(index as Number) as String
         {
             return _routeRepository.routeTitle(index);
+        }
+
+        function isRipleyModeEnabled() as Boolean
+        {
+            return Utilities.isEnabled(Storage.getValue("ripleyMode.enabled"));
+        }
+        function toggleRipleyMode() 
+        {
+            if(Utilities.isEnabled(Storage.getValue("ripleyMode.enabled")))
+            {
+                Storage.setValue("ripleyMode.enabled", "false");
+            }
+            else
+            {
+                Storage.setValue("ripleyMode.enabled", "true");
+            }
         }
     }
 }}

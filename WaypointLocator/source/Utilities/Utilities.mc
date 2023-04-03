@@ -41,6 +41,18 @@ module Utilities
         var howMany = (value / modulus).toNumber();
         return value - (modulus * howMany);
     }
+
+    function isEnabled(value as String or Null) as Boolean
+    {
+        if(value == null)
+        {
+            return false;
+        }
+        return 
+            "true".equals(value) ||
+            "True".equals(value) ||
+            "TRUE".equals(value);
+    }
 }
 
 

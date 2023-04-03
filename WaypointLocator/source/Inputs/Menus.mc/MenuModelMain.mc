@@ -17,12 +17,29 @@ module Inputs { module Menus
             MenuModel.updateMenu();
 
             setTitle("Main Menu");
-            addItem(new MenuItem(" Ripley Mode (on)", null, "menuMainRipleyMode", {}));
+            addItem(new MenuItem(toStringRipleyMode(), null, "menuMainRipleyMode", {}));
             addItem(new MenuItem(" Routes", null, "menuMainRoutes", {}));
+        }
+
+        function toStringRipleyMode() as String
+        {
+            if(adapter().isRipleyModeEnabled())
+            {
+                return " Ripley Mode (on)";
+            }
+            else
+            {
+                return " Ripley Mode (off)";
+            }
         }
 
         function onSelection(selection as String) as MenuModel or Null
         {
+            if("menuMainRipleyMode".equals(selection))
+            {
+                adapter().toggleRipleyMode();
+                return new MenuModelMain(_menu);
+            }
             if("menuMainRoutes".equals(selection))
             {
                 return new MenuModelRoutes(_menu);
