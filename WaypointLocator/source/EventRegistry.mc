@@ -53,6 +53,12 @@ class EventRegistry extends Events
         {
             (_listeners as Array<Events>)[i].onStart();
         }
+        _hasStarted = true;
+    }
+    var _hasStarted = false;
+    function hasStarted() as Boolean
+    {
+        return _hasStarted;
     }
 
     function onStop() as Void

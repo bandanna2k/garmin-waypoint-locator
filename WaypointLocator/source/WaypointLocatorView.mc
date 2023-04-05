@@ -11,13 +11,16 @@ class WaypointLocatorView extends WatchUi.View
     var _proximityBar = new Drawing.ProximityBar();
     var _messageLabel = new Drawing.MessageLabel();
 
-    var _cyclicString = new Utilities.Text.CyclicString("Waypoint Locator by David North", 18);
+    var _cyclicString = new Utilities.Text.CyclicString("Finding Newt (Waypoint Locator)", 18);
     var _cyclicLabel = new Drawing.CyclicLabel(_cyclicString);
 
-    function initialize(_eventRegistry as EventRegistry)
+    var _eventRegistry;
+
+    function initialize(eventRegistry as EventRegistry)
     {
         View.initialize();
 
+        _eventRegistry = eventRegistry;
         _eventRegistry.register(_arrowHead);
         _eventRegistry.register(_bearingLabel);
         _eventRegistry.register(_distanceLabel);
@@ -52,17 +55,44 @@ Instinct® 2S / Solar / Dual Power
 
     function onUpdate(dc as Dc) as Void 
     {
-        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
-        dc.clear();
+        if(_eventRegistry.hasStarted())
+        {
+            dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
+            dc.clear();
 
-        _compass.draw(dc);
-        _bearingLabel.draw(dc);
-        _arrowHead.draw(dc);
-        _distanceLabel.draw(dc);
-        _waypointLabel.draw(dc);
-        _cyclicLabel.draw(dc);
-        _proximityBar.draw(dc);
-        _messageLabel.draw(dc);
+            _compass.draw(dc);
+            _bearingLabel.draw(dc);
+            _arrowHead.draw(dc);
+            _distanceLabel.draw(dc);
+            _waypointLabel.draw(dc);
+            _cyclicLabel.draw(dc);
+            _proximityBar.draw(dc);
+            _messageLabel.draw(dc);
+        }
+        else
+        {
+            View.onUpdate(dc);
+            
+            var w = dc.getWidth();
+            var h = dc.getHeight();
+
+            var x = (w / 2) + 2;
+            var y = (h - 75) + 2;
+
+            dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+            dc.drawText(x, y, Graphics.FONT_LARGE, 
+                "Finding Newt", Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(x, y + 30, Graphics.FONT_SMALL, 
+                "Waypoint Locator", Graphics.TEXT_JUSTIFY_CENTER);
+
+            x = x - 2;
+            y = y - 2;
+            dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+            dc.drawText(x, y, Graphics.FONT_LARGE, 
+                "Finding Newt", Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(x, y + 30, Graphics.FONT_SMALL, 
+                "Waypoint Locator", Graphics.TEXT_JUSTIFY_CENTER);
+        }
     }
 
     // Called when this View is removed from the screen. Save the
