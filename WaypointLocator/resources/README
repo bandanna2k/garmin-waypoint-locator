@@ -1,10 +1,13 @@
 
-- Show Finding Newt intro screen.
+- Set type of activity. QW
 - Show activity on display.
+-   - Show distance
+-   - Show time
 - Increase freq of refresh compass event. 
-- Set type of activity.
+- Moving average on compass. QW
 
-  
+- Redo menu options DONE
+- Show Finding Newt intro screen. DONE
 - Have start stop of cycling activity. DONE
 - Give routes a name. DONE
 - Save multiple routes. DONE
