@@ -11,25 +11,27 @@ module Inputs { module Menus
         {
             MenuModel.initialize(menu);
         }
-
+        
         function updateMenu()
         {
             MenuModel.updateMenu();
 
-            setTitle("Routes");
-            addItem(new MenuItem(" Import", null, "menuRouteImport", {}));
-            addItem(new MenuItem(" Select", null, "menuRouteSelect", {}));
+            setTitle("Select Route");
+            for(var i = 0; i < 10; i++)
+            {
+                var routeTitle = adapter().routeTitle(i);
+                addItem(new MenuItem(" " + i + ": " + routeTitle, null, "menuRouteOptions" + i, {}));
+            }
         }
 
         function onSelection(selection as String) as MenuModel or Null
         {
-            if("menuRouteSelect".equals(selection))
+            if(null != selection.find("menuRouteOptions"))
             {
-                return new MenuModelRouteSelect(_menu);
-            }
-            if("menuRouteImport".equals(selection))
-            {
-                return new MenuModelRouteImportFrom(_menu);
+                var selectionAsString = selection.substring(selection.length() - 1, selection.length());
+                var selectionAsNumber = selectionAsString.toNumber();
+
+                return new MenuModelRouteOptions(_menu, selectionAsNumber);
             }
             return null;
         }

@@ -7,7 +7,8 @@ module Inputs { module Menus
 {        
     class MenuModelRouteSelect extends MenuModel
     {
-        function initialize(menu as MyMenu)
+        function initialize(
+            menu as MyMenu)
         {
             MenuModel.initialize(menu);
         }
@@ -31,7 +32,8 @@ module Inputs { module Menus
                 var selectionAsString = selection.substring(selection.length() - 1, selection.length());
                 var selectionAsNumber = selectionAsString.toNumber();
 
-                adapter().onRouteSelect(selectionAsNumber);
+                // adapter().onRouteSelect(selectionAsNumber);
+                
             }
             return null;
         }

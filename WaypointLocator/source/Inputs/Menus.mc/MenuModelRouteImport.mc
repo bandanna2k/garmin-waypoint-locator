@@ -5,34 +5,38 @@ import Routes;
 
 module Inputs { module Menus
 {        
-    class MenuModelRouteImportFrom extends MenuModel
+    class MenuModelRouteImport extends MenuModel
     {
-        function initialize(menu as MyMenu)
+        var _destination;
+
+        function initialize(
+            menu as MyMenu, 
+            destination as Number)
         {
             MenuModel.initialize(menu);
+            _destination = destination;
         }
 
         function updateMenu()
         {
             MenuModel.updateMenu();
 
-            setTitle("Import From");
+            setTitle("Import");
 
             var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             for(var i = 0; i < alphabet.length(); i++)
             {
                 var item = alphabet.substring(i, i + 1);
-                addItem(new MenuItem(" Source " + item, null, "menuRouteImportFrom" + item, {}));
+                addItem(new MenuItem(" Source " + item, null, "menuRouteImport" + item, {}));
             }
         }
 
         function onSelection(selection as String) as MenuModel or Null
         {
-            if(null != selection.find("menuRouteImportFrom"))
+            if(null != selection.find("menuRouteImport"))
             {
-                var from = selection.substring(selection.length() - 1, selection.length());
-
-                return new MenuModelRouteImportTo(_menu, from);
+                var source = selection.substring(selection.length() - 1, selection.length());
+                adapter().onRouteImport(source, _destination);
             }
             return null;
         }

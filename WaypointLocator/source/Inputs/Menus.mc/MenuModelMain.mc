@@ -17,8 +17,8 @@ module Inputs { module Menus
             MenuModel.updateMenu();
 
             setTitle("Main Menu");
-            addItem(new MenuItem(toStringRipleyMode(), null, "menuMainRipleyMode", {}));
             addItem(new MenuItem(" Routes", null, "menuMainRoutes", {}));
+            addItem(new MenuItem(toStringRipleyMode(), null, "menuMainRipleyMode", {}));
         }
 
         function toStringRipleyMode() as String
