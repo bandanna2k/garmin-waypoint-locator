@@ -1,13 +1,13 @@
 
-- Import in reverse. QW
 - Set type of activity. QW
-- Toast message ???
 - Show activity on display.
 -   - Show distance
 -   - Show time
 - Increase freq of refresh compass event. 
 - Moving average on compass. QW
 
+- Toast message (needs api 3.4.0. Instinct 2 only 3.2.0??? Maybe I need the new SDK)
+- Import in reverse. QW (Changed to select in reverse)
 - Redo menu options DONE
 - Show Finding Newt intro screen. DONE
 - Have start stop of cycling activity. DONE

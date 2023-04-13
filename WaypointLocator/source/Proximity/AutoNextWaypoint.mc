@@ -18,9 +18,9 @@ module Proximity
             _eventRegistry.register(self);
         }
 
-        function onWaypointProximity(proximity as Proximity) as Void
+        function onWaypointProximity2(proximity as Number)
         {
-            if(proximity == Proximity.ExtremelyClose && _counter == 0)
+            if(proximity == Proximity.EXTREMELY_CLOSE && _counter == 0)
             {      
                 _counter = 10;
             }

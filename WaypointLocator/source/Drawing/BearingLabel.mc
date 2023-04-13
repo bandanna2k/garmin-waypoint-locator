@@ -25,7 +25,7 @@ module Drawing
             }
         }
 
-        function onWaypointBearing(bearing as Numeric) as Void
+        function onWaypointBearing(bearing as Numeric or Null)
         {
             _waypointBearing = bearing;
         }

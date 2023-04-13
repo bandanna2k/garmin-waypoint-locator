@@ -27,11 +27,9 @@ module Drawing
 
             var font = Graphics.FONT_LARGE;
             var dimensions = dc.getTextDimensions(_message, font);
-            var textW = dimensions[0];
             var textH = dimensions[1];
 
             // Background box
-            var boxX = (w / 2) - (textW / 2) - 10;
             var boxY = (h / 2);
             dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_BLACK);
             dc.fillRectangle(0, boxY, w, textH + 4);

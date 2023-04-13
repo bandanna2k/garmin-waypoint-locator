@@ -62,7 +62,7 @@ module Drawing
             calculate();
         }
 
-        function onCompassHeading(heading as Numeric or Null) as Void
+        function onCompassHeading(heading as Numeric or Null)
         {
             _compassHeading = heading;
             calculate();

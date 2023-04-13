@@ -14,10 +14,11 @@ class Events
    function onStart() {}
    function onStop() {}
    function onPulse() {}
-   function onCompassHeading(heading as Numeric) {}
+   function onCompassHeading(heading as Numeric or Null) {}
    function onNextWaypoint() {}
    function onPreviousWaypoint() {}
    function onWaypointProximity(proximity as Proximity) {}
+   function onWaypointProximity2(proximity as Number) {}
    function onActivityInitiate() {}
    function onActivityStarted() {}
    function onActivityStopped() {}

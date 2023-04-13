@@ -38,7 +38,6 @@ module Test { module TestRotateForSchool
         actual as Array<Array<Numeric>>, 
         expected as Array<Array<Numeric>>) as Boolean
     {
-        var result = true;
         for(var i = 0; i < actual.size(); i++)
         {
             var actualX = actual[i][0];

@@ -123,11 +123,11 @@ Logging.trace("EventRegistry.onCurrentWaypoint:" + waypoint);
             (_listeners as Array<Events>)[i].onWaypointCounter(displayIndex, displayCount);
         }
     }
-    function onWaypointProximity(proximity as Proximity) as Void
+    function onWaypointProximity2(proximity as Number) as Void
     {
         for(var i = 0; i < _listeners.size(); i++)
         {
-            (_listeners as Array<Events>)[i].onWaypointProximity(proximity);
+            (_listeners as Array<Events>)[i].onWaypointProximity2(proximity);
         }
     }
     function onActivityInitiate() as Void

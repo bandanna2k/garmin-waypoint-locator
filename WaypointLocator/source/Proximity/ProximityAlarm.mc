@@ -27,7 +27,7 @@ module Proximity
             _eventRegistry.register(self);
         }
 
-        function onWaypointProximity(proximity as Proximity) as Void
+        function onWaypointProximity2(proximity as Number)
         {
             _proximity = proximity;
 
@@ -39,11 +39,11 @@ module Proximity
             // else if(proximity == Proximity.ExtremelyClose) { _delta = 1; }
 
             if(proximity == Proximity.FarAway)             { _delta = 60; }
-            else if(proximity == Proximity.GettingClose)   { _delta = 10; }
-            else if(proximity == Proximity.FairlyClose)    { _delta = 5; }
-            else if(proximity == Proximity.Close)          { _delta = 2; }
-            else if(proximity == Proximity.VeryClose)      { _delta = 1; }
-            else if(proximity == Proximity.ExtremelyClose) { _delta = 1; }
+            else if(proximity == Proximity.GETTING_CLOSE)   { _delta = 10; }
+            else if(proximity == Proximity.FAIRLY_CLOSE)    { _delta = 5; }
+            else if(proximity == Proximity.CLOSE)          { _delta = 2; }
+            else if(proximity == Proximity.VERY_CLOSE)      { _delta = 1; }
+            else if(proximity == Proximity.EXTREMELY_CLOSE) { _delta = 1; }
 
             _counter = Utilities.min(_delta, _counter);
         }

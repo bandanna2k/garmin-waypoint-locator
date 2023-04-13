@@ -71,7 +71,7 @@ module Test { module Proximity
             Events.initialize();
         }
 
-        function onWaypointProximity(proximity as Proximity) as Void
+        function onWaypointProximity2(proximity as Number)
         {
             _proximity = proximity;
         }
