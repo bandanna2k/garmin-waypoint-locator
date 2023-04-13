@@ -1,5 +1,6 @@
 import Toybox.WatchUi;
 import Toybox.Graphics;
+import Logging;
 
 class WaypointLocatorView extends WatchUi.View  
 {

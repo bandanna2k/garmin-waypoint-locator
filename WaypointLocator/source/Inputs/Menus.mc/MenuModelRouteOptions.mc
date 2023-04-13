@@ -24,13 +24,18 @@ module Inputs { module Menus
             setTitle("Route Options");
             addItem(new MenuItem(" Select Route", null, "menuRouteSelect", {}));
             addItem(new MenuItem(" Import from Web", null, "menuRouteImport", {}));
+            addItem(new MenuItem(" Select Reverse Route", null, "menuRouteSelectReverse", {}));
         }
 
         function onSelection(selection as String) as MenuModel or Null
         {
             if("menuRouteSelect".equals(selection))
             {
-                adapter().onRouteSelect(_selectedRoute);
+                adapter().onRouteSelect(_selectedRoute, false);
+            }
+            if("menuRouteSelectReverse".equals(selection))
+            {
+                adapter().onRouteSelect(_selectedRoute, true);
             }
             if("menuRouteImport".equals(selection))
             {

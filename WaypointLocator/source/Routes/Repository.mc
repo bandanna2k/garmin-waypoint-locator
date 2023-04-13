@@ -65,11 +65,16 @@ module Routes
             return route;
         }
 
-        function selectRoute(index as Number)
+        function selectRoute(index as Number, inReverse as Boolean)
         {
             var route = importRouteFromStorage(index);
             if(route != null)
             {
+                if(inReverse)
+                {
+                    route.invert();
+                }
+
                 _eventRegistry.onRouteUpdate(route);
 
                 Storage.setValue("route.selectedRoute", index);
@@ -193,7 +198,7 @@ module Routes
             var index = Storage.getValue("route.selectedRoute");
             if(null != index)
             {
-                selectRoute(index);
+                selectRoute(index, false);
             }
         }
     }

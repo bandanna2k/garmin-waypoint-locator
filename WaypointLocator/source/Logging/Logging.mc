@@ -2,6 +2,8 @@ import Toybox.WatchUi;
 import Toybox.Lang;
 import Waypoints;
 import Toybox.System;
+import Toybox.Time;
+import Toybox.Time.Gregorian;
 
 module Logging
 {        
@@ -12,6 +14,7 @@ module Logging
     const LOGGING_LEVEL_ERROR = 4;
 
     var _loggingLevel = LOGGING_LEVEL_DEBUG;
+    var _startMillis = System.getTimer();
 
     function setLoggingLevel(loggingLevel as Number) as Void
     {
@@ -22,7 +25,7 @@ module Logging
     {
         if(_loggingLevel <= LOGGING_LEVEL_TRACE)
         {
-            System.println("TRACE: " + message);
+            println("TRACE: " + message);
         }
     }
 
@@ -30,7 +33,7 @@ module Logging
     {
         if(_loggingLevel <= LOGGING_LEVEL_DEBUG)
         {
-            System.println("DEBUG: " + message);
+            println("DEBUG: " + message);
         }
     }
 
@@ -38,7 +41,7 @@ module Logging
     {
         if(_loggingLevel <= LOGGING_LEVEL_INFO)
         {
-            System.println("INFO: " + message);
+            println("INFO: " + message);
         }
     }
 
@@ -46,7 +49,7 @@ module Logging
     {
         if(_loggingLevel <= LOGGING_LEVEL_WARN)
         {
-            System.println("WARN: " + message);
+            println("WARN: " + message);
         }
     }
 
@@ -54,7 +57,27 @@ module Logging
     {
         if(_loggingLevel <= LOGGING_LEVEL_ERROR)
         {
-            System.println("ERROR: " + message);
+            println("ERROR: " + message);
         }
+    }
+
+    function println(message as String)
+    {
+        var millis = Utilities.mod(System.getTimer() - _startMillis, 1000); 
+        var millisAsString = millis.format("%03d");
+
+        var today = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
+        var dateTime = Lang.format("$1$:$2$:$3$.$4$ $5$-$6$-$7$",
+            [
+                today.hour,
+                today.min,
+                today.sec,
+                millisAsString,
+                today.day,
+                today.month,
+                today.year
+            ]
+        );
+        System.println(dateTime + ": " + message);
     }
 }

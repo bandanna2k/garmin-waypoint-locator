@@ -34,6 +34,12 @@ module Routes
         {
             return "Title:" + _title + ", Waypoint Count:" + _waypoints.size();
         } 
+
+        function invert()
+        {
+            _title = _title + " (R)";
+            _waypoints = _waypoints.reverse();
+        }
     }
 
     function isValid(route as Route) as Boolean

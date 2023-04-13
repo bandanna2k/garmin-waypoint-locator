@@ -19,9 +19,9 @@ module Inputs { module Menus
             _routeRepository.importRouteFromWeb(source, destination);
         } 
 
-        function onRouteSelect(selection as Number)
+        function onRouteSelect(selection as Number, inReverse as Boolean)
         {
-            _routeRepository.selectRoute(selection);
+            _routeRepository.selectRoute(selection, inReverse);
         }
 
         function routeTitle(index as Number) as String
