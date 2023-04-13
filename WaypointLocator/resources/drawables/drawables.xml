@@ -1,4 +1,4 @@
 <drawables>
-    <bitmap id="LauncherIcon" filename="launcher_icon.png" />
+    <bitmap id="LauncherIcon" filename="arrow-30x30.png" />
     <!-- <bitmap id="RipleyAndNewt" filename="ripley_and_newt.png" /> -->
 </drawables>
