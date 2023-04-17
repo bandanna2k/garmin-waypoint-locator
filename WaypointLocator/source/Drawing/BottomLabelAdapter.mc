@@ -1,7 +1,7 @@
 import Toybox.Lang;
 import Toybox.Graphics;
 import Toybox.System;
-import Activity;
+import Recording;
 
 module Drawing
 {
@@ -23,16 +23,21 @@ module Drawing
             _consumer.invoke(text());
         }
 
+        function onActivityStatus(status as Number)
+        {
+            _recordingStatus = status;
+        }
+
         function text() as String or Null
         {
             var result = " ";
             if(_waypointBearing != null)
             {
-                result += _waypointBearing.format("%03d") + "°";
+                result += _waypointBearing.format("%03d") + "° ";
             }
             if(_recordingStatus != null)
             {
-                result += Activity.toStringRecordingStatus(_recordingStatus);
+                result += Recording.toStringRecordingStatus(_recordingStatus) + " ";
             }
 
             if(result.length() == 1)

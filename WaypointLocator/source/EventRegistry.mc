@@ -137,25 +137,11 @@ Logging.trace("EventRegistry.onCurrentWaypoint:" + waypoint);
             (_listeners as Array<Events>)[i].onActivityInitiate();
         }
     }
-    function onActivityStarted() as Void
+    function onActivityStatus(status as Number) as Void
     {
         for(var i = 0; i < _listeners.size(); i++)
         {
-            (_listeners as Array<Events>)[i].onActivityStarted();
-        }
-    }
-    function onActivityStopped() as Void
-    {
-        for(var i = 0; i < _listeners.size(); i++)
-        {
-            (_listeners as Array<Events>)[i].onActivityStopped();
-        }
-    }
-    function onActivitySaved() as Void
-    {
-        for(var i = 0; i < _listeners.size(); i++)
-        {
-            (_listeners as Array<Events>)[i].onActivitySaved();
+            (_listeners as Array<Events>)[i].onActivityStatus(status);
         }
     }
     function onMessage(message as String) as Void

@@ -3,7 +3,7 @@ import Toybox.Activity;
 import Toybox.ActivityRecording;
 import Logging;
 
-module Activity
+module Recording
 {
     const STATUS_RECORDING_NOTHING = 0;
     const STATUS_RECORDING_RECORDING = 1;
@@ -14,15 +14,15 @@ module Activity
     {
         if(recordingStatus == STATUS_RECORDING_RECORDING)
         {
-            return "⏵";
+            return ">";
         }
         if(recordingStatus == STATUS_RECORDING_PAUSED)
         {
-            return "⏸";
+            return "||";
         }
         if(recordingStatus == STATUS_RECORDING_STOPPED)
         {
-            return "⏹";
+            return "";
         }
         return "";
     }

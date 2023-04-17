@@ -20,9 +20,7 @@ class Events
    function onWaypointProximity(proximity as Proximity) {}
    function onWaypointProximity2(proximity as Number) {}
    function onActivityInitiate() {}
-   function onActivityStarted() {}
-   function onActivityStopped() {}
-   function onActivitySaved() {}
+   function onActivityStatus(status as Number) {}
    function onMessage(message as String) {}
    function onRouteUpdate(route as Route) {}
 }

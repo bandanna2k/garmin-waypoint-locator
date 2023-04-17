@@ -7,7 +7,7 @@ import Toybox.Application;
 import Distance;
 import Bearing;
 import Waypoints;
-import Activity;
+import Recording;
 import Proximity;
 
 class WaypointLocator extends Events
