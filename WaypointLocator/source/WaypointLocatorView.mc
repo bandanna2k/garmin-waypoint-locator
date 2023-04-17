@@ -1,11 +1,12 @@
 import Toybox.WatchUi;
+import Toybox.Lang;
 import Toybox.Graphics;
 import Logging;
 
 class WaypointLocatorView extends WatchUi.View  
 {
     var _arrowHead = new Drawing.ArrowHead();
-    var _bearingLabel = new Drawing.BearingLabel();
+    var _bottomLabel = new Drawing.BottomLabel();
     var _distanceLabel = new Drawing.DistanceLabel();
     var _waypointLabel = new Drawing.WaypointLabel();
     var _compass = new Drawing.Compass();
@@ -23,14 +24,19 @@ class WaypointLocatorView extends WatchUi.View
 
         _eventRegistry = eventRegistry;
         _eventRegistry.register(_arrowHead);
-        _eventRegistry.register(_bearingLabel);
         _eventRegistry.register(_distanceLabel);
         _eventRegistry.register(_waypointLabel);
         _eventRegistry.register(_cyclicLabel);
         _eventRegistry.register(_compass);
         _eventRegistry.register(_proximityBar);
         _eventRegistry.register(_messageLabel);
-   }
+        _eventRegistry.register(new Drawing.BottomLabelAdapter(method(:setBottomText)));
+    }
+
+    function setBottomText(text as Null or String) as Void
+    {
+        _bottomLabel.setText(text);
+    }
 
     // Load your resources here
     function onLayout(dc as Dc) as Void 
@@ -62,7 +68,7 @@ Instinct® 2S / Solar / Dual Power
             dc.clear();
 
             _compass.draw(dc);
-            _bearingLabel.draw(dc);
+            _bottomLabel.draw(dc);
             _arrowHead.draw(dc);
             _distanceLabel.draw(dc);
             _waypointLabel.draw(dc);

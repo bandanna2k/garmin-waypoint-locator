@@ -19,7 +19,7 @@ module Drawing
             {
                 var w = dc.getWidth();
                 var h = dc.getHeight();
-                var waypointBearing = _waypointBearing.format("%03d");
+                var waypointBearing = _waypointBearing.format("%03d") + "°";
                 dc.drawText(w / 2, h - 35, Graphics.FONT_LARGE, 
                     waypointBearing, Graphics.TEXT_JUSTIFY_CENTER);
             }
