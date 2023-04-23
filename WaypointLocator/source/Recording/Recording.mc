@@ -14,7 +14,7 @@ module Recording
     {
         if(recordingStatus == STATUS_RECORDING_RECORDING)
         {
-            return ">";
+            return "REC";
         }
         if(recordingStatus == STATUS_RECORDING_PAUSED)
         {

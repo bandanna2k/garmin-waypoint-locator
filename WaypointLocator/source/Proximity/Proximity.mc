@@ -2,16 +2,6 @@ import Toybox.Lang;
 
 module Proximity
 {
-    enum Proximity
-    {
-        FarAway,
-        GettingClose,
-        FairlyClose,
-        Close,
-        VeryClose,
-        ExtremelyClose
-    }
-
     const FAR_AWAY = 1;
     const GETTING_CLOSE = 2;
     const FAIRLY_CLOSE = 3;

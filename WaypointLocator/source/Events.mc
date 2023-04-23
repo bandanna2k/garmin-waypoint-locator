@@ -3,6 +3,7 @@ import Toybox.Lang;
 import Waypoints;
 import Distance;
 import Routes;
+import Proximity;
 
 class Events
 {
@@ -17,8 +18,7 @@ class Events
    function onCompassHeading(heading as Numeric or Null) {}
    function onNextWaypoint() {}
    function onPreviousWaypoint() {}
-   function onWaypointProximity(proximity as Proximity) {}
-   function onWaypointProximity2(proximity as Number) {}
+   function onWaypointProximity(proximity as Number) {}
    function onActivityInitiate() {}
    function onActivityStatus(status as Number) {}
    function onMessage(message as String) {}

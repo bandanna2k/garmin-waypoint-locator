@@ -35,5 +35,10 @@ module Distance
         {
             return _valueInMm / 1609344d;
         }
+
+        function toString() as String
+        {
+            return metres() + " metre(s)";
+        }
     }
 }

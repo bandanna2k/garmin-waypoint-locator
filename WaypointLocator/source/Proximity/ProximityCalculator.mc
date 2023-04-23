@@ -44,7 +44,7 @@ module Proximity
 
         function resetCounters()
         {
-            _proximity = Proximity.FarAway;
+            _proximity = Proximity.FAR_AWAY;
 
             _proximityGettingClose = 0;
             _proximityFairlyClose = 0;
@@ -59,31 +59,32 @@ module Proximity
             {
                 return;
             }
+Logging.trace("ProximityCalculator.onDistance " + value);
 
             var metres = value.metres();
             if(metres <= PROXIMITY_EXTREMELY_CLOSE)
             {
-                updateState(Proximity.ExtremelyClose);
+                updateState(Proximity.EXTREMELY_CLOSE);
             }
             else if(metres <= PROXIMITY_VERY_CLOSE)
             {
-                updateState(Proximity.VeryClose);
+                updateState(Proximity.VERY_CLOSE);
             }
             else if(metres <= PROXIMITY_CLOSE)
             {
-                updateState(Proximity.Close);
+                updateState(Proximity.CLOSE);
             }
             else if(metres <= PROXIMITY_FAIRLY_CLOSE)
             {
-                updateState(Proximity.FairlyClose);
+                updateState(Proximity.FAIRLY_CLOSE);
             }
             else if(metres <= PROXIMITY_GETTING_CLOSE)
             {
-                updateState(Proximity.GettingClose);
+                updateState(Proximity.GETTING_CLOSE);
             }
             else
             {
-                updateState(Proximity.FarAway);
+                updateState(Proximity.FAR_AWAY);
             }
         }
 
@@ -92,7 +93,7 @@ module Proximity
             resetCounters();
         }
 
-        function updateState(proximity as Proximity) as Void
+        function updateState(proximity as Number) as Void
         {
             if(_proximity == proximity)
             {

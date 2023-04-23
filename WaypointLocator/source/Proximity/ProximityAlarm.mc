@@ -15,10 +15,8 @@ module Proximity
 
         var _delta = 1000000;
         var _counter = _delta;
-        var _proximity = Proximity.FarAway;
+        var _proximity = Proximity.FAR_AWAY;
         var _eventRegistry;
-
-        var _enabled = false;
 
         function initialize(eventRegistry as EventRegistry)
         {
@@ -27,18 +25,11 @@ module Proximity
             _eventRegistry.register(self);
         }
 
-        function onWaypointProximity2(proximity as Number)
+        function onWaypointProximity(proximity as Number)
         {
             _proximity = proximity;
 
-            // if(proximity == Proximity.FarAway)             { _delta = 1000000; }
-            // else if(proximity == Proximity.GettingClose)   { _delta = 20; }
-            // else if(proximity == Proximity.FairlyClose)    { _delta = 10; }
-            // else if(proximity == Proximity.Close)          { _delta = 5; }
-            // else if(proximity == Proximity.VeryClose)      { _delta = 2; }
-            // else if(proximity == Proximity.ExtremelyClose) { _delta = 1; }
-
-            if(proximity == Proximity.FarAway)             { _delta = 60; }
+            if(proximity == Proximity.FAR_AWAY)             { _delta = 60; }
             else if(proximity == Proximity.GETTING_CLOSE)   { _delta = 10; }
             else if(proximity == Proximity.FAIRLY_CLOSE)    { _delta = 5; }
             else if(proximity == Proximity.CLOSE)          { _delta = 2; }
@@ -60,13 +51,8 @@ module Proximity
 
         function alert() as Void
         {
-            if(!_enabled)
-            {
-                return;
-            }
-
             var tone;
-            if(_proximity == Proximity.ExtremelyClose)
+            if(_proximity == Proximity.EXTREMELY_CLOSE)
             {
                 tone = _finalTone;
             }
