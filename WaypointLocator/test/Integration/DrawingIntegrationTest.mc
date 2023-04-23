@@ -16,7 +16,6 @@ module Test { module Integration
         var eventRegistry = new EventRegistry();
         var eventAssertions = new EventAssertions(eventRegistry);
         var waypointLocator = new WaypointLocator(eventRegistry);
-        var bearingCalculator = new BearingCalculator(eventRegistry);
         var arrowHead = new ArrowHead();
         eventRegistry.register(arrowHead); // TODO: Why are we not creating and registering at the same time?
 

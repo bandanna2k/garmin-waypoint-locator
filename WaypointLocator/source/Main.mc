@@ -8,6 +8,7 @@ import Waypoints;
 import Inputs;
 import Logging;
 import Routes;
+import Configuration;
 
 class Main extends Application.AppBase 
 {
@@ -16,6 +17,7 @@ class Main extends Application.AppBase
     var _waypointLocator = new WaypointLocator(_eventRegistry);
     var _view = new WaypointLocatorView(_eventRegistry);
     var _routeRepository = Routes.createAndRegisterRepository(_eventRegistry);
+    var _config = new Config();
 
     function initialize() 
     {
@@ -25,6 +27,7 @@ class Main extends Application.AppBase
     // onStart() is called on application start up
     function onStart(state as Dictionary?) as Void 
     {
+        _config.load();
     }
 
     // onStop() is called when your application is exiting
@@ -42,7 +45,10 @@ class Main extends Application.AppBase
             _view,
             new InitialScreenInputBehaviourWrapper(
                 _eventRegistry,
-                new InputBehaviour(_eventRegistry, _routeRepository))
+                new InputBehaviour(
+                    _eventRegistry, 
+                    _routeRepository,
+                    _config))
         ] as Array<Views or InputDelegates>;
     }
 

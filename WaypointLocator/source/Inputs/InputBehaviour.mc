@@ -5,6 +5,7 @@ import Waypoints;
 import Logging;
 import Inputs.Menus;
 import Routes;
+import Configuration;
 
 module Inputs
 {        
@@ -16,18 +17,23 @@ module Inputs
         var _menu;
         var _menuModel;
         var _menuInput;
+        var _config;
         
         function initialize(
             eventRegistry as EventRegistry,
-            routeRepository as Repository) 
+            routeRepository as Repository,
+            config as Config) 
         {
             BehaviorDelegate.initialize();
 
             _eventRegistry = eventRegistry;
             _routeRepository = routeRepository;
+            _config = config;
             _menu = new MyMenu(
                 new Menu2({:title=>"-"}), 
-                new MenuAdapter(_routeRepository));
+                new MenuAdapter(
+                    _routeRepository,
+                    _config));
 
             _menuInput = new MenuInput(new Method(self, :onSelection));
         }

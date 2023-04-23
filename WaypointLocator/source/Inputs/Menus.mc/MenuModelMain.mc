@@ -17,8 +17,9 @@ module Inputs { module Menus
             MenuModel.updateMenu();
 
             setTitle("Main Menu");
-            addItem(new MenuItem(" Routes", null, "menuMainRoutes", {}));
-            addItem(new MenuItem(toStringRipleyMode(), null, "menuMainRipleyMode", {}));
+            addItem(new MenuItem(" Routes", null, "menuRoutes", {}));
+            addItem(new MenuItem(toStringRipleyMode(), null, "menuRipleyMode", {}));
+            addItem(new MenuItem(" Activity Type", null, "menuActivityType", {}));
         }
 
         function toStringRipleyMode() as String
@@ -35,14 +36,18 @@ module Inputs { module Menus
 
         function onSelection(selection as String) as MenuModel or Null
         {
-            if("menuMainRipleyMode".equals(selection))
+            if("menuRipleyMode".equals(selection))
             {
                 adapter().toggleRipleyMode();
                 return new MenuModelMain(_menu);
             }
-            if("menuMainRoutes".equals(selection))
+            if("menuRoutes".equals(selection))
             {
                 return new MenuModelRoutes(_menu);
+            }
+            if("menuActivityType".equals(selection))
+            {
+                return new MenuModelActivityType(_menu);
             }
             return null;
         }

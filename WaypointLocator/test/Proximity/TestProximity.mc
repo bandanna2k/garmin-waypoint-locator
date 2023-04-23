@@ -25,39 +25,39 @@ module Test { module Proximity
 
         // Getting close
         _eventRegistry.onDistance(DistanceValue.fromMetres(1000));
-        Assertions.areEqual(_assertions.proximity(), 1);
+        Assertions.areEqual(_assertions.proximity(), Proximity.GETTING_CLOSE);
 
         // Fairly close
         _eventRegistry.onDistance(DistanceValue.fromMetres(500));
-        Assertions.areEqual(_assertions.proximity(), 2);
+        Assertions.areEqual(_assertions.proximity(), Proximity.FAIRLY_CLOSE);
 
         // Close
         _eventRegistry.onDistance(DistanceValue.fromMetres(100));
-        Assertions.areEqual(_assertions.proximity(), 3);
+        Assertions.areEqual(_assertions.proximity(), Proximity.CLOSE);
 
         // Very close
         _eventRegistry.onDistance(DistanceValue.fromMetres(50));
-        Assertions.areEqual(_assertions.proximity(), 4);
+        Assertions.areEqual(_assertions.proximity(), Proximity.VERY_CLOSE);
 
         // Extremely close
         _eventRegistry.onDistance(DistanceValue.fromMetres(25));
-        Assertions.areEqual(_assertions.proximity(), 5);
+        Assertions.areEqual(_assertions.proximity(), Proximity.EXTREMELY_CLOSE);
 
         // Very close
         _eventRegistry.onDistance(DistanceValue.fromMetres(50));
-        Assertions.areEqual(_assertions.proximity(), 4);
+        Assertions.areEqual(_assertions.proximity(), Proximity.VERY_CLOSE);
 
         // Close
         _eventRegistry.onDistance(DistanceValue.fromMetres(100));
-        Assertions.areEqual(_assertions.proximity(), 3);
+        Assertions.areEqual(_assertions.proximity(), Proximity.CLOSE);
 
         // Getting close
         _eventRegistry.onDistance(DistanceValue.fromMetres(1000));
-        Assertions.areEqual(_assertions.proximity(), 1);
+        Assertions.areEqual(_assertions.proximity(), Proximity.GETTING_CLOSE);
 
         // Not close
         _eventRegistry.onDistance(DistanceValue.fromMetres(1001));
-        Assertions.areEqual(_assertions.proximity(), 0);
+        Assertions.areEqual(_assertions.proximity(), Proximity.FAR_AWAY);
 
         return true;
     }
@@ -71,7 +71,7 @@ module Test { module Proximity
             Events.initialize();
         }
 
-        function onWaypointProximity2(proximity as Number)
+        function onWaypointProximity(proximity as Number)
         {
             _proximity = proximity;
         }

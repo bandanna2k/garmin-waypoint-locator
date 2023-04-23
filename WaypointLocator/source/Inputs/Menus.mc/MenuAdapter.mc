@@ -2,16 +2,21 @@ import Toybox.WatchUi;
 import Toybox.Lang;
 import Routes;
 import Toybox.Application.Storage;
+import Configuration;
 
 module Inputs { module Menus 
 {
     class MenuAdapter
     {
         var _routeRepository;
+        var _config;
 
-        function initialize(routeRepository as Repository)
+        function initialize(
+            routeRepository as Repository,
+            config as Config)
         {
             _routeRepository = routeRepository;
+            _config = config;
         }
 
         function onRouteImport(source as String, destination as Number)
@@ -31,18 +36,15 @@ module Inputs { module Menus
 
         function isRipleyModeEnabled() as Boolean
         {
-            return Utilities.isEnabled(Storage.getValue("ripleyMode.enabled"));
+            return _config.isRipleyModeEnabled();
         }
         function toggleRipleyMode() 
         {
-            if(Utilities.isEnabled(Storage.getValue("ripleyMode.enabled")))
-            {
-                Storage.setValue("ripleyMode.enabled", "false");
-            }
-            else
-            {
-                Storage.setValue("ripleyMode.enabled", "true");
-            }
+            _config.toggleRipleyMode();
+        }
+        function setActivityType(type as Number) 
+        {
+            _config.setActivityType(type);
         }
     }
 }}
