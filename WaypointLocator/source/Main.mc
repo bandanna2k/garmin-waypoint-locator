@@ -14,10 +14,10 @@ class Main extends Application.AppBase
 {
     var _eventRegistry = new EventRegistry();
 
-    var _waypointLocator = new WaypointLocator(_eventRegistry);
-    var _view = new WaypointLocatorView(_eventRegistry);
-    var _routeRepository = Routes.createAndRegisterRepository(_eventRegistry);
     var _config = new Config();
+    var _waypointLocator = new WaypointLocator(_eventRegistry, _config);
+    var _view = new WaypointLocatorView(_config, _eventRegistry);
+    var _routeRepository = Routes.createAndRegisterRepository(_eventRegistry);
 
     function initialize() 
     {

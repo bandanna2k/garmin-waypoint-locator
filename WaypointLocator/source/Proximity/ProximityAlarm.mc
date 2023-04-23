@@ -18,11 +18,9 @@ module Proximity
         var _proximity = Proximity.FAR_AWAY;
         var _eventRegistry;
 
-        function initialize(eventRegistry as EventRegistry)
+        function initialize()
         {
             Events.initialize();
-            _eventRegistry = eventRegistry;
-            _eventRegistry.register(self);
         }
 
         function onWaypointProximity(proximity as Number)

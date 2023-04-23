@@ -9,13 +9,16 @@ import Bearing;
 import Waypoints;
 import Recording;
 import Proximity;
+import Configuration;
 
 class WaypointLocator extends Events
 {
     var _timer;
     var _eventRegistry;
 
-    function initialize(eventRegistry as EventRegistry)
+    function initialize(
+        eventRegistry as EventRegistry,
+        config as Config)
     {
         Events.initialize();
         _eventRegistry = eventRegistry;
@@ -25,7 +28,9 @@ class WaypointLocator extends Events
         new DistanceCalculator(eventRegistry);
         new ProximityCalculator(eventRegistry);
         new AutoNextWaypoint(eventRegistry);
-        new ProximityAlarm(eventRegistry);
+        var proximityAlarm = new ProximityAlarm();
+        _eventRegistry.register(new ConfigFilter(config, proximityAlarm));
+
         new ActivityController(eventRegistry);
     }
 

@@ -2,6 +2,7 @@ import Toybox.WatchUi;
 import Toybox.Lang;
 import Toybox.Graphics;
 import Logging;
+import Configuration;
 
 class WaypointLocatorView extends WatchUi.View  
 {
@@ -18,7 +19,9 @@ class WaypointLocatorView extends WatchUi.View
 
     var _eventRegistry;
 
-    function initialize(eventRegistry as EventRegistry)
+    function initialize(
+        config as Config,
+        eventRegistry as EventRegistry)
     {
         View.initialize();
 
@@ -28,7 +31,7 @@ class WaypointLocatorView extends WatchUi.View
         _eventRegistry.register(_waypointLabel);
         _eventRegistry.register(_cyclicLabel);
         _eventRegistry.register(_compass);
-        _eventRegistry.register(_proximityBar);
+        _eventRegistry.register(new ConfigFilter(config, _proximityBar));
         _eventRegistry.register(_messageLabel);
         _eventRegistry.register(new Drawing.BottomLabelAdapter(method(:setBottomText)));
     }
